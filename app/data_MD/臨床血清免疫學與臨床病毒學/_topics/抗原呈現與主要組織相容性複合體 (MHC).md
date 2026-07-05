@@ -1,0 +1,37 @@
+---
+type: topic
+subject: 臨床血清免疫學與臨床病毒學
+definition: 專指主要組織相容性複合體 (MHC/HLA) 的基因結構、多樣性與功能。核心知識為第一型 (MHC class I) 與第二型 (MHC class
+  II) 分子呈現內源性與外源性抗原的分子路徑差異。
+is_pinned: false
+aliases: []
+---
+
+## 類群定義
+
+> 專指主要組織相容性複合體 (MHC/HLA) 的基因結構、多樣性與功能。核心知識為第一型 (MHC class I) 與第二型 (MHC class II) 分子呈現內源性與外源性抗原的分子路徑差異。
+
+---
+
+## 類群說明
+
+
+
+---
+
+## 包含題庫
+
+```dataview
+TABLE WITHOUT ID
+  file.link AS "題目",
+  year AS "年份",
+  question_number AS "題號",
+  difficulty AS "難度",
+  key_concept AS "考點",
+  is_fixed AS "已掌握",
+  summarize_including AS "重點收錄",
+  current_answer AS "作答"
+FROM "臨床血清免疫學與臨床病毒學"
+WHERE type = "question" AND contains(string(topic), this.file.name)
+SORT year DESC, question_number ASC
+```
