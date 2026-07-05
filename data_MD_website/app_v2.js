@@ -1,3 +1,19 @@
+
+// [Static Site] Mock fetch API
+const originalFetch = window.fetch;
+window.fetch = async function(resource, config) {
+    let url = typeof resource === 'string' ? resource : (resource instanceof Request ? resource.url : '');
+    if (url && url.includes('/api/')) {
+        console.log('[Static Site] Ignored API call to:', url);
+        return Promise.resolve({
+            ok: true,
+            json: () => Promise.resolve({}),
+            text: () => Promise.resolve('{}')
+        });
+    }
+    return originalFetch.call(window, resource, config);
+};
+
 const subjects = [
     "臨床生理學與病理學",
     "臨床血液學與血庫學",
@@ -32,7 +48,7 @@ const globalUncheckedYears = new Set(); // Remember user's unselected years acro
 async function fetchSubjectData(sub) {
     if (subjectDataCache[sub]) return subjectDataCache[sub];
     try {
-        const res = await fetch(`../data_cache/${sub}.json?v=${Date.now()}`);
+        const res = await fetch(`./data_cache/${sub}.json?v=${Date.now()}`);
         if (!res.ok) return [];
         const data = await res.json();
         data.forEach(q => q.subject = sub);
@@ -499,7 +515,7 @@ async function onSubjectChange() {
         currentData = await fetchSubjectData(sub);
         
         try {
-            const sumRes = await fetch(`../data_cache/topics_${sub}.json?v=${Date.now()}`);
+            const sumRes = await fetch(`./data_cache/topics_${sub}.json?v=${Date.now()}`);
             aiTopicSummaries = await sumRes.json();
         } catch(e) {
             aiTopicSummaries = {};
