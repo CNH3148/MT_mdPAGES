@@ -697,9 +697,18 @@ window.refreshAnkiCardWall = function() {
                     endAnsLength = 12;
                 }
                 back = line.substring(sepIndex + ansLength, endAnsIndex);
-                let extra = line.substring(endAnsIndex + endAnsLength);
-                if (extra.trim() && extra.includes('<br>')) {
-                    back += `<div style="font-size:12px; color:var(--text-muted); margin-top:8px; border-top:1px dashed rgba(255,255,255,0.2); padding-top:8px;">${extra}</div>`;
+                let extra = line.substring(endAnsIndex + endAnsLength).trim();
+                if (extra) {
+                    extra = extra.replace(/^(<br\s*\/?>\s*)+/i, '');
+                    let explanationHtml = `
+                        <div class="answer-exp-toggle" style="text-align:center; margin-top:8px; cursor:pointer; color:var(--text-muted);" title="展開說明">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                        <div class="answer-exp-content" style="display:none; padding-top:12px; border-top:1px dashed var(--border-color); margin-top:8px; font-size:13px; color:var(--text-muted);">
+                            ${extra}
+                        </div>
+                    `;
+                    back += explanationHtml;
                 }
             } else {
                 back = line.substring(sepIndex + ansLength);
@@ -730,8 +739,28 @@ window.refreshAnkiCardWall = function() {
             </div>
         `;
         
-        cardDiv.onclick = function() {
+        cardDiv.onclick = function(e) {
+            const toggleBtn = e.target.closest('.answer-exp-toggle');
+            if (toggleBtn) {
+                e.stopPropagation();
+                const content = cardDiv.querySelector('.answer-exp-content');
+                if (content) {
+                    content.style.display = 'block';
+                    toggleBtn.style.display = 'none';
+                }
+                return;
+            }
+            
             this.classList.toggle('flipped');
+            
+            if (!this.classList.contains('flipped')) {
+                const content = cardDiv.querySelector('.answer-exp-content');
+                const toggle = cardDiv.querySelector('.answer-exp-toggle');
+                if (content && toggle) {
+                    content.style.display = 'none';
+                    toggle.style.display = 'block';
+                }
+            }
         };
         
         wallContainer.appendChild(cardDiv);
