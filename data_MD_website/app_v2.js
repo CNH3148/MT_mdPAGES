@@ -92,32 +92,6 @@ function setupEventListeners() {
             renderQuestionCard();
         }
     };
-
-    // 滑動手勢 (Swipe)
-    let touchStartX = 0;
-    let touchEndX = 0;
-    const practiceArea = document.getElementById('question-card');
-    
-    practiceArea.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, {passive: true});
-
-    practiceArea.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, {passive: true});
-
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        if (touchEndX < touchStartX - swipeThreshold) {
-            // 左滑 -> 下一題
-            document.getElementById('btn-next').click();
-        }
-        if (touchEndX > touchStartX + swipeThreshold) {
-            // 右滑 -> 上一題
-            document.getElementById('btn-prev').click();
-        }
-    }
 }
 
 // --- 路由管理 (History API) ---
@@ -289,13 +263,21 @@ function calculateTopicStats() {
         const rawCp = proportion * avgDiff;
         if (rawCp > maxRawCp) maxRawCp = rawCp;
 
+        let diffText = '適中';
+        if (avgDiff >= 3.5) diffText = '非常簡單';
+        else if (avgDiff >= 2.5) diffText = '簡單';
+        else if (avgDiff >= 1.5) diffText = '適中';
+        else if (avgDiff >= 0.8) diffText = '困難';
+        else diffText = '非常困難';
+
         stats.push({
             name: topicName,
             count,
             proportionPct: proportion * 100,
             avgPos,
             positions,
-            rawCp
+            rawCp,
+            diffText
         });
     }
 
@@ -374,6 +356,7 @@ function renderTopicList(sortType) {
                     <div class="topic-title">${idx+1}. ${s.name}</div>
                     <div class="topic-meta">
                         <span>題數：${s.count} (${s.proportionPct.toFixed(1)}%)</span>
+                        <span>難度：${s.diffText}</span>
                         <span style="color:var(--primary);">累積佔比：${cumulativeProportion.toFixed(1)}%</span>
                     </div>
                 </div>
@@ -456,6 +439,16 @@ function renderQuestionCard() {
         if (savedState) {
             expPanel.style.display = 'block';
             let expHtml = '';
+            
+            // 顯示難易度
+            if (q.difficulty) {
+                let diffColor = 'var(--text-muted)';
+                if (q.difficulty.includes('簡單')) diffColor = '#10b981';
+                else if (q.difficulty.includes('困難')) diffColor = '#ef4444';
+                else diffColor = '#f59e0b';
+                expHtml += `<div style="margin-bottom:8px; font-size:13px; color:${diffColor}; font-weight:600;">${q.difficulty}</div>`;
+            }
+
             if (q.key_concept) expHtml += `<div style="margin-bottom:12px; color:var(--text-main);"><strong>🤖：</strong>${q.key_concept}</div>`;
             if (q.explanation) {
                 expHtml += `<div><strong>🤓：</strong><br><div class="markdown-body" style="font-size:14px; margin-top:4px;">${safeMarkdown(q.explanation)}</div></div>`;
