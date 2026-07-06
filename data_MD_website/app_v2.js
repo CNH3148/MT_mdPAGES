@@ -221,11 +221,23 @@ function updateHeaderUI(level) {
 async function loadSubjectData(sub) {
     let rawData = [];
     if (sub === 'all') {
+        aiTopicSummaries = {}; // Reset summaries
         const promises = SUBJECTS.map(s => fetch(`./data_cache/${s}.json?v=${Date.now()}`).then(r => r.json()).catch(() => []));
+        const sumPromises = SUBJECTS.map(s => fetch(`./data_cache/topics_${s}.json?v=${Date.now()}`).then(r => r.json()).catch(() => ({})));
+        
         const results = await Promise.all(promises);
+        const sumResults = await Promise.all(sumPromises);
+        
         results.forEach((data, idx) => {
             data.forEach(q => q.subject = SUBJECTS[idx]);
             rawData = rawData.concat(data);
+        });
+        
+        sumResults.forEach((sumData, idx) => {
+            const subjectName = SUBJECTS[idx];
+            for (const [topicName, summaryInfo] of Object.entries(sumData)) {
+                aiTopicSummaries[subjectName + ' - ' + topicName] = summaryInfo;
+            }
         });
     } else {
         try {
@@ -252,7 +264,10 @@ async function loadSubjectData(sub) {
     // 分群與計算
     topicGroups = {};
     filteredData.forEach(q => {
-        const t = q.topic || '未分類';
+        let t = q.topic || '未分類';
+        if (sub === 'all') {
+            t = q.subject + ' - ' + t;
+        }
         if (!topicGroups[t]) topicGroups[t] = [];
         topicGroups[t].push(q);
     });
