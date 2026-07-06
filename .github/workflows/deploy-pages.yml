@@ -4,10 +4,8 @@ on:
   push:
     branches: ["main", "master"]
     paths:
-      - 'app/data_MD/**'
-      - 'data_MD/**'
-      - 'Scripts/**'
-      - '.github/workflows/**'
+      - 'data_MD_website/**'
+      - '.github/workflows/deploy-pages.yml'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -18,43 +16,18 @@ permissions:
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# Allow only one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Build job
+  # Build job (just configures pages and uploads the artifact)
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v3
-        with:
-          enable-cache: true
-          cache-dependency-glob: "Scripts/Build-Website/build_website.py"
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Determine data directory
-        id: data-dir
-        run: |
-          if [ -d "data_MD" ]; then
-            echo "path=data_MD" >> $GITHUB_OUTPUT
-          else
-            echo "path=app/data_MD" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Build static website
-        run: |
-          uv run --with ruamel.yaml --with pydantic python Scripts/Build-Website/build_website.py --data-dir ${{ steps.data-dir.outputs.path }} --output-dir _site
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -62,7 +35,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '_site'
+          path: 'data_MD_website'
 
   # Deployment job
   deploy:

@@ -2,348 +2,169 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MT 國考一次過！</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style_v2.css?v=1781260507">
+    <link rel="stylesheet" href="style_v2.css?v=1781260508">
     <link rel="stylesheet" href="markdown.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js"></script>
-    <style>
-        .sidebar.collapsed { display: none; }
-        .question-image { max-width: 100%; height: auto !important; max-height: 400px; object-fit: contain; }
-        .manual-tag-input { background: transparent; border: none; color: white; outline: none; font-size: 13px; width: 80px; border-bottom: 1px solid rgba(255,255,255,0.3); }
-        .manual-tag-input::placeholder { color: rgba(255,255,255,0.7); }
-    </style>
 </head>
 <body>
     <div class="app-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2 id="sidebar-title">AI 國考衝刺</h2>
-                
-                <!-- 4 Mode Buttons -->
-                <div class="mode-buttons" style="display:flex; gap:4px; margin-top:12px;">
-                    <button id="mode-general" class="btn btn-primary active" title="一般模式" style="flex:1; padding:10px 0;">📖</button>
-                    <button id="mode-wrong" class="btn btn-secondary" title="錯題模式" style="flex:1; padding:10px 0;">❌</button>
-                    <button id="mode-bookmark" class="btn btn-secondary" title="收藏模式" style="flex:1; padding:10px 0;">⭐</button>
-                    <button id="mode-search" class="btn btn-secondary" title="標籤/搜尋模式" style="flex:1; padding:10px 0;">🔍</button>
-                </div>
-
-                <div class="filters" style="margin-top:12px; display: flex; flex-direction: column; gap: 8px;">
-                    <!-- General Mode: Single Select -->
-                    <select id="filter-subject" class="search-input">
-                        <option value="">-- 請選擇科目 --</option>
-                    </select>
-                    
-                    <!-- Other Modes: Multiple Select for Subjects -->
-                    <div id="filter-subject-multi-wrapper" class="filter-dropdown-wrapper" style="display:none; position:relative;">
-                        <button class="filter-dropdown-btn" id="btn-filter-subject-multi" onclick="toggleDropdown('filter-subject-multi')">
-                            科目 <span style="font-size:10px; opacity:0.7">▼</span>
-                        </button>
-                        <div id="filter-subject-multi" class="filter-dropdown-content" style="display:none;">
-                            <!-- Checkboxes injected here -->
-                        </div>
-                    </div>
-                    
-                    <!-- Year Checkboxes -->
-                    <div id="filter-year-wrapper" class="filter-dropdown-wrapper" style="display:none; position:relative;">
-                        <button class="filter-dropdown-btn" id="btn-filter-year" onclick="toggleDropdown('filter-year-container')">
-                            年次 <span style="font-size:10px; opacity:0.7">▼</span>
-                        </button>
-                        <div id="filter-year-container" class="filter-dropdown-content" style="display:none;">
-                            <div style="color:var(--text-muted); font-size:12px;">請先選擇科目...</div>
-                        </div>
-                    </div>
-
-                    <!-- Search/Tag Mode Specific Tools -->
-                    <div id="search-mode-tools" style="display:none; flex-direction:column; gap:8px;">
-                        <div id="custom-tags-wrapper" class="filter-dropdown-wrapper" style="position:relative;">
-                            <button class="filter-dropdown-btn" id="btn-custom-tags" onclick="toggleDropdown('custom-tags-checkboxes')">
-                                標籤 <span style="font-size:10px; opacity:0.7">▼</span>
-                            </button>
-                            <div id="custom-tags-checkboxes" class="filter-dropdown-content" style="display:none;"></div>
-                        </div>
-                        
-                        <div style="display:flex; gap:8px; position:relative;">
-                            <div style="position:relative; flex:1;">
-                                <input type="text" id="regex-search-input" class="search-input" placeholder="Regex / 關鍵字搜尋..." style="width:100%; padding-right:24px; box-sizing:border-box;">
-                                <span id="regex-history-toggle" style="position:absolute; right:8px; top:50%; transform:translateY(-50%); cursor:pointer; color:var(--text-muted); font-size:12px;">▼</span>
-                                <div id="regex-history-dropdown" class="dropdown-menu" style="display:none; top:100%; left:0; width:100%;"></div>
-                            </div>
-                            <button id="btn-search-execute" class="btn btn-primary" style="padding: 0 16px; font-weight:bold; white-space:nowrap; border-radius: 6px;">搜尋</button>
-                        </div>
-                        
-                        <div style="display:flex; gap:4px; margin-top:2px;">
-                            <input type="text" id="batch-tag-input" class="search-input" placeholder="批次標籤命名..." style="flex:1; padding:4px 8px; font-size:13px;">
-                            <button class="btn btn-secondary btn-small" id="btn-batch-tag">🏷️貼標籤</button>
-                        </div>
-                    </div>
+        
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-left">
+                <button id="btn-back" class="btn-icon" style="display:none;" title="回上一頁">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <div id="breadcrumb" class="breadcrumb">
+                    <span id="bc-home" class="bc-item">首頁</span>
+                    <span id="bc-sep-sub" class="bc-sep" style="display:none;">/</span>
+                    <span id="bc-subject" class="bc-item" style="display:none;">選擇科目</span>
+                    <span id="bc-sep-topic" class="bc-sep" style="display:none;">/</span>
+                    <span id="bc-topic" class="bc-item bc-active" style="display:none;">類群名稱</span>
                 </div>
             </div>
-        </aside>
-
+            <div class="header-right">
+                <span id="list-accuracy" style="display:none;" title="目前正確率">正確率: --%</span>
+            </div>
+        </header>
+        
         <!-- Main Content -->
-        <main class="main-content">
-            <header class="main-header" style="display: flex; justify-content: space-between; align-items: center; min-height: 40px; margin-bottom: 12px;">
-                <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-                    <!-- Breadcrumbs & Toggles in one line -->
-                    <button class="btn btn-secondary btn-small" id="btn-sidebar-toggle" style="padding:4px 8px;">☰</button>
-                    <div id="breadcrumb" style="font-size:14px; color:var(--text-secondary); display:flex; gap:8px; align-items:center;">
-                        <span id="bc-subject" style="cursor:pointer; color:var(--primary); font-weight:500;">🏠 選擇科目</span>
-                        <span id="bc-sep-topic" style="display:none;">›</span>
-                        <span id="bc-topic" style="cursor:pointer; color:var(--primary); font-weight:500; display:none;">🏷️ 類群名稱</span>
-                        <span id="bc-sep-practice" style="display:none;">›</span>
-                        <span id="bc-practice" style="color:var(--accent); font-weight:500; display:none;">📝 一般練習</span>
-                    </div>
-                    <span style="font-size:14px; color:var(--text-secondary); display:none; margin-left:8px; cursor:pointer; user-select:none;" id="list-accuracy" title="點擊切換計算模式">正確率: --%</span>
-                    <h1 id="current-subject-title" style="display:none;"></h1>
-                </div>
-                <!-- Practice Action Buttons & Mode Toggle -->
-                <div style="display:flex; gap:16px; align-items:center;">
-                    <div class="view-toggle" id="view-toggle-container" style="display:none; align-items:center; gap:8px;">
-                        <span style="font-size:14px; color:var(--text-main); cursor:pointer;" id="label-mode-card">卡片</span>
-                        <label class="switch">
-                            <input type="checkbox" id="mode-toggle-checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                        <span style="font-size:14px; color:var(--text-secondary); cursor:pointer;" id="label-mode-list">清單</span>
-                    </div>
-                </div>
-            </header>
+        <main class="content-area">
             
-            <div class="progress-bar" style="border-radius:0;">
-                <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+            <!-- View: Home (Subject Selection) -->
+            <div id="view-home" class="view active">
+                <div class="home-hero">
+                    <h1>選擇練習科目</h1>
+                    <p>請選擇您要進行複習的科目，或選擇全科進行綜合測驗。</p>
+                </div>
+                
+                <div class="subject-grid" id="subject-grid">
+                    <button class="subject-card all-subjects" data-subject="all">
+                        <h2>🌟 全科綜合</h2>
+                        <p>跨科混合練習，挑戰最高 CP 值考點</p>
+                    </button>
+                    <!-- Subject cards will be injected here by JS -->
+                </div>
             </div>
 
-            <div class="content-area">
+            <!-- View: Topic List (Dashboard) -->
+            <div id="view-topic-list" class="view">
+                <div class="topic-list-header">
+                    <h2 id="current-subject-title">類群總覽</h2>
+                    <div class="topic-stats">
+                        <span id="stat-total-q">0 題</span>
+                    </div>
+                </div>
                 
-                <!-- View: Topic List (Dashboard) -->
-                <div id="view-topic-list" class="view active">
-                    <div style="margin-bottom:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-                        <h2>類群總覽 <span style="font-size:14px; color:var(--text-secondary); font-weight:normal;" id="stat-total-q">0 題</span></h2>
-                        <div id="completion-meter-container" style="display:none; align-items:center; gap:12px;">
-                            <span style="font-size:14px; color:var(--text-secondary);">學習完成度</span>
-                            <div class="progress-bar" style="width:200px; height:12px; border-radius:6px; margin:0; background:var(--bg-lighter); position:relative; overflow:hidden;">
-                                <div class="progress-fill" id="dashboard-progress-fill" style="width:0%; background:#4ade80; border-radius:6px; position:absolute; top:0; left:0; bottom:0;"></div>
-                            </div>
-                            <span id="dashboard-progress-text" style="font-size:14px; font-weight:bold; color:#4ade80;">0%</span>
-                        </div>
+                <div id="completion-meter-container" class="completion-meter-container" style="display:none;">
+                    <span>完成度</span>
+                    <div class="progress-bar-bg">
+                        <div class="progress-fill" id="dashboard-progress-fill" style="width:0%;"></div>
                     </div>
-                    <div id="subject-analytics" class="analytics-container" style="display:none; margin-bottom: 24px;">
-                        <div class="analytics-card" style="background:var(--bg-panel); border:1px solid var(--glass-border); border-radius:12px; padding:20px;">
-                            <h3 style="margin-bottom:12px; color:var(--accent);">📊 累積掌握度與落點分析 (Cumulative Coverage)</h3>
-                            <div id="coverage-chart" style="color:var(--text-muted); font-size:14px; line-height:1.5;"></div>
-                        </div>
-                    </div>
+                    <span id="dashboard-progress-text" class="progress-text">0%</span>
+                </div>
 
-                    <div class="dashboard-cards" id="topic-cards-container">
-                        <!-- Topic cards injected here -->
+                <div class="topic-controls">
+                    <span class="sort-label">排序方式：</span>
+                    <div class="sort-buttons">
+                        <button class="btn-sort active" data-sort="cp">⭐ CP 值</button>
+                        <button class="btn-sort" data-sort="freq">📊 佔比</button>
+                        <button class="btn-sort" data-sort="pos">📍 落點分佈</button>
                     </div>
                 </div>
 
-                <!-- View: Topic Detail -->
-                <div id="view-topic-detail" class="view">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-                        <h2 id="detail-topic-title" style="font-size:1.8rem; margin:0; color:var(--primary);">類群名稱</h2>
-                        <button class="btn btn-primary" id="btn-start-practice-top">🚀 開始練習</button>
-                    </div>
-                    <div style="background:var(--bg-panel); border:1px solid var(--glass-border); border-radius:12px; padding:24px; margin-bottom:24px;">
-                        <h3 style="margin-bottom:12px; color:var(--accent);">📖 類群整體說明與必備知識</h3>
-                        <div id="detail-topic-desc" style="line-height:1.6; color:var(--text-muted);">
-                            (等待 AI 分析生成...)
-                        </div>
+                <div class="topic-list-container" id="topic-list-container">
+                    <!-- Topic list items injected here -->
+                </div>
+            </div>
 
-                    </div>
+            <!-- View: Practice (Card Mode) -->
+            <div id="view-practice" class="view">
+                <div class="progress-bar-top">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
                 </div>
 
-                <!-- View: Practice -->
-                <div id="view-practice" class="view">
-                    <div class="question-container">
-                        <div class="question-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-                            <div style="display:flex; align-items:center; gap:8px;">
-                                <span class="badge" id="q-no" style="margin:0;">Q 1</span>
-                            </div>
-                            <div style="display:flex; align-items:center; gap:12px;">
-                                <div class="tags-container" id="q-tags" style="margin:0;">
-                                    <!-- Tags injected here -->
-                                </div>
-                                <div id="q-bookmark" class="star-icon inactive" style="cursor:pointer; margin:0; font-size:18px; display:flex; align-items:center; line-height:1;" title="收藏">☆</div>
+                <div class="practice-area">
+                    <div class="question-container" id="question-card">
+                        <div class="question-header">
+                            <span class="badge" id="q-no">Q 1</span>
+                            <div class="question-actions">
+                                <div id="q-tags" class="tags-container"></div>
+                                <div id="q-bookmark" class="star-icon inactive" title="收藏">☆</div>
                             </div>
                         </div>
+                        
                         <h2 class="question-text" id="q-text">載入中...</h2>
+                        
                         <div class="options-grid" id="q-options">
                             <!-- Options injected here -->
                         </div>
                         
-                        <!-- Inline PDF Viewer Container -->
                         <div id="q-pdf-container" style="display:none; margin-top:16px;">
-                            <iframe id="q-pdf-iframe" style="width:100%; height:65vh; border:1px solid var(--glass-border); border-radius:8px; background:#fff;"></iframe>
+                            <iframe id="q-pdf-iframe" style="width:100%; height:65vh; border:1px solid var(--border-color); border-radius:8px; background:var(--bg-card);"></iframe>
                         </div>
                     </div>
 
-                    <div class="action-bar" style="display: flex; justify-content: center; gap: 16px;">
-                        <button class="btn btn-secondary" id="btn-prev">上一題</button>
-                        <button class="btn" id="btn-note" style="background-color: rgba(255, 255, 255, 0.05); color: var(--text-muted); border: 1px solid var(--glass-border);">寫筆記</button>
-                        <button class="btn btn-primary" id="btn-next">下一題</button>
+                    <div class="action-bar">
+                        <button class="btn-nav" id="btn-prev">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg> 上一題
+                        </button>
+                        <button class="btn-nav" id="btn-next">
+                            下一題 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                        </button>
                     </div>
                     
-                    <div class="explanation-panel" id="explanation-panel" style="display: none; border: 1px solid var(--glass-border); border-radius: 8px; padding: 16px; background: rgba(30, 41, 59, 0.5);">
+                    <div class="explanation-panel" id="explanation-panel" style="display: none;">
+                        <h3 class="explanation-title">💡 詳解</h3>
                         <div id="q-explanation">載入中...</div>
                     </div>
                 </div>
-                <!-- View: List View (Yamol Style) -->
-                <div id="view-list" class="view" style="padding-bottom: 60px;">
-                    <div id="list-container" style="display:flex; flex-direction:column; gap:16px;">
-                        <!-- List cards injected here -->
-                    </div>
-                </div>
             </div>
+
         </main>
     </div>
 
-    <!-- Save Slot Selection Modal -->
-    <div id="slot-selection-modal" class="modal" style="display:none;">
-        <div class="modal-content" style="max-width:500px; text-align:center;">
-            <h2 style="margin-bottom:8px; color:var(--primary);">選擇學習存檔</h2>
-            <p style="font-size:14px; color:var(--text-secondary); margin-bottom:24px;">紀錄將自動保存在您的瀏覽器中</p>
-            
-            <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:24px;">
-                <div class="slot-card" id="slot-1" style="padding:16px; border:1px solid var(--glass-border); border-radius:8px; cursor:pointer; background:var(--bg-lighter); text-align:left; display:flex; justify-content:space-between; align-items:center;">
-                    <div onclick="selectSlot(1)" style="flex:1;">
-                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
-                            <h3 id="slot-1-title">存檔 1</h3>
-                            <button class="btn btn-secondary btn-small" onclick="event.stopPropagation(); renameSlot(1);" style="padding:2px 6px; font-size:12px;">✏️</button>
-                        </div>
-                        <div id="slot-1-desc" style="font-size:12px; color:var(--text-muted);">尚未建立紀錄</div>
-                    </div>
-                    <button class="btn btn-secondary btn-small" onclick="event.stopPropagation(); openSavesFolder();">管理存檔</button>
+    <!-- Override Answer Modal (Kept for compatibility, restyled in CSS) -->
+    <div id="modal-override-answer" class="modal" style="display:none;">
+        <div class="modal-content override-modal">
+            <h2 class="modal-title">修改標準答案</h2>
+            <div class="override-body">
+                <div class="override-left">
+                    <div class="pdf-wrapper"><iframe id="iframe-override-exam"></iframe></div>
+                    <div class="pdf-wrapper"><iframe id="iframe-override-ans"></iframe></div>
                 </div>
-                <div class="slot-card" id="slot-2" style="padding:16px; border:1px solid var(--glass-border); border-radius:8px; cursor:pointer; background:var(--bg-lighter); text-align:left; display:flex; justify-content:space-between; align-items:center;">
-                    <div onclick="selectSlot(2)" style="flex:1;">
-                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
-                            <h3 id="slot-2-title">存檔 2</h3>
-                            <button class="btn btn-secondary btn-small" onclick="event.stopPropagation(); renameSlot(2);" style="padding:2px 6px; font-size:12px;">✏️</button>
+                <div class="override-right">
+                    <p class="text-muted">這會永久性地更改伺服器上該題的標準答案。若原題庫存在爭議或送分，請仔細比對左側考卷與答案卷。</p>
+                    <div class="current-ans">原始標準答案：<strong id="override-orig-ans"></strong></div>
+                    <div class="override-options">
+                        <label>更正之答案 (可複選)：</label>
+                        <div id="override-checkboxes">
+                            <label><input type="checkbox" value="A" class="override-chk"> A</label>
+                            <label><input type="checkbox" value="B" class="override-chk"> B</label>
+                            <label><input type="checkbox" value="C" class="override-chk"> C</label>
+                            <label><input type="checkbox" value="D" class="override-chk"> D</label>
                         </div>
-                        <div id="slot-2-desc" style="font-size:12px; color:var(--text-muted);">尚未建立紀錄</div>
                     </div>
-                    <button class="btn btn-secondary btn-small" onclick="event.stopPropagation(); openSavesFolder();">管理存檔</button>
-                </div>
-                <div class="slot-card" id="slot-3" style="padding:16px; border:1px solid var(--glass-border); border-radius:8px; cursor:pointer; background:var(--bg-lighter); text-align:left; display:flex; justify-content:space-between; align-items:center;">
-                    <div onclick="selectSlot(3)" style="flex:1;">
-                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
-                            <h3 id="slot-3-title">存檔 3</h3>
-                            <button class="btn btn-secondary btn-small" onclick="event.stopPropagation(); renameSlot(3);" style="padding:2px 6px; font-size:12px;">✏️</button>
-                        </div>
-                        <div id="slot-3-desc" style="font-size:12px; color:var(--text-muted);">尚未建立紀錄</div>
+                    <input type="hidden" id="override-subject">
+                    <input type="hidden" id="override-year">
+                    <input type="hidden" id="override-exam-id">
+                    <input type="hidden" id="override-no">
+                    <input type="hidden" id="override-list-idx">
+                    <div class="modal-actions">
+                        <button class="btn-secondary" id="btn-override-cancel">取消</button>
+                        <button class="btn-danger" id="btn-override-confirm">確定更改</button>
                     </div>
-                    <button class="btn btn-secondary btn-small" onclick="event.stopPropagation(); openSavesFolder();">管理存檔</button>
                 </div>
             </div>
         </div>
     </div>
 
-        <!-- Advanced Search Modal -->
-    <div id="advanced-search-modal" class="modal" style="display:none; padding: 20px;">
-        <div style="display: flex; gap: 24px; max-width: 1000px; width: 100%; align-items: stretch; justify-content: center; margin: 0 auto;">
-            <!-- Left Box -->
-            <div class="modal-content" style="flex: 2; margin: 0; display: flex; flex-direction: column;">
-                <h3>進階 Regex 搜尋與自訂標籤</h3>
-                <p style="font-size:13px; color:var(--text-secondary); margin-bottom: 24px;">輸入 Regex 以搜尋題幹與選項，並建立您的專屬關聯規則。</p>
-                
-                <div style="display:flex; flex-direction:column; gap:16px; margin-bottom: 24px; flex: 1;">
-                    <div>
-                        <label style="display:block; margin-bottom:8px; font-size:15px; font-weight:600;">規則名稱 / 自訂標籤</label>
-                        <input type="text" id="adv-tag-name" class="search-input" placeholder="例如: 補體系統口訣題" style="width:100%; box-sizing:border-box; padding: 12px; font-size: 15px;">
-                    </div>
-                    <div>
-                        <label style="display:block; margin-bottom:8px; font-size:15px; font-weight:600;">Regex 搜尋語法</label>
-                        <input type="text" id="adv-regex" class="search-input" placeholder="例如: (Ig[GAMED]|免疫球蛋白)" style="width:100%; box-sizing:border-box; font-family:monospace; padding: 12px; font-size: 15px;">
-                        
-                        <div style="font-size:13px; color:var(--text-secondary); background:rgba(255,255,255,0.05); padding:12px; border-radius:6px; margin-top:12px; line-height:1.6;">
-                            <strong>💡 Regex (正規表示式) 快速指南：</strong>
-                            <ul style="margin-top:6px; padding-left:20px; margin-bottom:0;">
-                                <li><code>甲|乙</code>：包含「甲」<strong>或</strong>「乙」</li>
-                                <li><code>甲.*乙</code>：找出「甲」開頭，中間夾雜任意字，後面接「乙」</li>
-                                <li><code>[ABC]</code>：比對括號內的任一字元。例如 <code>Ig[GAMED]</code> 會找出 IgG, IgA, IgM, IgE, IgD</li>
-                                <li><code>(?i)字串</code>：在此字串忽略大小寫 (視瀏覽器支援度)</li>
-                                <li style="color:#ffb3b3; margin-top:4px;"><strong>注意：搜尋系統預設為「嚴格區分大小寫」</strong></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div style="font-size:13px; color:var(--text-muted); margin-top: auto;">
-                        提示：填寫完畢後點擊儲存，系統會自動切換為清單模式預覽符合的題目。
-                    </div>
-                </div>
-
-                <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--glass-border); padding-top:16px;">
-                    <span id="adv-preview" style="font-size:14px; color:var(--text-secondary);">等待輸入...</span>
-                    <div style="display:flex; gap:12px; align-items:center;">
-                        <button class="btn btn-secondary" id="btn-adv-cancel" style="padding: 10px 20px;">取消</button>
-                        <button class="btn btn-secondary" id="btn-adv-search-only" style="padding: 10px 20px; background:var(--bg-lighter);">純搜尋</button>
-                        <button class="btn btn-primary" id="btn-adv-save" style="padding: 10px 20px;">儲存並標記</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Box -->
-            <div class="modal-content" style="flex: 1; margin: 0; display: flex; flex-direction: column; background: var(--bg-panel);">
-                <h4 style="font-size:16px; margin-bottom:16px; color:var(--text-main); border-bottom: 1px solid var(--glass-border); padding-bottom: 12px;">常用自訂規則</h4>
-                <div id="saved-searches-list" style="flex: 1; overflow-y: auto;">
-                    <!-- Saved rules injected here -->
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- Override Answer Modal -->
-    <div id="modal-override-answer" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter:blur(5px); z-index:9999; justify-content:center; align-items:center;">
-        <div style="display:flex; width:95%; height:95%; background:var(--bg-panel); border-radius:12px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.5);">
-            <!-- Left side: PDFs -->
-            <div style="width:75%; display:flex; flex-direction:column; border-right:1px solid var(--glass-border);">
-                <div style="flex:1; border-bottom:1px solid var(--glass-border); position:relative;">
-                    <div style="position:absolute; top:0; left:0; background:rgba(0,0,0,0.5); color:white; padding:4px 8px; border-bottom-right-radius:8px; font-size:12px; z-index:10;">📄 原始試卷</div>
-                    <iframe id="iframe-override-exam" style="width:100%; height:100%; border:none; background:#fff;"></iframe>
-                </div>
-                <div style="flex:1; position:relative;">
-                    <div style="position:absolute; top:0; left:0; background:rgba(0,0,0,0.5); color:white; padding:4px 8px; border-bottom-right-radius:8px; font-size:12px; z-index:10;">✅ 原始答案卷</div>
-                    <iframe id="iframe-override-ans" style="width:100%; height:100%; border:none; background:#fff;"></iframe>
-                </div>
-            </div>
-            <!-- Right side: Controls -->
-            <div style="width:25%; padding:24px; display:flex; flex-direction:column; gap:16px;">
-                <h2 style="color:var(--primary); margin:0;">修改標準答案</h2>
-                <div style="color:var(--text-muted); font-size:13px; line-height:1.5;">這會永久性地更改伺服器上該題的標準答案，並對所有後續存檔生效。若原題庫存在爭議或送分，請仔細比對左側考卷與答案卷。</div>
-                <div style="margin-top:16px; font-size:15px;">
-                    <div>原始標準答案：<strong id="override-orig-ans" style="color:var(--accent);"></strong></div>
-                </div>
-                <div style="background:var(--bg-lighter); padding:16px; border-radius:8px; border:1px solid var(--glass-border);">
-                    <label style="display:block; margin-bottom:12px; font-weight:bold; color:var(--text-main);">更正之答案 (可複選)：</label>
-                    <div style="display:flex; flex-direction:column; gap:8px;" id="override-checkboxes">
-                        <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" value="A" class="override-chk" style="width:16px; height:16px;"> A</label>
-                        <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" value="B" class="override-chk" style="width:16px; height:16px;"> B</label>
-                        <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" value="C" class="override-chk" style="width:16px; height:16px;"> C</label>
-                        <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" value="D" class="override-chk" style="width:16px; height:16px;"> D</label>
-                    </div>
-                    <div style="font-size:12px; color:var(--text-muted); margin-top:12px;">* 勾選多個代表「均給分」或「送分」。只要使用者的作答符合任一勾選項即算正確。</div>
-                </div>
-                
-                <input type="hidden" id="override-subject">
-                <input type="hidden" id="override-year">
-                <input type="hidden" id="override-exam-id">
-                <input type="hidden" id="override-no">
-                <input type="hidden" id="override-list-idx">
-                
-                <div style="margin-top:auto; display:flex; gap:12px; justify-content:flex-end;">
-                    <button class="btn btn-secondary" id="btn-override-cancel" style="flex:1;">取消</button>
-                    <button class="btn btn-primary" id="btn-override-confirm" style="flex:1; background:#ef4444; border-color:#ef4444;">確定更改</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="app_v2.js?v=2"></script>
+    <script src="app_v2.js?v=3"></script>
 </body>
 </html>
