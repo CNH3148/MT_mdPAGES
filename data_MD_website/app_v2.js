@@ -336,40 +336,37 @@ function renderTopicList(sortType) {
                            s.cpValue > 50 ? 'style="background:rgba(16, 185, 129, 0.1); color:var(--accent); border-color:var(--accent);"' : '';
 
         // 熱圖 HTML
-        let heatmapHtml = '';
-        if (sortType === 'pos') {
-            let noCounts = {};
-            s.positions.forEach(pos => {
-                noCounts[pos] = (noCounts[pos] || 0) + 1;
-            });
-            let maxCount = Math.max(1, ...Object.values(noCounts));
-            let heatmapBlocks = '';
-            for(let i=1; i<=80; i++) {
-                const c = noCounts[i] || 0;
-                let bg = 'var(--bg-hover)';
-                if (c > 0) {
-                    const alpha = Math.max(0.3, c / maxCount);
-                    bg = `rgba(239, 68, 68, ${alpha})`;
-                }
-                let borderRight = (i % 5 === 0) ? 'border-right: 1px solid rgba(128,128,128,0.2);' : '';
-                heatmapBlocks += `<div style="flex:1; height:16px; background:${bg}; ${borderRight}" title="題號: ${i} (共 ${c} 題)"></div>`;
+        let noCounts = {};
+        s.positions.forEach(pos => {
+            noCounts[pos] = (noCounts[pos] || 0) + 1;
+        });
+        let maxCount = Math.max(1, ...Object.values(noCounts));
+        let heatmapBlocks = '';
+        for(let i=1; i<=80; i++) {
+            const c = noCounts[i] || 0;
+            let bg = 'var(--bg-hover)';
+            if (c > 0) {
+                const alpha = Math.max(0.3, c / maxCount);
+                bg = `rgba(239, 68, 68, ${alpha})`;
             }
-            
-            let axisHtml = '<div style="display:flex; width:100%; position:relative; height:15px; margin-top:2px;">';
-            for(let i=10; i<=80; i+=10) {
-                axisHtml += `<div style="position:absolute; left:${(i/80)*100}%; font-size:9px; color:var(--text-muted); transform:translateX(-50%);">${i}</div>`;
-            }
-            axisHtml += '</div>';
-
-            heatmapHtml = `
-                <div style="margin-top:12px;">
-                    <div style="display:flex; width:100%; border-radius:2px; overflow:hidden; border: 1px solid var(--border-color);">
-                        ${heatmapBlocks}
-                    </div>
-                    ${axisHtml}
-                </div>
-            `;
+            let borderRight = (i % 5 === 0) ? 'border-right: 1px solid rgba(128,128,128,0.2);' : '';
+            heatmapBlocks += `<div style="flex:1; height:16px; background:${bg}; ${borderRight}" title="題號: ${i} (共 ${c} 題)"></div>`;
         }
+        
+        let axisHtml = '<div style="display:flex; width:100%; position:relative; height:15px; margin-top:2px;">';
+        for(let i=10; i<=80; i+=10) {
+            axisHtml += `<div style="position:absolute; left:${(i/80)*100}%; font-size:9px; color:var(--text-muted); transform:translateX(-50%);">${i}</div>`;
+        }
+        axisHtml += '</div>';
+
+        let heatmapHtml = `
+            <div style="margin-top:12px;">
+                <div style="display:flex; width:100%; border-radius:2px; overflow:hidden; border: 1px solid var(--border-color);">
+                    ${heatmapBlocks}
+                </div>
+                ${axisHtml}
+            </div>
+        `;
 
         item.innerHTML = `
             <div style="display:flex; justify-content:space-between; align-items:center;">
