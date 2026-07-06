@@ -369,9 +369,13 @@ body {
 #view-practice {
     padding: 0;
     height: 100%;
-    display: flex;
-    flex-direction: column;
     max-width: 100%;
+    display: none;
+    flex-direction: column;
+}
+
+#view-practice.active {
+    display: flex;
 }
 
 .progress-bar-top {

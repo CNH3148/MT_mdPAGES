@@ -29,9 +29,6 @@
                     <span id="bc-topic" class="bc-item bc-active" style="display:none;">類群名稱</span>
                 </div>
             </div>
-            <div class="header-right">
-                <span id="list-accuracy" style="display:none;" title="目前正確率">正確率: --%</span>
-            </div>
         </header>
         
         <!-- Main Content -->
@@ -62,20 +59,12 @@
                     </div>
                 </div>
                 
-                <div id="completion-meter-container" class="completion-meter-container" style="display:none;">
-                    <span>完成度</span>
-                    <div class="progress-bar-bg">
-                        <div class="progress-fill" id="dashboard-progress-fill" style="width:0%;"></div>
-                    </div>
-                    <span id="dashboard-progress-text" class="progress-text">0%</span>
-                </div>
-
                 <div class="topic-controls">
                     <span class="sort-label">排序方式：</span>
                     <div class="sort-buttons">
                         <button class="btn-sort active" data-sort="cp">⭐ CP 值</button>
                         <button class="btn-sort" data-sort="freq">📊 佔比</button>
-                        <button class="btn-sort" data-sort="pos">📍 落點分佈</button>
+                        <button class="btn-sort" data-sort="pos">📍 題號分佈</button>
                     </div>
                 </div>
 
@@ -86,6 +75,9 @@
 
             <!-- View: Practice (Card Mode) -->
             <div id="view-practice" class="view">
+                <div class="practice-top-bar" style="display: flex; justify-content: center; padding: 12px 16px; background: var(--bg-card); border-bottom: 1px solid var(--border-color); font-weight: 600; color: var(--primary);">
+                    <span id="list-accuracy" title="目前正確率">🎯 正確率: --%</span>
+                </div>
                 <div class="progress-bar-top">
                     <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
                 </div>
@@ -96,7 +88,6 @@
                             <span class="badge" id="q-no">Q 1</span>
                             <div class="question-actions">
                                 <div id="q-tags" class="tags-container"></div>
-                                <div id="q-bookmark" class="star-icon inactive" title="收藏">☆</div>
                             </div>
                         </div>
                         

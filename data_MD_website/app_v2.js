@@ -260,17 +260,17 @@ function calculateTopicStats() {
         '非常困難': 0.5
     };
 
+    let maxRawCp = 0;
+
     for (const [topicName, questions] of Object.entries(topicGroups)) {
         const count = questions.length;
         const proportion = count / totalQuestions;
         
         let diffSum = 0;
         let posSum = 0;
-        let answeredCorrect = 0;
-        let answeredTotal = 0;
+        let positions = [];
 
         questions.forEach(q => {
-            // 難易度
             let diffScore = 2; // default
             if (q.difficulty) {
                 for (const [k, v] of Object.entries(difficultyMap)) {
@@ -278,32 +278,31 @@ function calculateTopicStats() {
                 }
             }
             diffSum += diffScore;
-
-            // 落點 (通常一份考卷 80 題)
-            posSum += (q.no || 40);
-
-            // 紀錄
-            const ans = userAnswers[q.qid];
-            if (ans) {
-                answeredTotal++;
-                if (ans.isCorrect) answeredCorrect++;
-            }
+            
+            const qno = parseInt(q.no) || 40;
+            posSum += qno;
+            positions.push(qno);
         });
 
         const avgDiff = diffSum / count;
         const avgPos = posSum / count;
-        const cpValue = proportion * avgDiff * 1000; // 放大數值方便看
-        const progressPct = count > 0 ? (answeredTotal / count * 100) : 0;
+        const rawCp = proportion * avgDiff;
+        if (rawCp > maxRawCp) maxRawCp = rawCp;
 
         stats.push({
             name: topicName,
             count,
-            proportion: (proportion * 100).toFixed(1),
+            proportionPct: proportion * 100,
             avgPos,
-            cpValue,
-            progressPct
+            positions,
+            rawCp
         });
     }
+
+    // 標準化 CP 值 (0-100)
+    stats.forEach(s => {
+        s.cpValue = maxRawCp > 0 ? (s.rawCp / maxRawCp) * 100 : 0;
+    });
 
     return stats;
 }
@@ -322,36 +321,62 @@ function renderTopicList(sortType) {
     const container = document.getElementById('topic-list-container');
     container.innerHTML = '';
 
+    let cumulativeProportion = 0;
+
     stats.forEach((s, idx) => {
+        cumulativeProportion += s.proportionPct;
+        
         const item = document.createElement('div');
         item.className = 'topic-item';
+        // 為了讓 heatmap 能正確排版，改為 flex-column
+        item.style.flexDirection = 'column';
+        item.style.alignItems = 'stretch';
         
-        let cpBadgeClass = s.cpValue > 50 ? 'style="background:rgba(16, 185, 129, 0.1); color:var(--accent); border-color:var(--accent);"' : '';
-        if(idx < 3 && sortType === 'cp') {
-            cpBadgeClass = 'style="background:var(--accent); color:#fff; border-color:var(--accent);"';
+        let cpBadgeClass = s.cpValue > 80 ? 'style="background:var(--accent); color:#fff; border-color:var(--accent);"' : 
+                           s.cpValue > 50 ? 'style="background:rgba(16, 185, 129, 0.1); color:var(--accent); border-color:var(--accent);"' : '';
+
+        // 熱圖 HTML
+        let heatmapHtml = '';
+        if (sortType === 'pos') {
+            const bins = [0, 0, 0, 0]; // 1-20, 21-40, 41-60, 61-80
+            s.positions.forEach(pos => {
+                if(pos <= 20) bins[0]++;
+                else if(pos <= 40) bins[1]++;
+                else if(pos <= 60) bins[2]++;
+                else bins[3]++;
+            });
+            const maxBin = Math.max(...bins, 1);
+            heatmapHtml = `
+                <div style="display:flex; gap:4px; height:24px; margin-top:12px; align-items:flex-end;">
+                    <div style="flex:1; background:var(--primary); opacity:${Math.max(0.1, bins[0]/maxBin)}; height:${Math.max(10, (bins[0]/maxBin)*100)}%; border-radius:4px;" title="1-20題: ${bins[0]}題"></div>
+                    <div style="flex:1; background:var(--primary); opacity:${Math.max(0.1, bins[1]/maxBin)}; height:${Math.max(10, (bins[1]/maxBin)*100)}%; border-radius:4px;" title="21-40題: ${bins[1]}題"></div>
+                    <div style="flex:1; background:var(--primary); opacity:${Math.max(0.1, bins[2]/maxBin)}; height:${Math.max(10, (bins[2]/maxBin)*100)}%; border-radius:4px;" title="41-60題: ${bins[2]}題"></div>
+                    <div style="flex:1; background:var(--primary); opacity:${Math.max(0.1, bins[3]/maxBin)}; height:${Math.max(10, (bins[3]/maxBin)*100)}%; border-radius:4px;" title="61-80題: ${bins[3]}題"></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--text-muted); margin-top:2px;">
+                    <span>前面</span><span>後面</span>
+                </div>
+            `;
         }
 
         item.innerHTML = `
-            <div class="topic-info">
-                <div class="topic-title">${idx+1}. ${s.name}</div>
-                <div class="topic-meta">
-                    <span>題數：${s.count} (${s.proportion}%)</span>
-                    <span>完成度：${s.progressPct.toFixed(0)}%</span>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div class="topic-info">
+                    <div class="topic-title">${idx+1}. ${s.name}</div>
+                    <div class="topic-meta">
+                        <span>題數：${s.count} (${s.proportionPct.toFixed(1)}%)</span>
+                        <span style="color:var(--primary);">累積佔比：${cumulativeProportion.toFixed(1)}%</span>
+                    </div>
+                </div>
+                <div class="topic-badge" ${cpBadgeClass}>
+                    CP: ${s.cpValue.toFixed(0)}
                 </div>
             </div>
-            <div class="topic-badge" ${cpBadgeClass}>
-                CP: ${s.cpValue.toFixed(1)}
-            </div>
+            ${heatmapHtml}
         `;
         item.onclick = () => navigateTo('practice', s.name);
         container.appendChild(item);
     });
-
-    // 整體完成度
-    const overallProgress = stats.reduce((acc, curr) => acc + (curr.count * (curr.progressPct/100)), 0) / filteredData.length * 100;
-    document.getElementById('completion-meter-container').style.display = 'flex';
-    document.getElementById('dashboard-progress-fill').style.width = `${overallProgress}%`;
-    document.getElementById('dashboard-progress-text').textContent = `${overallProgress.toFixed(1)}%`;
 }
 
 // --- 卡片練習區 ---
@@ -477,10 +502,37 @@ function safeHTML(str) {
 
 window.safeMarkdown = function(mdText) {
     if (!mdText) return '';
-    let html = mdText;
+    let text = mdText;
+    
+    // LaTeX 保護與渲染
+    const mathTokens = [];
+    text = text.replace(/(?<!\\)\$\$(.*?)(?<!\\)\$\$/gs, function(match, p1) {
+        mathTokens.push(p1);
+        return `%%%MATHBLOCK_${mathTokens.length - 1}%%%`;
+    });
+    
+    text = text.replace(/(?<!\\)\$(.*?)(?<!\\)\$/g, function(match, p1) {
+        if (p1 === '') return match; 
+        mathTokens.push(p1);
+        return `%%%MATHINLINE_${mathTokens.length - 1}%%%`;
+    });
+
+    let html = text;
     if (typeof window.marked !== 'undefined') {
-        html = window.marked.parse(mdText);
+        html = window.marked.parse(text);
     }
+    
+    if (typeof window.katex !== 'undefined') {
+        html = html.replace(/%%%MATHBLOCK_(\d+)%%%/g, function(match, i) {
+            try { return window.katex.renderToString(mathTokens[i], { displayMode: true, throwOnError: false }); } 
+            catch (e) { return `$$${mathTokens[i]}$$`; }
+        });
+        html = html.replace(/%%%MATHINLINE_(\d+)%%%/g, function(match, i) {
+            try { return window.katex.renderToString(mathTokens[i], { displayMode: false, throwOnError: false }); } 
+            catch (e) { return `$${mathTokens[i]}$`; }
+        });
+    }
+
     if (typeof window.DOMPurify !== 'undefined') {
         html = window.DOMPurify.sanitize(html);
     }
