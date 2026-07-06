@@ -140,7 +140,7 @@ body {
     display: none;
     animation: fadeIn 0.3s ease;
     padding: 20px 16px 80px 16px; /* Bottom padding for mobile scrolling */
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -391,7 +391,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 16px;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     width: 100%;
 }
