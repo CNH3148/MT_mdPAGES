@@ -771,3 +771,16 @@ window.refreshAnkiCardWall = function() {
 
 // 啟動
 init();
+
+// 修正 iOS Safari 旋轉後不會自動重新排版的 Bug
+window.addEventListener('orientationchange', function() {
+    setTimeout(function() {
+        var originalDisplay = document.body.style.display;
+        document.body.style.display = 'none';
+        document.body.offsetHeight; // 強制重繪
+        document.body.style.display = originalDisplay;
+        
+        // 如果還是沒效，再觸發一次 resize
+        window.dispatchEvent(new Event('resize'));
+    }, 200);
+});
