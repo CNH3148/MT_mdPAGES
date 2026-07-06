@@ -16,6 +16,7 @@ let currentSubject = null; // 'all' 或 單一科目名稱
 let currentTopic = null;
 let filteredData = [];
 let topicGroups = {};
+let aiTopicSummaries = {};
 let currentPracticeQuestions = [];
 let currentQuestionIndex = 0;
 
@@ -31,6 +32,7 @@ function saveAnswer(qid, answer, isCorrect) {
 // --- DOM 元素 ---
 const viewHome = document.getElementById('view-home');
 const viewTopicList = document.getElementById('view-topic-list');
+const viewTopicDetail = document.getElementById('view-topic-detail');
 const viewPractice = document.getElementById('view-practice');
 const btnBack = document.getElementById('btn-back');
 
@@ -99,7 +101,8 @@ function navigateTo(view, param = null) {
     let hash = '#';
     if (view === 'home') hash = '';
     else if (view === 'subject') hash = `#sub=${encodeURIComponent(param)}`;
-    else if (view === 'practice') hash = `#sub=${encodeURIComponent(currentSubject)}&topic=${encodeURIComponent(param)}`;
+    else if (view === 'detail') hash = `#sub=${encodeURIComponent(currentSubject)}&topic=${encodeURIComponent(param)}`;
+    else if (view === 'practice') hash = `#sub=${encodeURIComponent(currentSubject)}&topic=${encodeURIComponent(param)}&mode=practice`;
     
     window.history.pushState({ view, param }, '', hash || window.location.pathname);
     handleRoute(hash);
@@ -119,6 +122,7 @@ async function handleRoute(hash) {
     const params = new URLSearchParams(hash.replace('#', ''));
     const sub = params.get('sub');
     const topic = params.get('topic');
+    const mode = params.get('mode');
 
     if (sub && !topic) {
         // Level 2: 選擇科目後，載入該科主題清單
@@ -132,15 +136,28 @@ async function handleRoute(hash) {
         await loadSubjectData(sub);
         renderTopicList('cp');
     } 
-    else if (sub && topic) {
-        // Level 3: 進入特定主題練習
+    else if (sub && topic && mode !== 'practice') {
+        // Level 3: 顯示主題詳細資料與卡片
+        currentSubject = sub;
+        currentTopic = topic;
+        updateHeaderUI('detail');
+        viewTopicDetail.classList.add('active');
+        
+        if (filteredData.length === 0) {
+            await loadSubjectData(sub);
+        }
+        
+        renderTopicDetail(topic);
+    }
+    else if (sub && topic && mode === 'practice') {
+        // Level 4: 進入特定主題練習
         currentSubject = sub;
         currentTopic = topic;
         updateHeaderUI('practice');
         viewPractice.classList.add('active');
         
         if (filteredData.length === 0) {
-            await loadSubjectData(sub); // 處理直接貼網址進來的狀況
+            await loadSubjectData(sub);
         }
         
         currentPracticeQuestions = topicGroups[topic] || [];
@@ -152,6 +169,7 @@ async function handleRoute(hash) {
 function hideAllViews() {
     viewHome.classList.remove('active');
     viewTopicList.classList.remove('active');
+    viewTopicDetail.classList.remove('active');
     viewPractice.classList.remove('active');
 }
 
@@ -174,7 +192,7 @@ function updateHeaderUI(level) {
         bcSepTopic.style.display = 'none';
         bcTopic.style.display = 'none';
         listAccuracy.style.display = 'none';
-    } else if (level === 'practice') {
+    } else if (level === 'detail') {
         btnBack.style.display = 'flex';
         bcHome.classList.remove('bc-active');
         bcSepSub.style.display = 'inline';
@@ -183,6 +201,18 @@ function updateHeaderUI(level) {
         bcSepTopic.style.display = 'inline';
         bcTopic.style.display = 'inline';
         bcTopic.textContent = currentTopic;
+        bcTopic.classList.add('bc-active');
+        listAccuracy.style.display = 'none';
+    } else if (level === 'practice') {
+        btnBack.style.display = 'flex';
+        bcHome.classList.remove('bc-active');
+        bcSepSub.style.display = 'inline';
+        bcSubject.style.display = 'inline';
+        bcSubject.classList.remove('bc-active');
+        bcSepTopic.style.display = 'inline';
+        bcTopic.style.display = 'inline';
+        bcTopic.textContent = currentTopic + " (練習)";
+        bcTopic.classList.add('bc-active');
         listAccuracy.style.display = 'block';
     }
 }
@@ -202,7 +232,13 @@ async function loadSubjectData(sub) {
             const res = await fetch(`./data_cache/${sub}.json?v=${Date.now()}`);
             rawData = await res.json();
             rawData.forEach(q => q.subject = sub);
-        } catch(e) { console.error("Fetch failed", e); }
+            
+            const sumRes = await fetch(`./data_cache/topics_${sub}.json?v=${Date.now()}`);
+            aiTopicSummaries = await sumRes.json();
+        } catch(e) { 
+            console.error("Fetch failed", e); 
+            if (!aiTopicSummaries) aiTopicSummaries = {};
+        }
     }
 
     // 關鍵過濾：只保留 110 ~ 115 年的題目
@@ -366,7 +402,7 @@ function renderTopicList(sortType) {
             </div>
             ${heatmapHtml}
         `;
-        item.onclick = () => navigateTo('practice', s.name);
+        item.onclick = () => navigateTo('detail', s.name);
         container.appendChild(item);
     });
 }
@@ -551,6 +587,143 @@ window.safeMarkdown = function(mdText) {
     }
     return html;
 };
+
+
+// --- Topic Detail (Layer 3) ---
+function renderTopicDetail(topicName) {
+    document.getElementById('detail-topic-title').textContent = topicName;
+    
+    const detailTopicDesc = document.getElementById('detail-topic-desc');
+    
+    if (aiTopicSummaries[topicName]) {
+        let summaryText = aiTopicSummaries[topicName]?.summary_markdown || "";
+        
+        // Strip out dataview blocks and some unnecessary headers
+        summaryText = summaryText.replace(/```dataview[\s\S]*?```/gi, '');
+        summaryText = summaryText.replace(/#+\s*包含題庫\s*$/gm, '');
+        summaryText = summaryText.replace(/#+\s*Anki\s*聯想卡\s*$/gm, '');
+        
+        detailTopicDesc.innerHTML = `<div class="markdown-body">${marked.parse(summaryText)}</div>`;
+        refreshAnkiCardWall();
+    } else {
+        detailTopicDesc.innerHTML = "<em>此類群暫無總結。</em>";
+    }
+
+    const btnStart = document.getElementById('btn-start-practice-top');
+    if (btnStart) {
+        btnStart.onclick = () => navigateTo('practice', topicName);
+    }
+}
+
+window.refreshAnkiCardWall = function() {
+    const detailTopicDesc = document.getElementById('detail-topic-desc');
+    if (!detailTopicDesc) return;
+    
+    const preBlocks = detailTopicDesc.querySelectorAll('pre');
+    const allCardsData = [];
+    const ankiWrappers = [];
+    
+    preBlocks.forEach((pre) => {
+        const codeBlock = pre.querySelector('code.language-Anki') || pre.querySelector('code.language-anki');
+        if (codeBlock) {
+            const rawText = codeBlock.innerText || codeBlock.textContent;
+            let wrapper = pre.closest('.code-block-wrapper');
+            if (!wrapper) {
+                wrapper = document.createElement('div');
+                wrapper.className = 'code-block-wrapper';
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(pre);
+            }
+            
+            ankiWrappers.push(wrapper);
+            
+            const cardsData = rawText.split('\n').filter(line => line.trim() !== '');
+            allCardsData.push(...cardsData);
+        }
+    });
+    
+    if (allCardsData.length === 0) return;
+    
+    let wallOuter = document.createElement('div');
+    wallOuter.id = 'unified-anki-wall';
+    wallOuter.style.marginTop = '20px';
+    wallOuter.style.width = '100%';
+    wallOuter.innerHTML = '<h3 style="margin-bottom:16px; color:var(--accent); font-size:1.1rem;">✨ 互動式卡片牆 (點擊翻轉)</h3>';
+    
+    detailTopicDesc.appendChild(wallOuter);
+    
+    // Hide all original Anki code blocks
+    ankiWrappers.forEach(w => w.style.display = 'none');
+    
+    let wallContainer = document.createElement('div');
+    wallContainer.className = 'anki-card-wrapper';
+    
+    allCardsData.forEach(line => {
+        let front = line;
+        let back = '';
+        
+        let ansIndex = line.indexOf('<ans>');
+        if (ansIndex === -1) ansIndex = line.indexOf('&lt;ans&gt;');
+        
+        if (ansIndex !== -1) {
+            let sepIndex = ansIndex;
+            let ansLength = 5;
+            if (line.substring(sepIndex, sepIndex + 11) === '&lt;ans&gt;') {
+                ansLength = 11;
+            }
+            front = line.substring(0, sepIndex);
+            
+            let endAnsIndex = line.indexOf('</ans>', sepIndex);
+            if (endAnsIndex === -1) endAnsIndex = line.indexOf('&lt;/ans&gt;', sepIndex);
+            
+            if (endAnsIndex !== -1) {
+                let endAnsLength = 6;
+                if (line.substring(endAnsIndex, endAnsIndex + 12) === '&lt;/ans&gt;') {
+                    endAnsLength = 12;
+                }
+                back = line.substring(sepIndex + ansLength, endAnsIndex);
+                let extra = line.substring(endAnsIndex + endAnsLength);
+                if (extra.trim() && extra.includes('<br>')) {
+                    back += `<div style="font-size:12px; color:var(--text-muted); margin-top:8px; border-top:1px dashed rgba(255,255,255,0.2); padding-top:8px;">${extra}</div>`;
+                }
+            } else {
+                back = line.substring(sepIndex + ansLength);
+            }
+        } else {
+            let splitIndex = line.indexOf(';');
+            if (splitIndex !== -1) {
+                front = line.substring(0, splitIndex);
+                back = line.substring(splitIndex + 1);
+            } else {
+                back = '（請翻面查看解答）';
+            }
+        }
+        
+        // Remove semicolon at the end of front if exists
+        front = front.replace(/;$/, '').trim();
+        
+        const cardDiv = document.createElement('div');
+        cardDiv.className = 'anki-card';
+        cardDiv.innerHTML = `
+            <div class="card-front">
+                <div class="question">${front}</div>
+            </div>
+            <div class="card-back">
+                <div class="question-small">${front}</div>
+                <hr class="card-divider">
+                <div class="answer">${back}</div>
+            </div>
+        `;
+        
+        cardDiv.onclick = function() {
+            this.classList.toggle('flipped');
+        };
+        
+        wallContainer.appendChild(cardDiv);
+    });
+    
+    wallOuter.appendChild(wallContainer);
+}
 
 // 啟動
 init();
