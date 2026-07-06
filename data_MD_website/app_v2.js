@@ -338,23 +338,35 @@ function renderTopicList(sortType) {
         // 熱圖 HTML
         let heatmapHtml = '';
         if (sortType === 'pos') {
-            const bins = [0, 0, 0, 0]; // 1-20, 21-40, 41-60, 61-80
+            let noCounts = {};
             s.positions.forEach(pos => {
-                if(pos <= 20) bins[0]++;
-                else if(pos <= 40) bins[1]++;
-                else if(pos <= 60) bins[2]++;
-                else bins[3]++;
+                noCounts[pos] = (noCounts[pos] || 0) + 1;
             });
-            const maxBin = Math.max(...bins, 1);
+            let maxCount = Math.max(1, ...Object.values(noCounts));
+            let heatmapBlocks = '';
+            for(let i=1; i<=80; i++) {
+                const c = noCounts[i] || 0;
+                let bg = 'var(--bg-hover)';
+                if (c > 0) {
+                    const alpha = Math.max(0.3, c / maxCount);
+                    bg = `rgba(239, 68, 68, ${alpha})`;
+                }
+                let borderRight = (i % 5 === 0) ? 'border-right: 1px solid rgba(128,128,128,0.2);' : '';
+                heatmapBlocks += `<div style="flex:1; height:16px; background:${bg}; ${borderRight}" title="題號: ${i} (共 ${c} 題)"></div>`;
+            }
+            
+            let axisHtml = '<div style="display:flex; width:100%; position:relative; height:15px; margin-top:2px;">';
+            for(let i=10; i<=80; i+=10) {
+                axisHtml += `<div style="position:absolute; left:${(i/80)*100}%; font-size:9px; color:var(--text-muted); transform:translateX(-50%);">${i}</div>`;
+            }
+            axisHtml += '</div>';
+
             heatmapHtml = `
-                <div style="display:flex; gap:4px; height:24px; margin-top:12px; align-items:flex-end;">
-                    <div style="flex:1; background:var(--primary); opacity:${Math.max(0.1, bins[0]/maxBin)}; height:${Math.max(10, (bins[0]/maxBin)*100)}%; border-radius:4px;" title="1-20題: ${bins[0]}題"></div>
-                    <div style="flex:1; background:var(--primary); opacity:${Math.max(0.1, bins[1]/maxBin)}; height:${Math.max(10, (bins[1]/maxBin)*100)}%; border-radius:4px;" title="21-40題: ${bins[1]}題"></div>
-                    <div style="flex:1; background:var(--primary); opacity:${Math.max(0.1, bins[2]/maxBin)}; height:${Math.max(10, (bins[2]/maxBin)*100)}%; border-radius:4px;" title="41-60題: ${bins[2]}題"></div>
-                    <div style="flex:1; background:var(--primary); opacity:${Math.max(0.1, bins[3]/maxBin)}; height:${Math.max(10, (bins[3]/maxBin)*100)}%; border-radius:4px;" title="61-80題: ${bins[3]}題"></div>
-                </div>
-                <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--text-muted); margin-top:2px;">
-                    <span>前面</span><span>後面</span>
+                <div style="margin-top:12px;">
+                    <div style="display:flex; width:100%; border-radius:2px; overflow:hidden; border: 1px solid var(--border-color);">
+                        ${heatmapBlocks}
+                    </div>
+                    ${axisHtml}
                 </div>
             `;
         }
@@ -447,9 +459,9 @@ function renderQuestionCard() {
         if (savedState) {
             expPanel.style.display = 'block';
             let expHtml = '';
-            if (q.key_concept) expHtml += `<div style="margin-bottom:12px; color:var(--text-main);"><strong>🤖 AI 提示：</strong>${q.key_concept}</div>`;
+            if (q.key_concept) expHtml += `<div style="margin-bottom:12px; color:var(--text-main);"><strong>🤖：</strong>${q.key_concept}</div>`;
             if (q.explanation) {
-                expHtml += `<div class="markdown-body" style="font-size:14px;">${safeMarkdown(q.explanation)}</div>`;
+                expHtml += `<div><strong>🤓：</strong><br><div class="markdown-body" style="font-size:14px; margin-top:4px;">${safeMarkdown(q.explanation)}</div></div>`;
             } else {
                 expHtml += `<div style="color:var(--text-muted); font-size:14px;">目前尚無詳細解析。</div>`;
             }
@@ -491,7 +503,18 @@ function updateAccuracy() {
         listAccuracy.textContent = "正確率: --%";
     } else {
         const pct = Math.round((correct / total) * 100);
-        listAccuracy.textContent = `🎯 ${pct}% (${correct}/${total})`;
+        let emoji = '🤡';
+        if (pct >= 90) emoji = '😍';
+        else if (pct >= 80) emoji = '😆';
+        else if (pct >= 70) emoji = '😊';
+        else if (pct >= 60) emoji = '😅';
+        else if (pct >= 50) emoji = '😐';
+        else if (pct >= 40) emoji = '😑';
+        else if (pct >= 30) emoji = '😣';
+        else if (pct >= 20) emoji = '😨';
+        else if (pct >= 10) emoji = '🤮';
+        
+        listAccuracy.textContent = `${emoji} ${pct}% (${correct}/${total})`;
     }
 }
 
