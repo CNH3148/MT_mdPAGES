@@ -6,6 +6,9 @@ on:
     paths:
       - 'data_MD_website/**'
       - '.github/workflows/deploy-pages.yml'
+      - 'data_MD/**'
+      - 'public/**'
+      - 'Scripts/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -28,6 +31,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run Build Script
+        run: python Scripts/Build-Website/build_website.py
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
