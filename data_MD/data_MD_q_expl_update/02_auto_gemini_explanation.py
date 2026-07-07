@@ -525,8 +525,11 @@ def main() -> None:
 
         if success:
             consecutive_fails = 0
-            logger.info("Cooldown 5s…")
-            jsleep(5, 5)
+            logger.info("Cooldown 5s… (checking quota limit)")
+            if locate_image("reached_quota_limit.png", timeout=5.0) is not None:
+                logger.critical("Quota limit reached ('reached_quota_limit.png' detected). Halting script.")
+                beep_alert()
+                break
         else:
             consecutive_fails += 1
             if consecutive_fails >= 3:
