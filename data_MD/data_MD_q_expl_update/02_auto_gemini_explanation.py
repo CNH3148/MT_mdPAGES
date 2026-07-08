@@ -8,11 +8,13 @@
     uv run --with pyautogui --with pydirectinput --with pyperclip --with pygetwindow \
            --with opencv-python --with pillow \
            python 02_auto_gemini_explanation.py [--manual-send] [--start-from FILENAME] [--dry-run]
+                                                [--commit-interval SECONDS]
 """
 
 import argparse
 import importlib
 import logging
+import subprocess
 import sys
 import time
 import traceback
@@ -69,6 +71,58 @@ def beep_alert() -> None:
         winsound.Beep(1000, 500)
     except Exception:
         pass
+
+
+# ---------------------------------------------------------------------------
+# Git periodic commit & push
+# ---------------------------------------------------------------------------
+_REPO_ROOT: Path = DATA_ROOT.parent  # data_MD_PAGE/
+
+def git_commit_and_push(completed_count: int, failed_count: int) -> bool:
+    """Stage changes under data_MD/, commit with timestamp, and push.
+
+    Only commits the ``data_MD/`` subtree so unrelated workspace changes
+    are never accidentally included.
+
+    Returns True on success, False on any failure (failures are logged
+    but **never** interrupt the main automation loop).
+    """
+    timestamp: str = datetime.now().strftime("%Y-%m-%d %H:%M")
+    commit_msg: str = f"auto: 02 script periodic save ({timestamp}, {completed_count} done, {failed_count} failed)"
+
+    steps: list[tuple[str, list[str]]] = [
+        ("git add", ["git", "add", "data_MD/"]),
+        ("git commit", ["git", "commit", "-m", commit_msg]),
+        ("git push", ["git", "push", "origin", "master"]),
+    ]
+
+    for label, cmd in steps:
+        try:
+            result = subprocess.run(
+                cmd,
+                cwd=str(_REPO_ROOT),
+                capture_output=True,
+                text=True,
+                timeout=120,
+            )
+            if result.returncode != 0:
+                stderr_msg: str = result.stderr.strip()
+                # 'nothing to commit' is normal, not an error
+                if "nothing to commit" in result.stdout or "nothing to commit" in stderr_msg:
+                    logger.info("git commit: nothing to commit — skipping push.")
+                    return True
+                logger.warning(f"{label} failed (rc={result.returncode}): {stderr_msg}")
+                return False
+            logger.info(f"{label} succeeded.")
+        except subprocess.TimeoutExpired:
+            logger.warning(f"{label} timed out (120s). Skipping remaining git steps.")
+            return False
+        except Exception as exc:
+            logger.warning(f"{label} raised an exception: {exc}")
+            return False
+
+    logger.info(f"Git commit & push completed: {commit_msg}")
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -602,6 +656,8 @@ def main() -> None:
                         help="Start from a specific filename")
     parser.add_argument("--dry-run", action="store_true",
                         help="Just list pending questions, don't run")
+    parser.add_argument("--commit-interval", type=int, default=3600,
+                        help="Interval in seconds between periodic git commit+push (default: 3600 = 1h). Set 0 to disable.")
     args = parser.parse_args()
 
     csv_path = Path(__file__).resolve().parent / CSV_FILENAME
@@ -634,6 +690,10 @@ def main() -> None:
 
     chat_count = 0
     consecutive_fails = 0
+    completed_count = 0
+    failed_count = 0
+    last_commit_time: float = time.time()
+    commit_interval: int = args.commit_interval
 
     def handle_quota_limit() -> bool:
         logger.info("Quota limit reached ('reached_quota_limit.png' detected). Switching account...")
@@ -711,20 +771,36 @@ def main() -> None:
             
             if success:
                 consecutive_fails = 0
+                completed_count += 1
                 logger.info("Cooldown 5s...")
                 jsleep(5.0, 5.0)
-                break  # Question completed successfully, move to next in pending
             else:
                 consecutive_fails += 1
+                failed_count += 1
                 if consecutive_fails >= 3:
                     logger.critical("3 consecutive failures — halting.")
+                    if commit_interval > 0:
+                        logger.info("Performing final git commit before exit...")
+                        git_commit_and_push(completed_count, failed_count)
                     beep_alert()
                     sys.exit(1)
                 logger.warning(f"Fail #{consecutive_fails}. Attempting recovery…")
                 # Recovery: reopen side panel
                 open_side_panel()
                 jsleep(2.0, 3.0)
-                break  # Break inner loop, move to next question (status already updated to FAILED)
+
+            # --- Periodic git commit + push (regardless of success/fail) ---
+            if commit_interval > 0 and (time.time() - last_commit_time) >= commit_interval:
+                logger.info(f"定時 commit 觸發（已超過 {commit_interval} 秒）...")
+                git_commit_and_push(completed_count, failed_count)
+                last_commit_time = time.time()
+
+            break  # Move to next question in pending
+
+    # --- Final commit after all questions processed ---
+    if commit_interval > 0:
+        logger.info("All questions processed. Performing final git commit...")
+        git_commit_and_push(completed_count, failed_count)
 
 
 if __name__ == "__main__":
