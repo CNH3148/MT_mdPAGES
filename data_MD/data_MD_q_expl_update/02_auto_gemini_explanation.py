@@ -55,6 +55,9 @@ from _utils import (
 validate_mod = importlib.import_module("03_validate")
 run_validation = validate_mod.run_validation
 
+class QuotaLimitException(Exception):
+    pass
+
 # ---------------------------------------------------------------------------
 # Helper: beep alert (winsound)
 # ---------------------------------------------------------------------------
@@ -204,11 +207,23 @@ def setup_model(difficulty: str) -> str:
     logger.info(f"Step 4: target model={target_model} (difficulty={difficulty})")
 
     for attempt in range(4):
-        is_flash = locate_image("switch_model_from_flash.png", timeout=1.5) is not None
-        is_pro = locate_image("switch_model_from_pro.png", timeout=1.5) is not None
+        is_flash = False
+        is_pro = False
+        current_btn = None
         
-        current_btn = "switch_model_from_flash.png" if is_flash else "switch_model_from_pro.png"
-        if not is_flash and not is_pro:
+        for btn, is_f, is_p in [
+            ("switch_model_from_flash.png", True, False),
+            ("switch_model_from_pro.png", False, True),
+            ("switch_model_from_auto.png", False, False),
+            ("switch_model_from_flash-lite.png", False, False)
+        ]:
+            if locate_image(btn, timeout=0.5) is not None:
+                current_btn = btn
+                is_flash = is_f
+                is_pro = is_p
+                break
+                
+        if not current_btn:
             logger.warning("Could not find current model button, retrying...")
             jsleep(1.0, 2.0)
             continue
@@ -399,6 +414,14 @@ def wait_and_copy(model: str) -> str:
     else:
         raise RuntimeError("Could not find copy button after scrolling")
 
+    logger.info("Scrolling down slightly to ensure quota limit is visible if present")
+    human_scroll(-1500)
+    jsleep(1.0, 1.5)
+
+    if locate_image("reached_quota_limit.png", timeout=2.0) is not None:
+        logger.warning("reached_quota_limit.png detected before copying.")
+        raise QuotaLimitException("Quota limit reached for this generation.")
+
     logger.info("Step 12: Clicking copy button")
     click_image("gemini_copy_btn.png", timeout=3)
     jsleep(1.0, 1.5)
@@ -448,6 +471,8 @@ def process_question(q: dict, manual_send: bool) -> bool:
             )
             return False
 
+    except QuotaLimitException:
+        raise  # Propagate to main loop for account switching
     except Exception as e:
         logger.error(f"Error processing {q['filename']}: {e}")
         traceback.print_exc()
@@ -501,45 +526,88 @@ def main() -> None:
     chat_count = 0
     consecutive_fails = 0
 
-    for q in pending:
-        logger.info(f"{'='*50}")
-        logger.info(f"Processing: {q['filename']}  (difficulty={q['difficulty']})")
-        update_question_status(csv_path, q["filename"], STATUS_IN_PROGRESS)
+    def handle_quota_limit() -> bool:
+        logger.info("Quota limit reached ('reached_quota_limit.png' detected). Switching account...")
+        icon_1 = locate_image("user_icon_1.png", timeout=2.0)
+        icon_2 = locate_image("user_icon_2.png", timeout=2.0)
+        
+        if icon_1:
+            logger.info("Found user_icon_1. Clicking it to switch to account 2.")
+            click_image("user_icon_1.png", timeout=2)
+            jsleep(2.0, 3.0)
+            click_image("change_profile.png", timeout=3)
+            jsleep(2.0, 3.0)
+            click_image("user_profile_2.png", timeout=3)
+            jsleep(5.0, 6.0)
+            return True
+        elif icon_2:
+            logger.info("Found user_icon_2. Clicking it to switch to account 1.")
+            click_image("user_icon_2.png", timeout=2)
+            jsleep(2.0, 3.0)
+            click_image("change_profile.png", timeout=3)
+            jsleep(2.0, 3.0)
+            click_image("user_profile_1.png", timeout=3)
+            jsleep(5.0, 6.0)
+            return True
+        else:
+            logger.critical("Could not find any user icon to switch accounts.")
+            return False
 
-        # Always start a new chat for every question to avoid scrolling issues
-        try:
-            start_new_chat()
-        except Exception as e:
-            logger.error(f"Failed to start new chat: {e}")
-            # Recovery: Alt+G ×2
-            open_side_panel()
-            jsleep(1.0, 2.0)
+    for q in pending:
+        quota_hits_for_this_question = 0
+        while True:
+            logger.info(f"{'='*50}")
+            logger.info(f"Processing: {q['filename']}  (difficulty={q['difficulty']})")
+            update_question_status(csv_path, q["filename"], STATUS_IN_PROGRESS)
+
+            # Always start a new chat for every question to avoid scrolling issues
             try:
                 start_new_chat()
-            except Exception:
-                logger.critical("Cannot recover new-chat flow. Halting.")
-                beep_alert()
-                break
+            except Exception as e:
+                logger.error(f"Failed to start new chat: {e}")
+                # Recovery: Alt+G ×2
+                open_side_panel()
+                jsleep(1.0, 2.0)
+                try:
+                    start_new_chat()
+                except Exception:
+                    logger.critical("Cannot recover new-chat flow. Halting.")
+                    beep_alert()
+                    sys.exit(1)
 
-        success = process_question(q, manual_send=args.manual_send)
-
-        if success:
-            consecutive_fails = 0
-            logger.info("Cooldown 5s… (checking quota limit)")
-            if locate_image("reached_quota_limit.png", timeout=5.0) is not None:
-                logger.critical("Quota limit reached ('reached_quota_limit.png' detected). Halting script.")
-                beep_alert()
-                break
-        else:
-            consecutive_fails += 1
-            if consecutive_fails >= 3:
-                logger.critical("3 consecutive failures — halting.")
-                beep_alert()
-                break
-            logger.warning(f"Fail #{consecutive_fails}. Attempting recovery…")
-            # Recovery: reopen side panel
-            open_side_panel()
-            jsleep(2.0, 3.0)
+            try:
+                success = process_question(q, manual_send=args.manual_send)
+            except QuotaLimitException:
+                quota_hits_for_this_question += 1
+                if quota_hits_for_this_question >= 2:
+                    logger.critical("Hit quota limit twice for the same question. Halting.")
+                    ts = time.strftime("%Y-%m-%d %H:%M:%S")
+                    update_question_status(csv_path, q["filename"], STATUS_FAILED, error_msg=f"Quota Limit Reached Twice at {ts}")
+                    beep_alert()
+                    sys.exit(1)
+                
+                logger.info("Quota limit reached. Switching account and retrying this question...")
+                if not handle_quota_limit():
+                    beep_alert()
+                    sys.exit(1)
+                continue  # Retry this question
+            
+            if success:
+                consecutive_fails = 0
+                logger.info("Cooldown 5s...")
+                jsleep(5.0, 5.0)
+                break  # Question completed successfully, move to next in pending
+            else:
+                consecutive_fails += 1
+                if consecutive_fails >= 3:
+                    logger.critical("3 consecutive failures — halting.")
+                    beep_alert()
+                    sys.exit(1)
+                logger.warning(f"Fail #{consecutive_fails}. Attempting recovery…")
+                # Recovery: reopen side panel
+                open_side_panel()
+                jsleep(2.0, 3.0)
+                break  # Break inner loop, move to next question (status already updated to FAILED)
 
 
 if __name__ == "__main__":
