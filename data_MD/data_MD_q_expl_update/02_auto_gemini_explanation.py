@@ -17,6 +17,8 @@ import sys
 import time
 import traceback
 import winsound
+import re
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional, Any
 
@@ -483,6 +485,113 @@ def process_question(q: dict, manual_send: bool) -> bool:
 
 
 # ===================================================================
+#  Quota Limit Recovery Handlers
+# ===================================================================
+
+def parse_quota_recovery_time(text: str) -> Optional[datetime]:
+    # text 範例: 必須等到 7月 8 2:36 下午 額度重設後...
+    pattern = r"等到\s*(\d+)\s*月\s*(\d+)\s*(\d+):(\d+)\s*(上午|下午)"
+    match = re.search(pattern, text)
+    if not match:
+        return None
+    month = int(match.group(1))
+    day = int(match.group(2))
+    hour = int(match.group(3))
+    minute = int(match.group(4))
+    ampm = match.group(5)
+    
+    if ampm == "下午" and hour < 12:
+        hour += 12
+    elif ampm == "上午" and hour == 12:
+        hour = 0
+        
+    now = datetime.now()
+    year = now.year
+    
+    try:
+        recovery_dt = datetime(year, month, day, hour, minute)
+    except ValueError:
+        return None
+        
+    # 如果時間在過去超過一天，假設是跨年
+    if recovery_dt < now - timedelta(days=1):
+        try:
+            recovery_dt = recovery_dt.replace(year=year + 1)
+        except ValueError:
+            pass
+            
+    return recovery_dt
+
+def attempt_read_recovery_text() -> str:
+    loc = locate_image("reached_quota_limit.png", timeout=2.0)
+    if not loc:
+        return ""
+        
+    # 確保游標在圖片左上角，再略往左上偏移一點確保框到
+    x = loc.left - 10
+    y = loc.top - 10
+    
+    pyautogui.moveTo(x, y)
+    pyautogui.click() # clear previous selection
+    jsleep(0.2, 0.5)
+    
+    pyautogui.mouseDown()
+    jsleep(0.2, 0.5)
+    # 向下拖曳約80px並往右拖曳，覆蓋兩行文字
+    pyautogui.moveTo(x + 500, y + 80, duration=0.8)
+    pyautogui.mouseUp()
+    jsleep(0.5, 1.0)
+    
+    human_hotkey("ctrl", "c")
+    jsleep(0.5, 1.0)
+    
+    # 點擊空白處取消選取
+    pyautogui.click()
+    jsleep(0.2, 0.5)
+    
+    return pyperclip.paste()
+
+def wait_for_quota_recovery() -> bool:
+    dt = None
+    for attempt in range(2):
+        text = attempt_read_recovery_text()
+        logger.info(f"嘗試框選的恢復時間文字: {text.strip()}")
+        dt = parse_quota_recovery_time(text)
+        if dt:
+            break
+        logger.warning(f"第 {attempt+1} 次無法解析出時間，再試一次...")
+        jsleep(1.0, 2.0)
+    else:
+        logger.error("經過兩次嘗試仍無法解析出恢復時間。")
+        return False
+        
+    now = datetime.now()
+    wait_time = (dt - now).total_seconds()
+    if wait_time < 0:
+        logger.warning("解析出的恢復時間在過去，繼續執行。")
+        wait_time = 0
+        
+    wait_time += 300 # 加5分鐘緩衝
+    
+    if wait_time > 12 * 3600:
+        logger.error(f"需要等待的時間太久 ({wait_time} 秒，大於 12 小時)，放棄執行。")
+        return False
+        
+    logger.info(f"開始等待額度恢復。預計恢復時間: {dt}，等待秒數: {wait_time}")
+    beep_alert()
+    
+    while wait_time > 0:
+        sleep_chunk = min(wait_time, 300) # 每5分鐘印一次進度
+        jsleep(sleep_chunk, sleep_chunk)
+        wait_time -= sleep_chunk
+        if wait_time > 0:
+            logger.info(f"持續等待中... 剩餘約 {int(wait_time)} 秒")
+            
+    logger.info("等待結束，恢復任務。")
+    return True
+
+
+# ===================================================================
 #  Main loop
 # ===================================================================
 def main() -> None:
@@ -580,11 +689,19 @@ def main() -> None:
             except QuotaLimitException:
                 quota_hits_for_this_question += 1
                 if quota_hits_for_this_question >= 2:
-                    logger.critical("Hit quota limit twice for the same question. Halting.")
-                    ts = time.strftime("%Y-%m-%d %H:%M:%S")
-                    update_question_status(csv_path, q["filename"], STATUS_FAILED, error_msg=f"Quota Limit Reached Twice at {ts}")
-                    beep_alert()
-                    sys.exit(1)
+                    logger.warning("Hit quota limit twice for the same question. Attempting to parse recovery time...")
+                    if not wait_for_quota_recovery():
+                        logger.critical("Failed to recover or wait too long. Halting.")
+                        ts = time.strftime("%Y-%m-%d %H:%M:%S")
+                        update_question_status(csv_path, q["filename"], STATUS_FAILED, error_msg=f"Quota Limit Reached Twice at {ts}")
+                        beep_alert()
+                        sys.exit(1)
+                    
+                    logger.info("Wait completed. Re-opening side panel to resume...")
+                    open_side_panel()
+                    jsleep(2.0, 3.0)
+                    quota_hits_for_this_question = 0
+                    continue
                 
                 logger.info("Quota limit reached. Switching account and retrying this question...")
                 if not handle_quota_limit():
