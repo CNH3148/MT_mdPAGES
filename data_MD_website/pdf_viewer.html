@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PDF 對照</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; overflow: hidden; background: #2b2b2b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+        }
+        
+        .pane {
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100px;
+            min-width: 100px;
+        }
+
+        .pane-top { flex-basis: 66.66%; }
+        .pane-bottom { flex-basis: 33.33%; }
+
+        @media (orientation: landscape) and (min-width: 768px) {
+            .container { flex-direction: row; }
+            .pane-top { flex-basis: 50%; }
+            .pane-bottom { flex-basis: 50%; }
+        }
+
+        .pane-header {
+            background: #1e1e1e;
+            color: #f0f0f0;
+            padding: 8px 16px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #111;
+            font-weight: 500;
+        }
+
+        iframe {
+            flex-grow: 1;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #525659;
+        }
+
+        /* Resizer styling */
+        .resizer {
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            touch-action: none; /* Prevent scrolling while dragging on touch */
+        }
+
+        .resizer:hover, .resizer.resizing { background: #444; }
+
+        .resizer-horizontal {
+            height: 12px;
+            cursor: row-resize;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+        }
+
+        .resizer-vertical {
+            width: 12px;
+            cursor: col-resize;
+            border-left: 1px solid #222;
+            border-right: 1px solid #222;
+        }
+        
+        .resizer::after {
+            content: "";
+            display: block;
+            background: #666;
+            border-radius: 2px;
+        }
+
+        .resizer-horizontal::after {
+            width: 40px;
+            height: 4px;
+        }
+
+        .resizer-vertical::after {
+            width: 4px;
+            height: 40px;
+        }
+
+        .resizer.resizing::after {
+            background: #3b82f6; /* highlight when active */
+        }
+
+        /* Responsive resizer classes */
+        @media (orientation: portrait) {
+            .resizer { height: 12px; width: 100%; cursor: row-resize; border-top: 1px solid #222; border-bottom: 1px solid #222; border-left: none; border-right: none;}
+            .resizer::after { width: 40px; height: 4px; }
+        }
+        @media (orientation: landscape) and (min-width: 768px) {
+            .resizer { width: 12px; height: 100%; cursor: col-resize; border-left: 1px solid #222; border-right: 1px solid #222; border-top: none; border-bottom: none;}
+            .resizer::after { width: 4px; height: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="split-container">
+        <div class="pane pane-top" id="pane-exam">
+            <div class="pane-header">
+                <span id="title-exam">📄 試題卷</span>
+                <span style="opacity:0.7; font-size: 13px;" id="header-info"></span>
+            </div>
+            <iframe id="iframe-exam" title="Exam PDF"></iframe>
+        </div>
+        
+        <div class="resizer" id="resizer"></div>
+        
+        <div class="pane pane-bottom" id="pane-answer">
+            <div class="pane-header">
+                <span id="title-answer">📋 答案卷</span>
+            </div>
+            <iframe id="iframe-answer" title="Answer PDF"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Parse URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const subject = urlParams.get('subject') || '';
+        const year = urlParams.get('year') || '';
+        const no = urlParams.get('no') || '';
+        const searchText = urlParams.get('q') || '';
+
+        // Update titles
+        if (subject && year) {
+            const pageTitle = `${subject} - ${year} - Q${no} | PDF 對照`;
+            document.title = pageTitle;
+            document.getElementById('header-info').textContent = `${subject} | ${year}`;
+            document.getElementById('title-exam').textContent = `📄 試題卷 - Q${no}`;
+        }
+
+        // Generate jsDelivr CDN URLs for CORS bypass
+        // repo: CNH3148/MT_mdPAGES @ master
+        const getCdnUrl = (path) => `https://cdn.jsdelivr.net/gh/CNH3148/MT_mdPAGES@master/${path}`;
+
+        const examPdfUrl = getCdnUrl(`PDFs/pdfs/${encodeURIComponent(subject)}/${encodeURIComponent(year)}.pdf`);
+        const answerPdfUrl = getCdnUrl(`PDFs/answer_pdfs/${encodeURIComponent(subject)}/${encodeURIComponent(year)}.pdf`);
+
+        // Set iframe sources using local pdfjs viewer
+        const iframeExam = document.getElementById('iframe-exam');
+        const iframeAnswer = document.getElementById('iframe-answer');
+        
+        // Append search term if available for the exam pdf
+        let examSrc = `pdfjs/web/viewer.html?file=${encodeURIComponent(examPdfUrl)}`;
+        if (searchText) {
+            // pdf.js uses hash parameters for search
+            examSrc += `#search=${encodeURIComponent(searchText)}`;
+        }
+        
+        let answerSrc = `pdfjs/web/viewer.html?file=${encodeURIComponent(answerPdfUrl)}`;
+
+        iframeExam.src = examSrc;
+        iframeAnswer.src = answerSrc;
+
+        // Resizer Logic
+        const resizer = document.getElementById('resizer');
+        const paneTop = document.getElementById('pane-exam');
+        const container = document.getElementById('split-container');
+        
+        let isResizing = false;
+        let isHorizontal = true; // true if vertical split (horizontal resizer bar)
+
+        // Determine orientation
+        function checkOrientation() {
+            isHorizontal = window.innerWidth < 768 || window.innerHeight > window.innerWidth;
+            // Reset flex basis when orientation changes
+            paneTop.style.flexBasis = isHorizontal ? '66.66%' : '50%';
+        }
+        
+        window.addEventListener('resize', checkOrientation);
+        window.addEventListener('orientationchange', () => {
+            setTimeout(checkOrientation, 100);
+        });
+        checkOrientation();
+
+        function onMouseDown(e) {
+            isResizing = true;
+            resizer.classList.add('resizing');
+            
+            // Prevent iframes from stealing mouse events during drag
+            iframeExam.style.pointerEvents = 'none';
+            iframeAnswer.style.pointerEvents = 'none';
+        }
+
+        function onMouseMove(e) {
+            if (!isResizing) return;
+            
+            // Get position based on event type (mouse or touch)
+            const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+
+            const rect = container.getBoundingClientRect();
+            
+            if (isHorizontal) {
+                // Vertical layout, horizontal resizer (adjusting height)
+                let newHeight = clientY - rect.top;
+                let percentage = (newHeight / rect.height) * 100;
+                
+                // Boundaries
+                if (percentage < 10) percentage = 10;
+                if (percentage > 90) percentage = 90;
+                
+                paneTop.style.flexBasis = `${percentage}%`;
+            } else {
+                // Horizontal layout, vertical resizer (adjusting width)
+                let newWidth = clientX - rect.left;
+                let percentage = (newWidth / rect.width) * 100;
+                
+                // Boundaries
+                if (percentage < 10) percentage = 10;
+                if (percentage > 90) percentage = 90;
+                
+                paneTop.style.flexBasis = `${percentage}%`;
+            }
+        }
+
+        function onMouseUp() {
+            if (isResizing) {
+                isResizing = false;
+                resizer.classList.remove('resizing');
+                
+                // Restore iframe mouse events
+                iframeExam.style.pointerEvents = 'auto';
+                iframeAnswer.style.pointerEvents = 'auto';
+            }
+        }
+
+        resizer.addEventListener('mousedown', onMouseDown);
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+
+        // Touch support
+        resizer.addEventListener('touchstart', onMouseDown, {passive: true});
+        document.addEventListener('touchmove', onMouseMove, {passive: false}); // Prevent default scrolling
+        document.addEventListener('touchend', onMouseUp);
+        document.addEventListener('touchcancel', onMouseUp);
+    </script>
+</body>
+</html>

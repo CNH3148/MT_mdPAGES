@@ -857,6 +857,83 @@ body {
 }
 
 /* ========================================
+   Source Links Slider (MD / PDF popout)
+   ======================================== */
+.source-links-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.source-links-slider {
+    position: absolute;
+    right: 100%;        /* Pop out to the left */
+    top: 50%;
+    transform: translateY(-50%) translateX(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    margin-right: 8px;
+    white-space: nowrap;
+    z-index: 5;
+    display: flex;
+    gap: 6px;
+}
+
+.source-links-slider.visible {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+    pointer-events: auto;
+}
+
+.source-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    text-decoration: none;
+}
+
+.source-link-btn:active {
+    transform: scale(0.95);
+}
+
+/* MD Button - Green theme */
+.source-link-btn.md-btn {
+    border-color: var(--accent);
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--accent);
+}
+
+.source-link-btn.md-btn:hover {
+    background: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+/* PDF Button - Orange/Amber theme */
+.source-link-btn.pdf-btn {
+    border-color: #f59e0b;
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+
+.source-link-btn.pdf-btn:hover {
+    background: #f59e0b;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+/* ========================================
    List Mode View
    ======================================== */
 #view-practice-list {

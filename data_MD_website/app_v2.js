@@ -458,8 +458,11 @@ function renderQuestionCard() {
         const qNoEl = document.getElementById('q-no');
         qNoEl.textContent = `Q ${currentQuestionIndex + 1} / ${currentPracticeQuestions.length}`;
         setupModeSwitchOnBadge(qNoEl, 'card', currentQuestionIndex);
-        document.getElementById('q-tags').innerHTML = `<span class="badge" style="background:var(--bg-hover); color:var(--text-muted);">${q.year} - ${q.no}</span>`;
         
+        const tagsContainer = document.getElementById('q-tags');
+        tagsContainer.innerHTML = `<span class="badge" style="background:var(--bg-hover); color:var(--text-muted);">${q.year} - ${q.no}</span>`;
+        const tagBadge = tagsContainer.querySelector('.badge');
+        setupSourceLinksOnBadge(tagBadge, q);
         // 渲染題目文字與圖片
         let htmlContent = safeHTML(q.question).replace(/^\s*\d+\.\s*/, '');
         if (q.images && q.images.length > 0) {
@@ -837,7 +840,7 @@ function setupModeSwitchOnBadge(badgeEl, currentMode, questionIndex) {
     badgeEl.onclick = (e) => {
         e.stopPropagation();
         // 先關閉所有其他的 slider
-        document.querySelectorAll('.mode-switch-slider.visible').forEach(s => {
+        document.querySelectorAll('.mode-switch-slider.visible, .source-links-slider.visible').forEach(s => {
             if (s !== slider) s.classList.remove('visible');
         });
         slider.classList.toggle('visible');
@@ -854,6 +857,76 @@ function setupModeSwitchOnBadge(badgeEl, currentMode, questionIndex) {
         }
     };
 }
+
+/**
+ * 從題幹中提取最長連續中文字串或英文字串作為 PDF 搜尋關鍵字
+ */
+function extractSearchText(questionText) {
+    if (!questionText) return '';
+    // 移除題號前綴 (如 "1. " 或 "42.")
+    let text = questionText.replace(/^\s*\d+\.\s*/, '');
+    
+    // 找出最長的連續中文片段
+    const chineseMatches = text.match(/[\u4e00-\u9fff\u3400-\u4dbf]{4,}/g) || [];
+    let longest = chineseMatches.sort((a, b) => b.length - a.length)[0] || '';
+    
+    // 若中文太短，改用英文
+    if (longest.length < 6) {
+        const engMatches = text.match(/[A-Za-z][A-Za-z0-9\s\-]{5,}/g) || [];
+        longest = engMatches.sort((a, b) => b.length - a.length)[0] || text;
+    }
+    
+    // 截取適當長度
+    return longest.slice(0, 40);
+}
+
+function setupSourceLinksOnBadge(badgeEl, question) {
+    // 確保 badge 被包在 wrapper 中
+    let wrapper = badgeEl.closest('.source-links-wrapper');
+    if (!wrapper) {
+        wrapper = document.createElement('span');
+        wrapper.className = 'source-links-wrapper';
+        if (badgeEl.parentNode) {
+            badgeEl.parentNode.insertBefore(wrapper, badgeEl);
+        }
+        wrapper.appendChild(badgeEl);
+    }
+
+    // 移除舊的 slider
+    const oldSlider = wrapper.querySelector('.source-links-slider');
+    if (oldSlider) oldSlider.remove();
+
+    // 建立新的 slider
+    const slider = document.createElement('span');
+    slider.className = 'source-links-slider';
+    
+    // MD Link
+    // github raw filename pattern: {subject}/{year}/{exam_id}_{year}_{no}.md
+    const sourcePath = question._source_path || `${question.subject}/${question.year}/${question.exam_id}_${question.year}_${question.no}.md`;
+    const githubMdUrl = `https://github.com/CNH3148/MT_mdPAGES/blob/master/data_MD/${sourcePath}`;
+    
+    // PDF Link
+    const searchText = extractSearchText(question.question);
+    const pdfUrl = `pdf_viewer.html?subject=${encodeURIComponent(question.subject)}&year=${encodeURIComponent(question.year)}&no=${encodeURIComponent(question.no)}&q=${encodeURIComponent(searchText)}`;
+    
+    slider.innerHTML = `
+        <a href="${pdfUrl}" target="_blank" class="source-link-btn pdf-btn" title="查看 PDF 試題與答案卷">📋 PDF</a>
+        <a href="${githubMdUrl}" target="_blank" class="source-link-btn md-btn" title="在 GitHub 查看 Markdown 原檔">📄 MD</a>
+    `;
+    wrapper.appendChild(slider);
+
+    // badge 點擊 → 切換 slider 顯示
+    badgeEl.style.cursor = 'pointer';
+    badgeEl.onclick = (e) => {
+        e.stopPropagation();
+        // 關閉其他已展開的 source-links 和 mode-switch
+        document.querySelectorAll('.source-links-slider.visible, .mode-switch-slider.visible').forEach(s => {
+            if (s !== slider) s.classList.remove('visible');
+        });
+        slider.classList.toggle('visible');
+    };
+}
+
 
 /**
  * 切換至清單模式
@@ -917,6 +990,8 @@ function renderListMode(scrollToIndex = -1) {
         const tagsDiv = document.createElement('div');
         tagsDiv.className = 'tags-container';
         tagsDiv.innerHTML = `<span class="badge" style="background:var(--bg-hover); color:var(--text-muted);">${q.year} - ${q.no}</span>`;
+        const tagBadge = tagsDiv.querySelector('.badge');
+        setupSourceLinksOnBadge(tagBadge, q);
 
         headerDiv.appendChild(qnoBadge.closest('.mode-switch-wrapper') || qnoBadge);
         headerDiv.appendChild(tagsDiv);
@@ -1106,9 +1181,9 @@ function updateListModeAccuracy() {
     updateAccuracy();
 }
 
-// --- 全域事件：點擊空白處關閉所有 mode-switch-slider ---
+// --- 全域事件：點擊空白處關閉所有 mode-switch-slider 與 source-links-slider ---
 document.addEventListener('click', () => {
-    document.querySelectorAll('.mode-switch-slider.visible').forEach(s => {
+    document.querySelectorAll('.mode-switch-slider.visible, .source-links-slider.visible').forEach(s => {
         s.classList.remove('visible');
     });
 });
