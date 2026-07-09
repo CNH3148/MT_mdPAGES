@@ -297,6 +297,8 @@ def setup_model(difficulty: str) -> str:
 
     logger.info(f"Step 4: target model={target_model} (difficulty={difficulty})")
 
+    model_clicked = False
+
     for attempt in range(4):
         is_flash = False
         is_pro = False
@@ -306,7 +308,10 @@ def setup_model(difficulty: str) -> str:
             ("switch_model_from_flash.png", True, False),
             ("switch_model_from_pro.png", False, True),
             ("switch_model_from_auto.png", False, False),
-            ("switch_model_from_flash-lite.png", False, False)
+            ("switch_model_from_flash-lite.png", False, False),
+            ("flash_thinking.png", False, False),
+            ("pro_thinking.png", False, False),
+            ("flash-lite_thinking.png", False, False)
         ]:
             if locate_image(btn, timeout=0.5) is not None:
                 current_btn = btn
@@ -323,7 +328,11 @@ def setup_model(difficulty: str) -> str:
         click_image(current_btn, timeout=2)
         jsleep(1.5, 2.0)
         
-        model_correct = (is_flash and target_model == "flash") or (is_pro and target_model == "pro")
+        if model_clicked:
+            model_correct = True
+        else:
+            model_correct = (is_flash and target_model == "flash") or (is_pro and target_model == "pro")
+            
         thinking_on = locate_image("switch_on.png", timeout=1.5) is not None
         
         if model_correct and thinking_on:
@@ -339,6 +348,7 @@ def setup_model(difficulty: str) -> str:
             target_opt = "gemini_pro_model.png" if target_model == "pro" else "gemini_flash_model.png"
             click_image(target_opt, timeout=3)
             jsleep(2.0, 3.0)
+            model_clicked = True
             continue
             
         if not thinking_on:
