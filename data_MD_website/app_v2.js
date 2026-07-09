@@ -521,7 +521,7 @@ function renderQuestionCard() {
 
             if (q.key_concept) expHtml += `<div style="margin-bottom:12px; color:var(--text-main);"><strong>🤖：</strong>${q.key_concept}</div>`;
             if (q.explanation) {
-                expHtml += `<div><strong>🤓：</strong><br><div class="markdown-body" style="font-size:14px; margin-top:4px;">${safeMarkdown(q.explanation)}</div></div>`;
+                expHtml += `<div><div class="markdown-body" style="font-size:14px; margin-top:4px;">${safeMarkdown(q.explanation)}</div></div>`;
             } else {
                 expHtml += `<div style="color:var(--text-muted); font-size:14px;">目前尚無詳細解析。</div>`;
             }
@@ -772,10 +772,8 @@ window.refreshAnkiCardWall = function() {
 function extractQuickExplanation(explanation) {
     if (!explanation) return '';
 
-    // 匹配 "### (1) 快速破題" 或 "(1) 快速破題" 等變體
     const startPatterns = [
-        /###\s*\(1\)\s*快速破題\s*\n/i,
-        /\(1\)\s*快速破題\s*\n/i,
+        /(?:^|\n)#*\s*\(1\)[^\n]*\n/i
     ];
 
     let startIndex = -1;
@@ -793,8 +791,8 @@ function extractQuickExplanation(explanation) {
 
     const contentStart = startIndex + matchLength;
 
-    // 截取到下一個段落標題 (### (2)... 或 (2)... 開頭) 之前
-    const endPatterns = /\n(?:###?\s*)?\(2\)/;
+    // 截取到下一個段落標題 (# (2)... 或 (2)... 開頭) 之前
+    const endPatterns = /\n#*\s*\(2\)/;
     const endMatch = explanation.substring(contentStart).match(endPatterns);
     const content = endMatch
         ? explanation.substring(contentStart, contentStart + endMatch.index)
@@ -993,9 +991,9 @@ function renderListMode(scrollToIndex = -1) {
         if (q.explanation) {
             const quickExp = extractQuickExplanation(q.explanation);
             if (quickExp) {
-                expDiv.innerHTML = `<div class="quick-exp-content"><span class="quick-exp-label">🤓：</span><div class="markdown-body" style="font-size:14px; margin-top:4px;">${safeMarkdown(quickExp)}</div></div>`;
+                expDiv.innerHTML = `<div class="quick-exp-content"><div class="markdown-body" style="font-size:14px; margin-top:4px;">${safeMarkdown(quickExp)}</div></div>`;
             } else {
-                expDiv.innerHTML = `<div class="quick-exp-content"><span class="quick-exp-label">🤓：</span><div class="markdown-body" style="font-size:14px; margin-top:4px;">${safeMarkdown(q.explanation)}</div></div>`;
+                expDiv.innerHTML = `<div class="quick-exp-content"><div class="markdown-body" style="font-size:14px; margin-top:4px;">${safeMarkdown(q.explanation)}</div></div>`;
             }
         } else {
             expDiv.innerHTML = '<div class="no-explanation">目前尚無快速破題解析。</div>';
