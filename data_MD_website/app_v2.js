@@ -24,6 +24,7 @@ let topicGroups = {};
 let aiTopicSummaries = {};
 let currentPracticeQuestions = [];
 let currentQuestionIndex = 0;
+let practiceMode = 'card'; // 'card' | 'list'
 
 // 將作答紀錄存在 localStorage
 const STORAGE_KEY = 'mt_answers_v3';
@@ -39,6 +40,7 @@ const viewHome = document.getElementById('view-home');
 const viewTopicList = document.getElementById('view-topic-list');
 const viewTopicDetail = document.getElementById('view-topic-detail');
 const viewPractice = document.getElementById('view-practice');
+const viewPracticeList = document.getElementById('view-practice-list');
 const btnBack = document.getElementById('btn-back');
 
 const bcHome = document.getElementById('bc-home');
@@ -154,20 +156,28 @@ async function handleRoute(hash) {
         
         renderTopicDetail(topic);
     }
-    else if (sub && topic && mode === 'practice') {
-        // Level 4: 進入特定主題練習
+    else if (sub && topic && (mode === 'practice' || mode === 'list')) {
+        // Level 4: 進入特定主題練習 (卡片或清單模式)
         currentSubject = sub;
         currentTopic = topic;
         updateHeaderUI('practice');
-        viewPractice.classList.add('active');
         
         if (filteredData.length === 0) {
             await loadSubjectData(sub);
         }
         
         currentPracticeQuestions = topicGroups[topic] || [];
-        currentQuestionIndex = 0;
-        renderQuestionCard();
+
+        if (mode === 'list') {
+            practiceMode = 'list';
+            viewPracticeList.classList.add('active');
+            renderListMode();
+        } else {
+            practiceMode = 'card';
+            viewPractice.classList.add('active');
+            currentQuestionIndex = 0;
+            renderQuestionCard();
+        }
     }
 }
 
@@ -176,6 +186,7 @@ function hideAllViews() {
     viewTopicList.classList.remove('active');
     viewTopicDetail.classList.remove('active');
     viewPractice.classList.remove('active');
+    viewPracticeList.classList.remove('active');
 }
 
 function updateHeaderUI(level) {
@@ -443,7 +454,10 @@ function renderQuestionCard() {
     card.style.transform = 'translateY(10px)';
     
     setTimeout(() => {
-        document.getElementById('q-no').textContent = `Q ${currentQuestionIndex + 1} / ${currentPracticeQuestions.length}`;
+        // 題號 badge 改為 mode-switch-wrapper 結構
+        const qNoEl = document.getElementById('q-no');
+        qNoEl.textContent = `Q ${currentQuestionIndex + 1} / ${currentPracticeQuestions.length}`;
+        setupModeSwitchOnBadge(qNoEl, 'card', currentQuestionIndex);
         document.getElementById('q-tags').innerHTML = `<span class="badge" style="background:var(--bg-hover); color:var(--text-muted);">${q.year} - ${q.no}</span>`;
         
         // 渲染題目文字與圖片
@@ -745,6 +759,359 @@ window.refreshAnkiCardWall = function() {
     
     wallOuter.appendChild(wallContainer);
 }
+
+// ========================================
+// 清單模式 (List Mode) 相關函式
+// ========================================
+
+/**
+ * 從 explanation markdown 中擷取「(1) 快速破題」段落內容
+ * @param {string} explanation - 完整的 markdown 格式詳解
+ * @returns {string} 快速破題段落文字 (不含標題)
+ */
+function extractQuickExplanation(explanation) {
+    if (!explanation) return '';
+
+    // 匹配 "### (1) 快速破題" 或 "(1) 快速破題" 等變體
+    const startPatterns = [
+        /###\s*\(1\)\s*快速破題\s*\n/i,
+        /\(1\)\s*快速破題\s*\n/i,
+    ];
+
+    let startIndex = -1;
+    let matchLength = 0;
+    for (const pat of startPatterns) {
+        const m = explanation.match(pat);
+        if (m) {
+            startIndex = m.index;
+            matchLength = m[0].length;
+            break;
+        }
+    }
+
+    if (startIndex === -1) return '';
+
+    const contentStart = startIndex + matchLength;
+
+    // 截取到下一個段落標題 (### (2)... 或 (2)... 開頭) 之前
+    const endPatterns = /\n(?:###?\s*)?\(2\)/;
+    const endMatch = explanation.substring(contentStart).match(endPatterns);
+    const content = endMatch
+        ? explanation.substring(contentStart, contentStart + endMatch.index)
+        : explanation.substring(contentStart);
+
+    return content.trim();
+}
+
+/**
+ * 在 badge 上建立模式切換滑塊
+ * @param {HTMLElement} badgeEl - 題號 badge 元素
+ * @param {'card'|'list'} currentMode - 目前模式
+ * @param {number} questionIndex - 該題在 currentPracticeQuestions 中的 index
+ */
+function setupModeSwitchOnBadge(badgeEl, currentMode, questionIndex) {
+    // 確保 badge 被包在 wrapper 中
+    let wrapper = badgeEl.closest('.mode-switch-wrapper');
+    if (!wrapper) {
+        wrapper = document.createElement('span');
+        wrapper.className = 'mode-switch-wrapper';
+        badgeEl.parentNode.insertBefore(wrapper, badgeEl);
+        wrapper.appendChild(badgeEl);
+    }
+
+    // 移除舊的 slider
+    const oldSlider = wrapper.querySelector('.mode-switch-slider');
+    if (oldSlider) oldSlider.remove();
+
+    // 建立新的 slider
+    const slider = document.createElement('span');
+    slider.className = 'mode-switch-slider';
+    const targetMode = currentMode === 'card' ? 'list' : 'card';
+    const icon = targetMode === 'list' ? '📋' : '🃏';
+    const label = targetMode === 'list' ? '清單模式' : '卡片模式';
+    slider.innerHTML = `<button class="mode-switch-btn">${icon} ${label}</button>`;
+    wrapper.appendChild(slider);
+
+    // badge 點擊 → 切換 slider 顯示
+    badgeEl.style.cursor = 'pointer';
+    badgeEl.onclick = (e) => {
+        e.stopPropagation();
+        // 先關閉所有其他的 slider
+        document.querySelectorAll('.mode-switch-slider.visible').forEach(s => {
+            if (s !== slider) s.classList.remove('visible');
+        });
+        slider.classList.toggle('visible');
+    };
+
+    // slider 按鈕點擊 → 切換模式
+    slider.querySelector('.mode-switch-btn').onclick = (e) => {
+        e.stopPropagation();
+        slider.classList.remove('visible');
+        if (targetMode === 'list') {
+            switchToListMode(questionIndex);
+        } else {
+            switchToCardMode(questionIndex);
+        }
+    };
+}
+
+/**
+ * 切換至清單模式
+ * @param {number} scrollToIndex - 要自動捲動到的題目 index
+ */
+function switchToListMode(scrollToIndex) {
+    practiceMode = 'list';
+    viewPractice.classList.remove('active');
+    viewPracticeList.classList.add('active');
+
+    // 更新 URL hash 但不觸發 handleRoute
+    const hash = `#sub=${encodeURIComponent(currentSubject)}&topic=${encodeURIComponent(currentTopic)}&mode=list`;
+    window.history.replaceState({ view: 'practice', param: currentTopic }, '', hash);
+
+    renderListMode(scrollToIndex);
+}
+
+/**
+ * 切換至卡片模式
+ * @param {number} questionIndex - 要顯示的題目 index
+ */
+function switchToCardMode(questionIndex) {
+    practiceMode = 'card';
+    viewPracticeList.classList.remove('active');
+    viewPractice.classList.add('active');
+
+    // 更新 URL hash 但不觸發 handleRoute
+    const hash = `#sub=${encodeURIComponent(currentSubject)}&topic=${encodeURIComponent(currentTopic)}&mode=practice`;
+    window.history.replaceState({ view: 'practice', param: currentTopic }, '', hash);
+
+    currentQuestionIndex = questionIndex;
+    renderQuestionCard();
+}
+
+/**
+ * 渲染清單模式 (所有題目一次顯示)
+ * @param {number} [scrollToIndex=-1] - 渲染後要自動捲動到的題目 index
+ */
+function renderListMode(scrollToIndex = -1) {
+    const container = document.getElementById('list-mode-container');
+    container.innerHTML = '';
+
+    const total = currentPracticeQuestions.length;
+    const letters = ['A', 'B', 'C', 'D'];
+
+    currentPracticeQuestions.forEach((q, idx) => {
+        const savedState = userAnswers[q.qid];
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'list-item' + (savedState ? ' answered' : '');
+        itemDiv.id = `list-item-${idx}`;
+
+        // --- Header ---
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'list-item-header';
+
+        const qnoBadge = document.createElement('span');
+        qnoBadge.className = 'badge list-item-qno';
+        qnoBadge.textContent = `Q ${idx + 1} / ${total}`;
+        setupModeSwitchOnBadge(qnoBadge, 'list', idx);
+
+        const tagsDiv = document.createElement('div');
+        tagsDiv.className = 'tags-container';
+        tagsDiv.innerHTML = `<span class="badge" style="background:var(--bg-hover); color:var(--text-muted);">${q.year} - ${q.no}</span>`;
+
+        headerDiv.appendChild(qnoBadge.closest('.mode-switch-wrapper') || qnoBadge);
+        headerDiv.appendChild(tagsDiv);
+        itemDiv.appendChild(headerDiv);
+
+        // --- Question text + images ---
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'list-item-question';
+        let htmlContent = safeHTML(q.question).replace(/^\s*\d+\.\s*/, '');
+        if (q.images && q.images.length > 0) {
+            htmlContent += '<div style="margin-top:10px;">';
+            q.images.forEach(imgSrc => {
+                htmlContent += `<img src="${imgSrc}" />`;
+            });
+            htmlContent += '</div>';
+        }
+        questionDiv.innerHTML = htmlContent;
+        itemDiv.appendChild(questionDiv);
+
+        // --- Options ---
+        const optionsDiv = document.createElement('div');
+        optionsDiv.className = 'list-item-options';
+
+        q.choices.forEach((choiceText, i) => {
+            const letter = letters[i];
+            const optDiv = document.createElement('div');
+            optDiv.className = 'option';
+
+            let safeChoiceText = safeHTML(choiceText).replace(/^\s*\(?[A-D]\)?[\.\s]+/i, '');
+            optDiv.innerHTML = `<span class="option-letter">${letter}.</span> <span class="option-content">${safeChoiceText}</span>`;
+
+            const isCorrectAnswer = q.answer.includes(letter);
+
+            if (savedState) {
+                // 已作答
+                if (savedState.answer === letter) {
+                    optDiv.classList.add(savedState.isCorrect ? 'correct' : 'wrong');
+                } else if (isCorrectAnswer) {
+                    optDiv.classList.add('correct');
+                }
+                // 正確選項可點擊展開/收合快速破題
+                if (isCorrectAnswer) {
+                    optDiv.classList.add('clickable-correct');
+                    optDiv.onclick = () => {
+                        const expEl = itemDiv.querySelector('.list-item-quick-explanation');
+                        if (expEl) {
+                            const isExpanded = expEl.classList.toggle('expanded');
+                            optDiv.classList.toggle('expanded', isExpanded);
+                        }
+                    };
+                }
+            } else {
+                // 未作答 → 點擊作答
+                optDiv.onclick = () => {
+                    const isCorrect = isCorrectAnswer;
+                    saveAnswer(q.qid, letter, isCorrect);
+                    // 重新渲染這一題
+                    rerenderListItem(itemDiv, q, idx, total);
+                    updateListModeAccuracy();
+                };
+            }
+
+            optionsDiv.appendChild(optDiv);
+        });
+
+        itemDiv.appendChild(optionsDiv);
+
+        // --- Quick Explanation (hidden by default) ---
+        const expDiv = document.createElement('div');
+        expDiv.className = 'list-item-quick-explanation';
+
+        if (q.explanation) {
+            const quickExp = extractQuickExplanation(q.explanation);
+            if (quickExp) {
+                expDiv.innerHTML = `<div class="quick-exp-content"><span class="quick-exp-label">🤓：</span><div class="markdown-body" style="font-size:14px; margin-top:4px;">${safeMarkdown(quickExp)}</div></div>`;
+            } else {
+                expDiv.innerHTML = `<div class="quick-exp-content"><span class="quick-exp-label">🤓：</span><div class="markdown-body" style="font-size:14px; margin-top:4px;">${safeMarkdown(q.explanation)}</div></div>`;
+            }
+        } else {
+            expDiv.innerHTML = '<div class="no-explanation">目前尚無快速破題解析。</div>';
+        }
+
+        itemDiv.appendChild(expDiv);
+        container.appendChild(itemDiv);
+    });
+
+    updateListModeAccuracy();
+
+    // 自動捲動至指定題目
+    if (scrollToIndex >= 0) {
+        requestAnimationFrame(() => {
+            const targetEl = document.getElementById(`list-item-${scrollToIndex}`);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // 短暫高亮
+                targetEl.classList.add('highlight');
+                setTimeout(() => targetEl.classList.remove('highlight'), 2000);
+            }
+        });
+    }
+}
+
+/**
+ * 重新渲染清單模式中的單一題目 (作答後)
+ */
+function rerenderListItem(itemDiv, q, idx, total) {
+    const savedState = userAnswers[q.qid];
+    if (!savedState) return;
+
+    itemDiv.classList.add('answered');
+    const optionsDiv = itemDiv.querySelector('.list-item-options');
+    const letters = ['A', 'B', 'C', 'D'];
+
+    optionsDiv.innerHTML = '';
+    q.choices.forEach((choiceText, i) => {
+        const letter = letters[i];
+        const optDiv = document.createElement('div');
+        optDiv.className = 'option';
+
+        let safeChoiceText = safeHTML(choiceText).replace(/^\s*\(?[A-D]\)?[\.\s]+/i, '');
+        optDiv.innerHTML = `<span class="option-letter">${letter}.</span> <span class="option-content">${safeChoiceText}</span>`;
+
+        const isCorrectAnswer = q.answer.includes(letter);
+
+        if (savedState.answer === letter) {
+            optDiv.classList.add(savedState.isCorrect ? 'correct' : 'wrong');
+        } else if (isCorrectAnswer) {
+            optDiv.classList.add('correct');
+        }
+
+        if (isCorrectAnswer) {
+            optDiv.classList.add('clickable-correct');
+            optDiv.onclick = () => {
+                const expEl = itemDiv.querySelector('.list-item-quick-explanation');
+                if (expEl) {
+                    const isExpanded = expEl.classList.toggle('expanded');
+                    optDiv.classList.toggle('expanded', isExpanded);
+                }
+            };
+        }
+
+        optionsDiv.appendChild(optDiv);
+    });
+}
+
+/**
+ * 更新清單模式的正確率顯示與進度條
+ */
+function updateListModeAccuracy() {
+    let total = 0;
+    let correct = 0;
+    currentPracticeQuestions.forEach(q => {
+        const ans = userAnswers[q.qid];
+        if (ans) {
+            total++;
+            if (ans.isCorrect) correct++;
+        }
+    });
+
+    const accEl = document.getElementById('list-accuracy-listmode');
+    const progressEl = document.getElementById('progress-fill-list');
+
+    if (total === 0) {
+        if (accEl) accEl.textContent = '🎯 正確率: --%';
+    } else {
+        const pct = Math.round((correct / total) * 100);
+        let emoji = '🤡';
+        if (pct >= 90) emoji = '😍';
+        else if (pct >= 80) emoji = '😆';
+        else if (pct >= 70) emoji = '😊';
+        else if (pct >= 60) emoji = '😅';
+        else if (pct >= 50) emoji = '😐';
+        else if (pct >= 40) emoji = '😑';
+        else if (pct >= 30) emoji = '😣';
+        else if (pct >= 20) emoji = '😨';
+        else if (pct >= 10) emoji = '🤮';
+        if (accEl) accEl.textContent = `${emoji} ${pct}% (${correct}/${total})`;
+    }
+
+    // 更新進度條 (以作答數 / 總題數)
+    if (progressEl) {
+        const progress = (total / currentPracticeQuestions.length) * 100;
+        progressEl.style.width = `${progress}%`;
+    }
+
+    // 同步卡片模式的正確率 (共用同一組資料)
+    updateAccuracy();
+}
+
+// --- 全域事件：點擊空白處關閉所有 mode-switch-slider ---
+document.addEventListener('click', () => {
+    document.querySelectorAll('.mode-switch-slider.visible').forEach(s => {
+        s.classList.remove('visible');
+    });
+});
 
 // 啟動
 init();

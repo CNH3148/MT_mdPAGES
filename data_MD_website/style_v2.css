@@ -800,3 +800,252 @@ body {
     background: rgba(59, 130, 246, 0.05) !important;
 }
 
+/* ========================================
+   Mode Switch Slider (Card ↔ List toggle)
+   ======================================== */
+.mode-switch-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.mode-switch-slider {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    margin-left: 8px;
+    white-space: nowrap;
+    z-index: 5;
+}
+
+.mode-switch-slider.visible {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+    pointer-events: auto;
+}
+
+.mode-switch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border: 1px solid var(--primary);
+    border-radius: 20px;
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.mode-switch-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.mode-switch-btn:active {
+    transform: scale(0.95);
+}
+
+/* ========================================
+   List Mode View
+   ======================================== */
+#view-practice-list {
+    padding: 0;
+    max-width: 100%;
+}
+
+#view-practice-list.active {
+    display: block;
+}
+
+.list-mode-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 16px 16px 100px 16px;
+}
+
+/* --- List Item (Each Question) --- */
+.list-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s ease;
+}
+
+.list-item:target,
+.list-item.highlight {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.list-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.list-item-qno {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.list-item-qno:hover {
+    background: var(--primary-hover);
+}
+
+.list-item-question {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--text-main);
+    margin-bottom: 14px;
+}
+
+.list-item-question img {
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-top: 10px;
+}
+
+/* --- List Item Options (Compact) --- */
+.list-item-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.list-item-options .option {
+    padding: 12px 14px;
+    font-size: 15px;
+    border-radius: var(--radius-sm);
+}
+
+.list-item-options .option.correct.clickable-correct {
+    cursor: pointer;
+    position: relative;
+}
+
+.list-item-options .option.correct.clickable-correct::after {
+    content: '▾';
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--accent);
+    opacity: 0.6;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    padding-left: 8px;
+}
+
+.list-item-options .option.correct.clickable-correct.expanded::after {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+/* --- Quick Explanation (Expandable) --- */
+.list-item-quick-explanation {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.3s ease, margin 0.3s ease;
+    background: rgba(16, 185, 129, 0.04);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    padding: 0 16px;
+    margin-top: 0;
+}
+
+.list-item-quick-explanation.expanded {
+    max-height: 2000px;
+    opacity: 1;
+    padding: 16px;
+    margin-top: 12px;
+    border-color: var(--accent);
+}
+
+.list-item-quick-explanation .quick-exp-content {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-main);
+}
+
+.list-item-quick-explanation .quick-exp-label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.list-item-quick-explanation .no-explanation {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 14px;
+}
+
+/* --- List Mode Answered State Separator --- */
+.list-item.answered {
+    opacity: 1;
+}
+
+.list-item.answered .list-item-question {
+    opacity: 0.85;
+}
+
+/* ========================================
+   Mobile Responsive for List Mode
+   ======================================== */
+@media (max-width: 768px) {
+    .list-mode-container {
+        padding: 12px 12px 100px 12px;
+    }
+
+    .list-item {
+        padding: 16px;
+        margin-bottom: 12px;
+    }
+
+    .list-item-question {
+        font-size: 15px;
+    }
+
+    .list-item-options .option {
+        padding: 11px 12px;
+        font-size: 14px;
+    }
+
+    .mode-switch-btn {
+        font-size: 12px;
+        padding: 4px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .list-item {
+        padding: 14px;
+        border-radius: var(--radius-md);
+    }
+
+    .list-item-options .option {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .list-item-quick-explanation.expanded {
+        padding: 12px;
+    }
+}
