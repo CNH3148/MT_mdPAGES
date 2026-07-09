@@ -815,7 +815,9 @@ function setupModeSwitchOnBadge(badgeEl, currentMode, questionIndex) {
     if (!wrapper) {
         wrapper = document.createElement('span');
         wrapper.className = 'mode-switch-wrapper';
-        badgeEl.parentNode.insertBefore(wrapper, badgeEl);
+        if (badgeEl.parentNode) {
+            badgeEl.parentNode.insertBefore(wrapper, badgeEl);
+        }
         wrapper.appendChild(badgeEl);
     }
 
