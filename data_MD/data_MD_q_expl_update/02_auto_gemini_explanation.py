@@ -8,7 +8,7 @@
     uv run --with pyautogui --with pydirectinput --with pyperclip --with pygetwindow \
            --with opencv-python --with pillow \
            python 02_auto_gemini_explanation.py [--manual-send] [--start-from FILENAME] [--dry-run]
-                                                [--commit-interval SECONDS]
+                                                [--auto-git] [--commit-interval SECONDS]
 """
 
 import argparse
@@ -78,6 +78,33 @@ def beep_alert() -> None:
 # ---------------------------------------------------------------------------
 _REPO_ROOT: Path = DATA_ROOT.parent  # data_MD_PAGE/
 
+def check_git_auth() -> None:
+    """Pre-flight check to trigger GitHub login prompt if credentials are not cached.
+    
+    Runs a harmless `git ls-remote origin` command. If the user needs to login,
+    the Git Credential Manager will pop up immediately. Wait up to 60 seconds
+    for the user to complete the login.
+    """
+    logger.info("Checking GitHub authentication status...")
+    try:
+        result = subprocess.run(
+            ["git", "ls-remote", "origin"],
+            cwd=str(_REPO_ROOT),
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+        if result.returncode != 0:
+            logger.error(f"GitHub auth check failed: {result.stderr.strip()}")
+            sys.exit(1)
+        logger.info("GitHub auth check passed.")
+    except subprocess.TimeoutExpired:
+        logger.error("GitHub auth check timed out (60s). Please ensure you are logged in.")
+        sys.exit(1)
+    except Exception as exc:
+        logger.error(f"GitHub auth check raised an exception: {exc}")
+        sys.exit(1)
+
 def git_commit_and_push(completed_count: int, failed_count: int) -> bool:
     """Stage changes under data_MD/, commit with timestamp, and push.
 
@@ -93,6 +120,7 @@ def git_commit_and_push(completed_count: int, failed_count: int) -> bool:
     steps: list[tuple[str, list[str]]] = [
         ("git add", ["git", "add", "data_MD/"]),
         ("git commit", ["git", "commit", "-m", commit_msg]),
+        ("git pull", ["git", "pull", "--rebase", "origin", "master"]),
         ("git push", ["git", "push", "origin", "master"]),
     ]
 
@@ -108,10 +136,17 @@ def git_commit_and_push(completed_count: int, failed_count: int) -> bool:
             if result.returncode != 0:
                 stderr_msg: str = result.stderr.strip()
                 # 'nothing to commit' is normal, not an error
-                if "nothing to commit" in result.stdout or "nothing to commit" in stderr_msg:
-                    logger.info("git commit: nothing to commit — skipping push.")
-                    return True
+                if label == "git commit" and ("nothing to commit" in result.stdout or "nothing to commit" in stderr_msg):
+                    logger.info("git commit: nothing to commit. Proceeding to pull/push...")
+                    continue
+                    
                 logger.warning(f"{label} failed (rc={result.returncode}): {stderr_msg}")
+                
+                # If pull --rebase fails, abort the rebase to keep local repo clean
+                if label == "git pull":
+                    logger.warning("git pull failed. Aborting rebase to keep local repo clean...")
+                    subprocess.run(["git", "rebase", "--abort"], cwd=str(_REPO_ROOT), capture_output=True)
+                    
                 return False
             logger.info(f"{label} succeeded.")
         except subprocess.TimeoutExpired:
@@ -121,7 +156,7 @@ def git_commit_and_push(completed_count: int, failed_count: int) -> bool:
             logger.warning(f"{label} raised an exception: {exc}")
             return False
 
-    logger.info(f"Git commit & push completed: {commit_msg}")
+    logger.info(f"Git sync completed: {commit_msg}")
     return True
 
 
@@ -656,8 +691,10 @@ def main() -> None:
                         help="Start from a specific filename")
     parser.add_argument("--dry-run", action="store_true",
                         help="Just list pending questions, don't run")
+    parser.add_argument("--auto-git", action="store_true",
+                        help="Enable automatic git pull/commit/push periodically.")
     parser.add_argument("--commit-interval", type=int, default=3600,
-                        help="Interval in seconds between periodic git commit+push (default: 3600 = 1h). Set 0 to disable.")
+                        help="Interval in seconds between periodic git sync (default: 3600 = 1h).")
     args = parser.parse_args()
 
     csv_path = Path(__file__).resolve().parent / CSV_FILENAME
@@ -683,6 +720,10 @@ def main() -> None:
         if len(pending) > 20:
             print(f"  … and {len(pending) - 20} more")
         return
+
+    # --- Check Auth if auto git enabled ---
+    if args.auto_git:
+        check_git_auth()
 
     # --- Open panel once ---
     open_side_panel()
@@ -779,7 +820,7 @@ def main() -> None:
                 failed_count += 1
                 if consecutive_fails >= 3:
                     logger.critical("3 consecutive failures — halting.")
-                    if commit_interval > 0:
+                    if args.auto_git:
                         logger.info("Performing final git commit before exit...")
                         git_commit_and_push(completed_count, failed_count)
                     beep_alert()
@@ -790,7 +831,7 @@ def main() -> None:
                 jsleep(2.0, 3.0)
 
             # --- Periodic git commit + push (regardless of success/fail) ---
-            if commit_interval > 0 and (time.time() - last_commit_time) >= commit_interval:
+            if args.auto_git and (time.time() - last_commit_time) >= commit_interval:
                 logger.info(f"定時 commit 觸發（已超過 {commit_interval} 秒）...")
                 git_commit_and_push(completed_count, failed_count)
                 last_commit_time = time.time()
@@ -798,7 +839,7 @@ def main() -> None:
             break  # Move to next question in pending
 
     # --- Final commit after all questions processed ---
-    if commit_interval > 0:
+    if args.auto_git:
         logger.info("All questions processed. Performing final git commit...")
         git_commit_and_push(completed_count, failed_count)
 
