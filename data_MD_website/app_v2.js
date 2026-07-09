@@ -910,8 +910,8 @@ function setupSourceLinksOnBadge(badgeEl, question) {
     const pdfUrl = `pdf_viewer.html?subject=${encodeURIComponent(question.subject)}&year=${encodeURIComponent(question.year)}&no=${encodeURIComponent(question.no)}&q=${encodeURIComponent(searchText)}`;
     
     slider.innerHTML = `
-        <a href="${pdfUrl}" target="_blank" class="source-link-btn pdf-btn" title="查看 PDF 試題與答案卷">📋 PDF</a>
-        <a href="${githubMdUrl}" target="_blank" class="source-link-btn md-btn" title="在 GitHub 查看 Markdown 原檔">📄 MD</a>
+        <a href="${pdfUrl}" target="_blank" class="source-link-btn pdf-btn" title="查看 PDF 試題與答案卷">PDF</a>
+        <a href="${githubMdUrl}" target="_blank" class="source-link-btn md-btn" title="在 GitHub 查看 Markdown 原檔">MD</a>
     `;
     wrapper.appendChild(slider);
 

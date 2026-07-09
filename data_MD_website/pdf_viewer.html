@@ -145,8 +145,8 @@
         if (subject && year) {
             const pageTitle = `${subject} - ${year} - Q${no} | PDF 對照`;
             document.title = pageTitle;
-            document.getElementById('header-info').textContent = `${subject} | ${year}`;
-            document.getElementById('title-exam').textContent = `📄 試題卷 - Q${no}`;
+            document.getElementById('header-info').textContent = `${subject} | ${year}-${no}`;
+            document.getElementById('title-exam').textContent = `📄 試題卷`;
         }
 
         // Generate jsDelivr CDN URLs for CORS bypass
@@ -160,17 +160,30 @@
         const iframeExam = document.getElementById('iframe-exam');
         const iframeAnswer = document.getElementById('iframe-answer');
         
-        // Append search term if available for the exam pdf
-        let examSrc = `pdfjs/web/viewer.html?file=${encodeURIComponent(examPdfUrl)}`;
-        if (searchText) {
-            // pdf.js uses hash parameters for search
-            examSrc += `#search=${encodeURIComponent(searchText)}`;
+        // Load PDF via fetch to create a same-origin Blob URL, bypassing pdf.js origin check
+        async function loadPdf(iframeId, url, searchText = '') {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                
+                let src = `pdfjs/web/viewer.html?file=${encodeURIComponent(blobUrl)}`;
+                if (searchText) {
+                    src += `#search=${encodeURIComponent(searchText)}`;
+                }
+                document.getElementById(iframeId).src = src;
+            } catch (error) {
+                console.error(`Failed to load PDF from ${url}:`, error);
+                // Fallback to direct URL (might fail origin check, but worth trying)
+                let src = `pdfjs/web/viewer.html?file=${encodeURIComponent(url)}`;
+                if (searchText) src += `#search=${encodeURIComponent(searchText)}`;
+                document.getElementById(iframeId).src = src;
+            }
         }
-        
-        let answerSrc = `pdfjs/web/viewer.html?file=${encodeURIComponent(answerPdfUrl)}`;
 
-        iframeExam.src = examSrc;
-        iframeAnswer.src = answerSrc;
+        loadPdf('iframe-exam', examPdfUrl, searchText);
+        loadPdf('iframe-answer', answerPdfUrl);
 
         // Resizer Logic
         const resizer = document.getElementById('resizer');
