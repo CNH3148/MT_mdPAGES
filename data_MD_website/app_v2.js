@@ -2,6 +2,11 @@
 // MT 國考刷題 - 極簡行動端重構版
 // ==========================================
 
+// 註冊 marked-katex-extension
+if (typeof marked !== 'undefined' && typeof markedKatex !== 'undefined') {
+    marked.use(markedKatex({ throwOnError: false, nonStandard: true }));
+}
+
 const SUBJECTS = [
     "臨床生理學與病理學",
     "臨床血液學與血庫學",
@@ -568,38 +573,10 @@ window.safeMarkdown = function(mdText) {
     if (!mdText) return '';
     let text = mdText;
     
-    // LaTeX 保護與渲染
-    const mathTokens = [];
-    text = text.replace(/(?<!\\)\$\$(.*?)(?<!\\)\$\$/gs, function(match, p1) {
-        mathTokens.push(p1);
-        return `%%%MATHBLOCK_${mathTokens.length - 1}%%%`;
-    });
-    
-    text = text.replace(/(?<!\\)\$(.*?)(?<!\\)\$/g, function(match, p1) {
-        if (p1 === '') return match; 
-        mathTokens.push(p1);
-        return `%%%MATHINLINE_${mathTokens.length - 1}%%%`;
-    });
+    // 避免單一的 ~ 被 marked 誤認為刪除線
+    text = text.replace(/(?<!~)~(?!~)/g, '\\~');
 
-    let html = text;
-    if (typeof window.marked !== 'undefined') {
-        html = window.marked.parse(text);
-    }
-    
-    if (typeof window.katex !== 'undefined') {
-        html = html.replace(/%%%MATHBLOCK_(\d+)%%%/g, function(match, i) {
-            try { return window.katex.renderToString(mathTokens[i], { displayMode: true, throwOnError: false }); } 
-            catch (e) { return `$$${mathTokens[i]}$$`; }
-        });
-        html = html.replace(/%%%MATHINLINE_(\d+)%%%/g, function(match, i) {
-            try { return window.katex.renderToString(mathTokens[i], { displayMode: false, throwOnError: false }); } 
-            catch (e) { return `$${mathTokens[i]}$`; }
-        });
-    }
-
-    if (typeof window.DOMPurify !== 'undefined') {
-        html = window.DOMPurify.sanitize(html);
-    }
+    let html = (typeof window.marked !== 'undefined') ? window.marked.parse(text) : text;
     return html;
 };
 
@@ -618,7 +595,7 @@ function renderTopicDetail(topicName) {
         summaryText = summaryText.replace(/#+\s*包含題庫\s*$/gm, '');
         summaryText = summaryText.replace(/#+\s*Anki\s*聯想卡\s*$/gm, '');
         
-        detailTopicDesc.innerHTML = `<div class="markdown-body">${marked.parse(summaryText)}</div>`;
+        detailTopicDesc.innerHTML = `<div class="markdown-body">${safeMarkdown(summaryText)}</div>`;
         refreshAnkiCardWall();
     } else {
         detailTopicDesc.innerHTML = "<em>此類群暫無總結。</em>";
