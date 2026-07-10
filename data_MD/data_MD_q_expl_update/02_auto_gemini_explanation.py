@@ -701,9 +701,23 @@ def wait_for_quota_recovery() -> bool:
 
 
 # ===================================================================
+#  System Sleep Prevention
+# ===================================================================
+def prevent_system_sleep() -> None:
+    """防止 Windows 系統進入休眠、關閉螢幕或啟動螢幕保護程式。"""
+    try:
+        import ctypes
+        # ES_CONTINUOUS (0x80000000) | ES_SYSTEM_REQUIRED (0x00000001) | ES_DISPLAY_REQUIRED (0x00000002)
+        ctypes.windll.kernel32.SetThreadExecutionState(0x80000000 | 0x00000001 | 0x00000002)
+        logger.info("已成功呼叫 Windows API，防止系統閒置休眠與關閉螢幕。")
+    except Exception as e:
+        logger.warning(f"無法設定防止系統休眠: {e}")
+
+# ===================================================================
 #  Main loop
 # ===================================================================
 def main() -> None:
+    prevent_system_sleep()
     parser = argparse.ArgumentParser(description="Auto Gemini Explanation")
     parser.add_argument("--manual-send", action="store_true",
                         help="Wait for human to press send")
