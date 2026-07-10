@@ -233,6 +233,20 @@ def click_image(
 # ===================================================================
 #  Step (1) — Open side panel
 # ===================================================================
+def force_restart_side_panel() -> None:
+    """Force close and reopen the side panel to recover from UI glitches."""
+    logger.info("Force restarting side panel (Alt+G x2) to recover UI state...")
+    try:
+        x, y = pyautogui.position()
+        w, h = pyautogui.size()
+        if x <= 10 or y <= 10 or x >= w - 10 or y >= h - 10:
+            pyautogui.moveTo(w // 2, h // 2)
+    except Exception:
+        pass
+    human_hotkey("alt", "g")  # Toggle
+    jsleep(2.0, 3.0)
+    open_side_panel()         # Ensure it is open
+
 def open_side_panel() -> None:
     """Alt+G to open the Gemini side panel.
     Checks if it's already open first."""
@@ -809,8 +823,8 @@ def main() -> None:
                 start_new_chat()
             except Exception as e:
                 logger.error(f"Failed to start new chat: {e}")
-                # Recovery: Alt+G ×2
-                open_side_panel()
+                # Recovery: Force restart side panel
+                force_restart_side_panel()
                 jsleep(1.0, 2.0)
                 try:
                     start_new_chat()
@@ -832,8 +846,8 @@ def main() -> None:
                         beep_alert()
                         sys.exit(1)
                     
-                    logger.info("Wait completed. Re-opening side panel to resume...")
-                    open_side_panel()
+                    logger.info("Wait completed. Force restarting side panel to resume...")
+                    force_restart_side_panel()
                     jsleep(2.0, 3.0)
                     quota_hits_for_this_question = 0
                     continue
@@ -860,8 +874,8 @@ def main() -> None:
                     beep_alert()
                     sys.exit(1)
                 logger.warning(f"Fail #{consecutive_fails}. Attempting recovery…")
-                # Recovery: reopen side panel
-                open_side_panel()
+                # Recovery: force close and reopen side panel
+                force_restart_side_panel()
                 jsleep(2.0, 3.0)
 
             # --- Periodic git commit & panel reset (regardless of success/fail) ---
