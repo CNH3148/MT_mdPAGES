@@ -236,6 +236,16 @@ def click_image(
 def open_side_panel() -> None:
     """Alt+G to open the Gemini side panel.
     Checks if it's already open first."""
+    # 防呆：避免滑鼠在角落觸發 FailSafeException
+    try:
+        x, y = pyautogui.position()
+        w, h = pyautogui.size()
+        if x <= 10 or y <= 10 or x >= w - 10 or y >= h - 10:
+            logger.info("Mouse is near the corner. Moving to center to avoid FailSafeException.")
+            pyautogui.moveTo(w // 2, h // 2)
+    except Exception:
+        pass
+
     if locate_image(["gemini_input_box.png", "gemini_input_box_2.png"], timeout=1) is not None:
         logger.info("Side panel is already open.")
         return
