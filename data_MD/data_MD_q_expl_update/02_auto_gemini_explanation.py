@@ -850,10 +850,25 @@ def main() -> None:
                 open_side_panel()
                 jsleep(2.0, 3.0)
 
-            # --- Periodic git commit + push (regardless of success/fail) ---
-            if args.auto_git and (time.time() - last_commit_time) >= commit_interval:
-                logger.info(f"定時 commit 觸發（已超過 {commit_interval} 秒）...")
-                git_commit_and_push(completed_count, failed_count)
+            # --- Periodic git commit & panel reset (regardless of success/fail) ---
+            if (time.time() - last_commit_time) >= commit_interval:
+                if args.auto_git:
+                    logger.info(f"定時 commit 觸發（已超過 {commit_interval} 秒）...")
+                    git_commit_and_push(completed_count, failed_count)
+                
+                logger.info("定期重開側邊欄，確保懸浮視窗回到右上角初始位置...")
+                try:
+                    x, y = pyautogui.position()
+                    w, h = pyautogui.size()
+                    if x <= 10 or y <= 10 or x >= w - 10 or y >= h - 10:
+                        pyautogui.moveTo(w // 2, h // 2)
+                except Exception:
+                    pass
+                
+                human_hotkey("alt", "g")  # 關閉側邊欄
+                jsleep(2.0, 3.0)
+                open_side_panel()         # 重新開啟（內含防呆）
+                
                 last_commit_time = time.time()
 
             break  # Move to next question in pending
