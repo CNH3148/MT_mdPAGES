@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "044bb38f9d851733",
+        "id": "652f1c59ac7c21e4",
         "type": "tabs",
         "children": [
           {
-            "id": "c06993e79b56ec36",
+            "id": "b7597c27e1215ccb",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -74,8 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 309.5,
-    "collapsed": true
+    "width": 309.5
   },
   "right": {
     "id": "bef92fd3a065c01b",
@@ -91,7 +90,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "臨床血液學與血庫學/_topics/急性骨髓性白血病 (AML).md",
+                "file": "臨床血清免疫學與臨床病毒學/115-1/6_115-1_22.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -101,7 +100,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "急性骨髓性白血病 (AML) 的反向連結"
+              "title": "6_115-1_22 的反向連結"
             }
           },
           {
@@ -110,12 +109,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "臨床血液學與血庫學/_topics/急性骨髓性白血病 (AML).md",
+                "file": "臨床血清免疫學與臨床病毒學/115-1/6_115-1_22.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "急性骨髓性白血病 (AML) 的對外連結"
+              "title": "6_115-1_22 的對外連結"
             }
           },
           {
@@ -167,13 +166,14 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {},
+              "state": {
+                "file": "臨床血清免疫學與臨床病毒學/115-1/6_115-1_22.md"
+              },
               "icon": "lucide-info",
-              "title": "檔案屬性"
+              "title": "6_115-1_22 的檔案屬性"
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "horizontal",
@@ -188,13 +188,28 @@
       "daily-notes:開啟今天的每日筆記": true,
       "templates:插入模板": true,
       "command-palette:開啟命令面板": false,
-      "bases:建立新的 base": false,
-      "obsidian-git:Open Git source control": true,
-      "workspaces:管理工作區配置": true
+      "bases:建立新的 base": false
     }
   },
-  "active": "c06993e79b56ec36",
+  "active": "aea83aee94f2ac66",
   "lastOpenFiles": [
+    "臨床生理學與病理學/103-1/1_103-1_11.md",
+    "臨床血液學與血庫學/115-1/2_115-1_57.md",
+    "臨床血液學與血庫學/115-1/2_115-1_56.md",
+    "臨床血液學與血庫學/115-1/2_115-1_55.md",
+    "臨床血液學與血庫學/115-1/2_115-1_54.md",
+    "臨床血液學與血庫學/115-1/2_115-1_52.md",
+    "臨床血液學與血庫學/115-1/2_115-1_51.md",
+    "臨床血液學與血庫學/115-1/2_115-1_50.md",
+    "臨床血液學與血庫學/115-1/2_115-1_49.md",
+    "臨床血液學與血庫學/115-1/2_115-1_47.md",
+    "臨床血液學與血庫學/115-1/2_115-1_46.md",
+    "臨床血液學與血庫學/115-1/2_115-1_45.md",
+    "臨床生理學與病理學/115-1/1_115-1_62.md",
+    "臨床生理學與病理學/115-1/1_115-1_61.md",
+    "臨床生理學與病理學/103-1/1_103-1_10.md",
+    "生物化學與臨床生化學/112-2/5_112-2_5.md",
+    "_attachments/生物化學與臨床生化學_exam3_q5_0.png",
     "微生物學與臨床微生物學/115-1/4_115-1_12.md",
     "_notes/生化八管.md",
     "臨床血液學與血庫學/_topics/急性骨髓性白血病 (AML).md",
@@ -205,22 +220,6 @@
     "data_MD_update/old_MD/生物化學與臨床生化學/血液氣體分析與酸鹼平衡.md",
     "data_MD_update/new_MD/微生物學與臨床微生物學/腸內菌科：大腸桿菌、志賀氏菌與沙門氏菌.md",
     "data_MD_update/new_MD/dumps/腸內菌科：大腸桿菌、志賀氏菌與沙門氏菌.md",
-    "data_MD_update/old_MD/微生物學與臨床微生物學/腸內菌科：大腸桿菌、志賀氏菌與沙門氏菌.md",
-    "data_MD_update/new_MD/醫學分子檢驗學與臨床鏡檢學/血液惡性腫瘤分子診斷.md",
-    "data_MD_update/new_MD/dumps/血液惡性腫瘤分子診斷.md",
-    "data_MD_update/old_MD/醫學分子檢驗學與臨床鏡檢學/血液惡性腫瘤分子診斷.md",
-    "data_MD_update/new_MD/臨床血清免疫學與臨床病毒學/疫苗學與佐劑.md",
-    "data_MD_update/new_MD/dumps/疫苗學與佐劑.md",
-    "data_MD_update/old_MD/臨床血清免疫學與臨床病毒學/疫苗學與佐劑.md",
-    "data_MD_update/new_MD/臨床血清免疫學與臨床病毒學/黃病毒科與披膜病毒科 (Flaviviridae and Togaviridae).md",
-    "data_MD_update/new_MD/dumps/黃病毒科與披膜病毒科 (Flaviviridae and Togaviridae).md",
-    "data_MD_update/old_MD/臨床血清免疫學與臨床病毒學/黃病毒科與披膜病毒科 (Flaviviridae and Togaviridae).md",
-    "data_MD_update/new_MD/臨床生理學與病理學/環境與營養病理學.md",
-    "data_MD_update/new_MD/dumps/環境與營養病理學.md",
-    "data_MD_update/old_MD/臨床生理學與病理學/環境與營養病理學.md",
-    "data_MD_update/new_MD/醫學分子檢驗學與臨床鏡檢學/核酸雜交技術.md",
-    "data_MD_update/new_MD/dumps/核酸雜交技術.md",
-    "data_MD_update/old_MD/醫學分子檢驗學與臨床鏡檢學/核酸雜交技術.md",
     "data_MD_update/out.txt",
     "data_MD_update/test_anki.py",
     "list_dir.txt",
@@ -239,7 +238,6 @@
     "data_MD_update/images/sys_dropdown.png",
     "data_MD_update/images/sys_close_btn.png",
     "data_MD_update/images/run_btn.png",
-    "data_MD_update/images/new_chat_btn.png",
-    "data_MD_update/images/model_options_btn.png"
+    "data_MD_update/images/new_chat_btn.png"
   ]
 }

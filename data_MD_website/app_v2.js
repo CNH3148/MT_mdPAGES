@@ -592,6 +592,9 @@ window.safeMarkdown = function(mdText) {
     
     // 避免單一的 ~ 被 marked 誤認為刪除線
     text = text.replace(/(?<!~)~(?!~)/g, '\\~');
+    
+    // 支援 ==螢光筆== 標記
+    text = text.replace(/==([^=]+)==/g, '<mark>$1</mark>');
 
     let html = (typeof window.marked !== 'undefined') ? window.marked.parse(text) : text;
     return html;
