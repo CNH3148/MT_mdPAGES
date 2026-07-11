@@ -1,4 +1,11 @@
 {
   "propertiesInDocument": "hidden",
-  "readableLineLength": false
+  "readableLineLength": false,
+  "newFileLocation": "folder",
+  "newFileFolderPath": "_notes",
+  "attachmentFolderPath": "_attachments",
+  "alwaysUpdateLinks": true,
+  "showInlineTitle": false,
+  "defaultViewMode": "preview",
+  "showLineNumber": true
 }
