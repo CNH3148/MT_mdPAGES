@@ -11,10 +11,14 @@
             "id": "b7597c27e1215ccb",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "臨床血清免疫學與臨床病毒學/115-1/6_115-1_22.md",
+                "mode": "preview",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新分頁"
+              "title": "6_115-1_22"
             }
           }
         ]
@@ -173,7 +177,8 @@
               "title": "6_115-1_22 的檔案屬性"
             }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
@@ -191,7 +196,7 @@
       "bases:建立新的 base": false
     }
   },
-  "active": "aea83aee94f2ac66",
+  "active": "b7597c27e1215ccb",
   "lastOpenFiles": [
     "臨床生理學與病理學/103-1/1_103-1_11.md",
     "臨床血液學與血庫學/115-1/2_115-1_57.md",
