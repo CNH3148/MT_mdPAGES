@@ -62,6 +62,147 @@ run_validation = validate_mod.run_validation
 class QuotaLimitException(Exception):
     pass
 
+
+# ---------------------------------------------------------------------------
+# AccountManager — 多帳號輪替與額度恢復排程
+# ---------------------------------------------------------------------------
+class AccountManager:
+    """管理多帳號輪替、追蹤額度恢復時間。"""
+
+    ACCOUNTS: list[dict[str, Any]] = [
+        {"icon": "user_icon_1.png", "profile": "user_profile_1.png", "id": 1},
+        {"icon": "user_icon_2.png", "profile": "user_profile_2.png", "id": 2},
+        {"icon": "user_icon_3.png", "profile": "user_profile_3.png", "id": 3},
+    ]
+
+    def __init__(self) -> None:
+        self.current_account_id: Optional[int] = None
+        self.recovery_times: dict[int, datetime] = {}
+
+    def detect_current_account(self) -> Optional[int]:
+        """掃描螢幕上的 user_icon 來辨識目前登入的帳號。"""
+        for acct in self.ACCOUNTS:
+            if locate_image(acct["icon"], timeout=2.0) is not None:
+                logger.info(f"偵測到當前帳號: account {acct['id']} ({acct['icon']})")
+                self.current_account_id = acct["id"]
+                return acct["id"]
+        logger.warning("無法偵測到任何 user_icon。")
+        return None
+
+    def ensure_account(self, expected_id: int) -> bool:
+        """檢查當前帳號是否與 expected_id 一致，若不一致則切換回去。
+
+        Returns True if account is correct (or successfully switched back).
+        """
+        actual_id = self.detect_current_account()
+        if actual_id == expected_id:
+            logger.info(f"帳號驗證通過: 仍為 account {expected_id}")
+            return True
+
+        logger.warning(
+            f"帳號不一致! 預期 account {expected_id}, "
+            f"實際 account {actual_id}。切換回去..."
+        )
+        return self.switch_to_account(expected_id)
+
+    def switch_to_account(self, target_id: int) -> bool:
+        """切換到指定帳號（點擊 user_icon → change_profile → user_profile_X）。"""
+        target_acct = next(
+            (a for a in self.ACCOUNTS if a["id"] == target_id), None
+        )
+        if target_acct is None:
+            logger.error(f"找不到 account {target_id} 的設定。")
+            return False
+
+        # 先偵測目前是哪個帳號的 icon 在畫面上
+        current_icon: Optional[str] = None
+        for acct in self.ACCOUNTS:
+            if locate_image(acct["icon"], timeout=2.0) is not None:
+                current_icon = acct["icon"]
+                break
+
+        if current_icon is None:
+            logger.error("無法找到任何 user_icon 來進行帳號切換。")
+            return False
+
+        logger.info(f"點擊 {current_icon} 開始切換至 account {target_id}...")
+        click_image(current_icon, timeout=2)
+        jsleep(2.0, 3.0)
+        click_image("change_profile.png", timeout=3)
+        jsleep(2.0, 3.0)
+        click_image(target_acct["profile"], timeout=3)
+        jsleep(5.0, 6.0)
+
+        self.current_account_id = target_id
+        logger.info(f"已切換至 account {target_id}")
+        return True
+
+    def record_quota_exhausted(
+        self, account_id: int, recovery_dt: Optional[datetime]
+    ) -> None:
+        """記錄該帳號額度耗盡，保存恢復時間。"""
+        if recovery_dt is not None:
+            self.recovery_times[account_id] = recovery_dt
+            logger.info(
+                f"Account {account_id} 額度耗盡，預計恢復時間: {recovery_dt}"
+            )
+        else:
+            fallback_dt = datetime.now() + timedelta(hours=24)
+            self.recovery_times[account_id] = fallback_dt
+            logger.warning(
+                f"Account {account_id} 額度耗盡但無法解析恢復時間，"
+                f"暫設為 {fallback_dt}"
+            )
+
+    def get_next_available_account(self) -> Optional[int]:
+        """找到恢復時間已過的帳號（不含當前帳號），按 1→2→3 順序輪詢。"""
+        now = datetime.now()
+        start_idx = 0
+        if self.current_account_id is not None:
+            start_idx = self.current_account_id  # 1-based, gives next index
+
+        for i in range(len(self.ACCOUNTS)):
+            idx = (start_idx + i) % len(self.ACCOUNTS)
+            acct = self.ACCOUNTS[idx]
+            acct_id = acct["id"]
+            if acct_id == self.current_account_id:
+                continue
+            recovery = self.recovery_times.get(acct_id)
+            if recovery is None or recovery <= now:
+                logger.info(
+                    f"Account {acct_id} 額度可用"
+                    f"（恢復時間已過或從未耗盡）。"
+                )
+                return acct_id
+
+        logger.info("目前沒有可用帳號（全部額度耗盡且恢復時間未到）。")
+        return None
+
+    def get_earliest_recovery(self) -> Optional[tuple[int, datetime]]:
+        """返回恢復時間最早的 (account_id, recovery_datetime)。"""
+        if not self.recovery_times:
+            return None
+        earliest_id = min(
+            self.recovery_times, key=lambda k: self.recovery_times[k]
+        )
+        return earliest_id, self.recovery_times[earliest_id]
+
+    def all_accounts_exhausted_over_12h(self) -> bool:
+        """檢查是否所有帳號的恢復時間都超過現在起算 12 小時。"""
+        now = datetime.now()
+        threshold = timedelta(hours=12)
+
+        for acct in self.ACCOUNTS:
+            acct_id = acct["id"]
+            recovery = self.recovery_times.get(acct_id)
+            if recovery is None:
+                return False
+            if (recovery - now) <= threshold:
+                return False
+
+        return True
+
+
 # ---------------------------------------------------------------------------
 # Helper: beep alert (winsound)
 # ---------------------------------------------------------------------------
@@ -233,8 +374,13 @@ def click_image(
 # ===================================================================
 #  Step (1) — Open side panel
 # ===================================================================
-def force_restart_side_panel() -> None:
-    """Force close and reopen the side panel to recover from UI glitches."""
+def force_restart_side_panel(
+    account_mgr: Optional["AccountManager"] = None,
+) -> None:
+    """Force close and reopen the side panel to recover from UI glitches.
+
+    After reopening, verifies that the logged-in account has not changed.
+    """
     logger.info("Force restarting side panel (Alt+G x2) to recover UI state...")
     try:
         x, y = pyautogui.position()
@@ -246,6 +392,10 @@ def force_restart_side_panel() -> None:
     human_hotkey("alt", "g")  # Toggle
     jsleep(2.0, 3.0)
     open_side_panel()         # Ensure it is open
+
+    # 重開後驗證帳號一致性
+    if account_mgr is not None and account_mgr.current_account_id is not None:
+        account_mgr.ensure_account(account_mgr.current_account_id)
 
 def open_side_panel() -> None:
     """Alt+G to open the Gemini side panel.
@@ -777,6 +927,12 @@ def main() -> None:
     open_side_panel()
     jsleep(2.0, 3.0)
 
+    # --- 初始化帳號管理器 ---
+    account_mgr = AccountManager()
+    account_mgr.detect_current_account()
+    if account_mgr.current_account_id is None:
+        logger.warning("初始化時無法偵測到帳號 icon，將在首次額度事件時重新偵測。")
+
     chat_count = 0
     consecutive_fails = 0
     completed_count = 0
@@ -784,35 +940,7 @@ def main() -> None:
     last_commit_time: float = time.time()
     commit_interval: int = args.commit_interval
 
-    def handle_quota_limit() -> bool:
-        logger.info("Quota limit reached ('reached_quota_limit.png' detected). Switching account...")
-        icon_1 = locate_image("user_icon_1.png", timeout=2.0)
-        icon_2 = locate_image("user_icon_2.png", timeout=2.0)
-        
-        if icon_1:
-            logger.info("Found user_icon_1. Clicking it to switch to account 2.")
-            click_image("user_icon_1.png", timeout=2)
-            jsleep(2.0, 3.0)
-            click_image("change_profile.png", timeout=3)
-            jsleep(2.0, 3.0)
-            click_image("user_profile_2.png", timeout=3)
-            jsleep(5.0, 6.0)
-            return True
-        elif icon_2:
-            logger.info("Found user_icon_2. Clicking it to switch to account 1.")
-            click_image("user_icon_2.png", timeout=2)
-            jsleep(2.0, 3.0)
-            click_image("change_profile.png", timeout=3)
-            jsleep(2.0, 3.0)
-            click_image("user_profile_1.png", timeout=3)
-            jsleep(5.0, 6.0)
-            return True
-        else:
-            logger.critical("Could not find any user icon to switch accounts.")
-            return False
-
     for q in pending:
-        quota_hits_for_this_question = 0
         while True:
             logger.info(f"{'='*50}")
             logger.info(f"Processing: {q['filename']}  (difficulty={q['difficulty']})")
@@ -824,7 +952,7 @@ def main() -> None:
             except Exception as e:
                 logger.error(f"Failed to start new chat: {e}")
                 # Recovery: Force restart side panel
-                force_restart_side_panel()
+                force_restart_side_panel(account_mgr)
                 jsleep(1.0, 2.0)
                 try:
                     start_new_chat()
@@ -836,26 +964,88 @@ def main() -> None:
             try:
                 success = process_question(q, manual_send=args.manual_send)
             except QuotaLimitException:
-                quota_hits_for_this_question += 1
-                if quota_hits_for_this_question >= 2:
-                    logger.warning("Hit quota limit twice for the same question. Attempting to parse recovery time...")
-                    if not wait_for_quota_recovery():
-                        logger.critical("Failed to recover or wait too long. Halting.")
-                        ts = time.strftime("%Y-%m-%d %H:%M:%S")
-                        update_question_status(csv_path, q["filename"], STATUS_FAILED, error_msg=f"Quota Limit Reached Twice at {ts}")
+                # --- 三帳號智能輪替與恢復排程 ---
+                # 1. 解析畫面上的恢復時間
+                recovery_text = attempt_read_recovery_text()
+                logger.info(f"嘗試框選的恢復時間文字: {recovery_text.strip()}")
+                recovery_dt = parse_quota_recovery_time(recovery_text)
+                if recovery_dt is None:
+                    jsleep(1.0, 2.0)
+                    recovery_text = attempt_read_recovery_text()
+                    logger.info(f"第二次嘗試: {recovery_text.strip()}")
+                    recovery_dt = parse_quota_recovery_time(recovery_text)
+
+                # 2. 記錄當前帳號的額度耗盡
+                if account_mgr.current_account_id is None:
+                    account_mgr.detect_current_account()
+                if account_mgr.current_account_id is not None:
+                    account_mgr.record_quota_exhausted(
+                        account_mgr.current_account_id, recovery_dt
+                    )
+
+                # 3. 找下一個可用帳號
+                next_acct = account_mgr.get_next_available_account()
+                if next_acct is not None:
+                    logger.info(f"切換至 account {next_acct} 繼續工作...")
+                    if not account_mgr.switch_to_account(next_acct):
+                        logger.critical("帳號切換失敗。終止腳本。")
                         beep_alert()
                         sys.exit(1)
-                    
-                    logger.info("Wait completed. Force restarting side panel to resume...")
-                    force_restart_side_panel()
+                    force_restart_side_panel(account_mgr)
                     jsleep(2.0, 3.0)
-                    quota_hits_for_this_question = 0
-                    continue
-                
-                logger.info("Quota limit reached. Switching account and retrying this question...")
-                if not handle_quota_limit():
+                    continue  # Retry this question
+
+                # 4. 全部帳號耗盡 — 檢查是否超過 12 小時門檻
+                if account_mgr.all_accounts_exhausted_over_12h():
+                    logger.critical(
+                        "三個帳號的恢復時間都超過 12 小時，終止腳本。"
+                    )
+                    if args.auto_git:
+                        logger.info("Performing final git commit before exit...")
+                        git_commit_and_push(completed_count, failed_count)
                     beep_alert()
                     sys.exit(1)
+
+                # 5. 等待最早恢復的帳號
+                earliest = account_mgr.get_earliest_recovery()
+                if earliest is None:
+                    logger.critical("無法取得任何恢復時間。終止腳本。")
+                    beep_alert()
+                    sys.exit(1)
+
+                target_id, target_recovery_dt = earliest
+                wait_seconds = (
+                    (target_recovery_dt - datetime.now()).total_seconds()
+                )
+                wait_seconds = max(wait_seconds, 0) + 300  # +5 分鐘緩衝
+
+                logger.info(
+                    f"等待 account {target_id} 恢復。"
+                    f"預計恢復: {target_recovery_dt}，"
+                    f"等待 {int(wait_seconds)} 秒..."
+                )
+                beep_alert()
+
+                while wait_seconds > 0:
+                    sleep_chunk = min(wait_seconds, 300)
+                    jsleep(sleep_chunk, sleep_chunk)
+                    wait_seconds -= sleep_chunk
+                    if wait_seconds > 0:
+                        logger.info(
+                            f"持續等待中... 剩餘約 {int(wait_seconds)} 秒"
+                        )
+
+                logger.info(
+                    f"等待結束。切換至 account {target_id} 繼續工作..."
+                )
+                if not account_mgr.switch_to_account(target_id):
+                    logger.critical("帳號切換失敗。終止腳本。")
+                    beep_alert()
+                    sys.exit(1)
+                # 清除該帳號的恢復時間記錄
+                account_mgr.recovery_times.pop(target_id, None)
+                force_restart_side_panel(account_mgr)
+                jsleep(2.0, 3.0)
                 continue  # Retry this question
             
             if success:
@@ -875,7 +1065,7 @@ def main() -> None:
                     sys.exit(1)
                 logger.warning(f"Fail #{consecutive_fails}. Attempting recovery…")
                 # Recovery: force close and reopen side panel
-                force_restart_side_panel()
+                force_restart_side_panel(account_mgr)
                 jsleep(2.0, 3.0)
 
             # --- Periodic git commit & panel reset (regardless of success/fail) ---
@@ -896,6 +1086,10 @@ def main() -> None:
                 human_hotkey("alt", "g")  # 關閉側邊欄
                 jsleep(2.0, 3.0)
                 open_side_panel()         # 重新開啟（內含防呆）
+
+                # 重開後驗證帳號一致性
+                if account_mgr.current_account_id is not None:
+                    account_mgr.ensure_account(account_mgr.current_account_id)
                 
                 last_commit_time = time.time()
 
