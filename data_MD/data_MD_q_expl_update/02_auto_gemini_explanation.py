@@ -1011,7 +1011,8 @@ def main() -> None:
                         update_question_status(csv_path, q["filename"], STATUS_FAILED, error_msg=f"Account Switch Failed at {ts}")
                         beep_alert()
                         sys.exit(1)
-                    force_restart_side_panel(account_mgr)
+                    
+                    # 剛切換完帳號不需要 alt+G（否則會導致帳號被重置回預設帳號，陷入切換迴圈）
                     jsleep(2.0, 3.0)
                     continue  # Retry this question
 
@@ -1070,7 +1071,8 @@ def main() -> None:
                     sys.exit(1)
                 # 清除該帳號的恢復時間記錄
                 account_mgr.recovery_times.pop(target_id, None)
-                force_restart_side_panel(account_mgr)
+                
+                # 同理，剛切換完帳號不需要 alt+G
                 jsleep(2.0, 3.0)
                 continue  # Retry this question
             
