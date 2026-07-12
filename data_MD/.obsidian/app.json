@@ -7,5 +7,6 @@
   "alwaysUpdateLinks": true,
   "showInlineTitle": false,
   "defaultViewMode": "preview",
-  "showLineNumber": true
+  "showLineNumber": true,
+  "strictLineBreaks": true
 }

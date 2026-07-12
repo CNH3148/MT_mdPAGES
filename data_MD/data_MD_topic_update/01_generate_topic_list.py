@@ -4,8 +4,12 @@
 Scan all subject directories under the data_MD root, calculate the update
 priority for each topic, and output ``topic_list.csv``.
 
-Priority formula:
-    priority = 0.5 * (total_questions / 80) + 0.5 * (1 - support_rate)
+Priority rule (sorting order):
+    1. Question count difference (total - included): higher diff = higher priority
+    2. Tiebreaker: total question count: more questions = higher priority
+
+Existing topic statuses (Completed, InProgress, etc.) are preserved
+when re-generating the CSV.
 
 Usage::
 
@@ -37,6 +41,7 @@ from _utils import (
     is_stub_topic,
     list_subject_dirs,
     parse_frontmatter,
+    read_topic_list,
     write_topic_list,
 )
 
@@ -100,10 +105,12 @@ def _scan_questions_for_subject(subject_dir: Path) -> dict[str, dict[str, int]]:
 # ---------------------------------------------------------------------------
 
 
-def _calc_priority(total: int, included: int) -> float:
-    """Calculate the update priority score."""
-    support_rate = included / total if total > 0 else 0.0
-    return 0.5 * (total / 80.0) + 0.5 * (1.0 - support_rate)
+def _calc_priority(total: int, included: int) -> int:
+    """Calculate the update priority as question count difference.
+
+    Higher diff = more questions not yet included = higher priority.
+    """
+    return total - included
 
 
 # ---------------------------------------------------------------------------
@@ -167,7 +174,7 @@ def main() -> None:
             rel_path = topic_file.relative_to(data_root).as_posix()
 
             rows.append({
-                "Priority": f"{priority:.4f}",
+                "Priority": str(priority),
                 "Subject": subject_name,
                 "TopicName": topic_name,
                 "TopicPath": rel_path,
@@ -180,8 +187,31 @@ def main() -> None:
                 "UpdatedAt": "",
             })
 
-    # Sort by priority descending
-    rows.sort(key=lambda r: float(r["Priority"]), reverse=True)
+    # Sort by diff (Priority) descending, then TotalQuestions descending
+    rows.sort(key=lambda r: (-int(r["Priority"]), -int(r["TotalQuestions"])))
+
+    # Merge with existing CSV to preserve Status/Note/UpdatedAt
+    if csv_path.exists():
+        existing = read_topic_list(csv_path)
+        status_map: dict[tuple[str, str], dict[str, str]] = {}
+        for r in existing:
+            key = (r["Subject"], r["TopicName"])
+            status_map[key] = {
+                "Status": r.get("Status", STATUS_PENDING),
+                "Note": r.get("Note", ""),
+                "UpdatedAt": r.get("UpdatedAt", ""),
+            }
+
+        merged_count = 0
+        for row in rows:
+            key = (row["Subject"], row["TopicName"])
+            if key in status_map:
+                row["Status"] = status_map[key]["Status"]
+                row["Note"] = status_map[key]["Note"]
+                row["UpdatedAt"] = status_map[key]["UpdatedAt"]
+                merged_count += 1
+
+        logger.info("Merged status from existing CSV for %d topics.", merged_count)
 
     write_topic_list(csv_path, rows)
 

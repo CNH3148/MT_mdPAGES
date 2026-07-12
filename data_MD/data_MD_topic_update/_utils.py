@@ -23,7 +23,8 @@ logger = logging.getLogger("data_MD_update")
 
 # Directories to skip when scanning subjects
 SKIP_DIRS: set[str] = {
-    ".obsidian", "_attachments", "_templates", "data_MD_update",
+    ".obsidian", "_attachments", "_templates",
+    "data_MD_update", "data_MD_topic_update", "data_MD_q_expl_update",
 }
 SKIP_FILES: set[str] = {"_report.txt"}
 

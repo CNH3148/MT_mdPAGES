@@ -1,0 +1,216 @@
+﻿Priority,Subject,TopicName,TopicPath,TotalQuestions,IncludedQuestions,SupportRate,IsStub,Status,Note,UpdatedAt
+5,醫學分子檢驗學與臨床鏡檢學,藥物基因體學,醫學分子檢驗學與臨床鏡檢學/_topics/藥物基因體學.md,23,18,0.7826,False,Pending,,
+5,微生物學與臨床微生物學,分枝桿菌：結核病與鑑定,微生物學與臨床微生物學/_topics/分枝桿菌：結核病與鑑定.md,22,17,0.7727,False,Pending,,
+5,醫學分子檢驗學與臨床鏡檢學,聚合酶連鎖反應技術,醫學分子檢驗學與臨床鏡檢學/_topics/聚合酶連鎖反應技術.md,21,16,0.7619,False,Pending,,
+4,生物化學與臨床生化學,血液氣體分析與酸鹼平衡,生物化學與臨床生化學/_topics/血液氣體分析與酸鹼平衡.md,30,26,0.8667,False,InProgress,Started at 2026-07-06 12:08,
+4,臨床血液學與血庫學,血液成分製備、儲存與品管,臨床血液學與血庫學/_topics/血液成分製備、儲存與品管.md,25,21,0.8400,False,Pending,,
+4,醫學分子檢驗學與臨床鏡檢學,基因定序技術,醫學分子檢驗學與臨床鏡檢學/_topics/基因定序技術.md,25,21,0.8400,False,Pending,,
+4,臨床生理學與病理學,腫瘤學：致癌機轉與分子生物學,臨床生理學與病理學/_topics/腫瘤學：致癌機轉與分子生物學.md,24,20,0.8333,False,Pending,,
+4,臨床血液學與血庫學,淋巴瘤與其他淋巴增生疾患,臨床血液學與血庫學/_topics/淋巴瘤與其他淋巴增生疾患.md,24,20,0.8333,False,Pending,,
+4,微生物學與臨床微生物學,革蘭氏陽性球菌：葡萄球菌屬,微生物學與臨床微生物學/_topics/革蘭氏陽性球菌：葡萄球菌屬.md,23,19,0.8261,False,Pending,,
+4,臨床生理學與病理學,內分泌系統病理學,臨床生理學與病理學/_topics/內分泌系統病理學.md,23,19,0.8261,False,Pending,,
+4,臨床生理學與病理學,發炎、組織修復與再生,臨床生理學與病理學/_topics/發炎、組織修復與再生.md,23,19,0.8261,False,Pending,,
+4,醫學分子檢驗學與臨床鏡檢學,單基因遺傳疾病分子診斷,醫學分子檢驗學與臨床鏡檢學/_topics/單基因遺傳疾病分子診斷.md,22,18,0.8182,False,Pending,,
+4,生物化學與臨床生化學,臨床毒物學,生物化學與臨床生化學/_topics/臨床毒物學.md,21,17,0.8095,False,Pending,,
+4,微生物學與臨床微生物學,臨床檢體處理與品質評估,微生物學與臨床微生物學/_topics/臨床檢體處理與品質評估.md,15,11,0.7333,False,Pending,,
+4,微生物學與臨床微生物學,先進鑑定技術與流行病學分型,微生物學與臨床微生物學/_topics/先進鑑定技術與流行病學分型.md,14,10,0.7143,False,Pending,,
+4,微生物學與臨床微生物學,非結核分枝桿菌 (NTM),微生物學與臨床微生物學/_topics/非結核分枝桿菌 (NTM).md,12,8,0.6667,False,Pending,,
+3,臨床血清免疫學與臨床病毒學,腫瘤免疫學與免疫治療,臨床血清免疫學與臨床病毒學/_topics/腫瘤免疫學與免疫治療.md,29,26,0.8966,False,Pending,,
+3,生物化學與臨床生化學,檢體採集與分析前變因,生物化學與臨床生化學/_topics/檢體採集與分析前變因.md,27,24,0.8889,False,Pending,,
+3,臨床血液學與血庫學,骨髓增生性腫瘤 (MPN),臨床血液學與血庫學/_topics/骨髓增生性腫瘤 (MPN).md,26,23,0.8846,False,Pending,,
+3,臨床生理學與病理學,腎臟與泌尿道病理學,臨床生理學與病理學/_topics/腎臟與泌尿道病理學.md,25,22,0.8800,False,Pending,,
+3,臨床血液學與血庫學,其他血型系統,臨床血液學與血庫學/_topics/其他血型系統.md,23,20,0.8696,False,Pending,,
+3,醫學分子檢驗學與臨床鏡檢學,滑膜液分析與結晶鑑定,醫學分子檢驗學與臨床鏡檢學/_topics/滑膜液分析與結晶鑑定.md,23,20,0.8696,False,Pending,,
+3,微生物學與臨床微生物學,弧菌、彎曲桿菌與螺旋桿菌,微生物學與臨床微生物學/_topics/弧菌、彎曲桿菌與螺旋桿菌.md,22,19,0.8636,False,Pending,,
+3,生物化學與臨床生化學,下視丘-腦下垂體軸調控,生物化學與臨床生化學/_topics/下視丘-腦下垂體軸調控.md,22,19,0.8636,False,Pending,,
+3,臨床生理學與病理學,細胞病理學：損傷、適應與死亡,臨床生理學與病理學/_topics/細胞病理學：損傷、適應與死亡.md,20,17,0.8500,False,Pending,,
+3,臨床血清免疫學與臨床病毒學,凝集與沉澱反應,臨床血清免疫學與臨床病毒學/_topics/凝集與沉澱反應.md,19,16,0.8421,False,Pending,,
+3,生物化學與臨床生化學,光譜分析技術與原理,生物化學與臨床生化學/_topics/光譜分析技術與原理.md,16,13,0.8125,False,Pending,,
+3,微生物學與臨床微生物學,滅菌、消毒與生物安全,微生物學與臨床微生物學/_topics/滅菌、消毒與生物安全.md,14,11,0.7857,False,Pending,,
+3,微生物學與臨床微生物學,酵母菌感染與鑑定,微生物學與臨床微生物學/_topics/酵母菌感染與鑑定.md,14,11,0.7857,False,Pending,,
+3,醫學分子檢驗學與臨床鏡檢學,個體識別與親子鑑定,醫學分子檢驗學與臨床鏡檢學/_topics/個體識別與親子鑑定.md,12,9,0.7500,False,Pending,,
+3,臨床血液學與血庫學,實驗室品質管制與品質保證,臨床血液學與血庫學/_topics/實驗室品質管制與品質保證.md,8,5,0.6250,False,Pending,,
+2,臨床血清免疫學與臨床病毒學,微小RNA病毒科 (Picornaviridae),臨床血清免疫學與臨床病毒學/_topics/微小RNA病毒科 (Picornaviridae).md,34,32,0.9412,False,Pending,,
+2,臨床血液學與血庫學,血色素合成與血色素病變,臨床血液學與血庫學/_topics/血色素合成與血色素病變.md,33,31,0.9394,False,Pending,,
+2,臨床血液學與血庫學,凝血功能實驗室檢測,臨床血液學與血庫學/_topics/凝血功能實驗室檢測.md,31,29,0.9355,False,Pending,,
+2,臨床血液學與血庫學,鐵質代謝與缺鐵性貧血,臨床血液學與血庫學/_topics/鐵質代謝與缺鐵性貧血.md,30,28,0.9333,False,Pending,,
+2,生物化學與臨床生化學,腎上腺皮質激素與疾病,生物化學與臨床生化學/_topics/腎上腺皮質激素與疾病.md,29,27,0.9310,False,Pending,,
+2,臨床血清免疫學與臨床病毒學,抗病毒藥物,臨床血清免疫學與臨床病毒學/_topics/抗病毒藥物.md,29,27,0.9310,False,Pending,,
+2,臨床生理學與病理學,遺傳與小兒疾病學,臨床生理學與病理學/_topics/遺傳與小兒疾病學.md,26,24,0.9231,False,Pending,,
+2,臨床血清免疫學與臨床病毒學,B細胞生物學與抗體生成,臨床血清免疫學與臨床病毒學/_topics/B細胞生物學與抗體生成.md,26,24,0.9231,False,Pending,,
+2,臨床血清免疫學與臨床病毒學,反轉錄病毒科 (Retroviridae),臨床血清免疫學與臨床病毒學/_topics/反轉錄病毒科 (Retroviridae).md,26,24,0.9231,False,Pending,,
+2,臨床生理學與病理學,女性生殖系統與妊娠病理學,臨床生理學與病理學/_topics/女性生殖系統與妊娠病理學.md,25,23,0.9200,False,Pending,,
+2,生物化學與臨床生化學,心臟損傷生物標記,生物化學與臨床生化學/_topics/心臟損傷生物標記.md,24,22,0.9167,False,Pending,,
+2,生物化學與臨床生化學,治療藥物監測與藥物動力學,生物化學與臨床生化學/_topics/治療藥物監測與藥物動力學.md,24,22,0.9167,False,Pending,,
+2,臨床生理學與病理學,心電圖學：心律不整與心率分析,臨床生理學與病理學/_topics/心電圖學：心律不整與心率分析.md,24,22,0.9167,False,Pending,,
+2,臨床生理學與病理學,神經系統病理學,臨床生理學與病理學/_topics/神經系統病理學.md,24,22,0.9167,False,Pending,,
+2,生物化學與臨床生化學,血脂異常與動脈粥狀硬化,生物化學與臨床生化學/_topics/血脂異常與動脈粥狀硬化.md,22,20,0.9091,False,Pending,,
+2,生物化學與臨床生化學,鈣、磷、鎂代謝與調控,生物化學與臨床生化學/_topics/鈣、磷、鎂代謝與調控.md,21,19,0.9048,False,Pending,,
+2,臨床生理學與病理學,心血管系統病理學,臨床生理學與病理學/_topics/心血管系統病理學.md,21,19,0.9048,False,Pending,,
+2,醫學分子檢驗學與臨床鏡檢學,腎臟功能與蛋白尿評估,醫學分子檢驗學與臨床鏡檢學/_topics/腎臟功能與蛋白尿評估.md,21,19,0.9048,False,Pending,,
+2,臨床血清免疫學與臨床病毒學,流式細胞儀與細胞免疫分析,臨床血清免疫學與臨床病毒學/_topics/流式細胞儀與細胞免疫分析.md,20,18,0.9000,False,Pending,,
+2,臨床生理學與病理學,骨骼、關節與軟組織病理學,臨床生理學與病理學/_topics/骨骼、關節與軟組織病理學.md,18,16,0.8889,False,Pending,,
+2,臨床血液學與血庫學,先天性凝血功能異常,臨床血液學與血庫學/_topics/先天性凝血功能異常.md,18,16,0.8889,False,Pending,,
+2,臨床血液學與血庫學,急性淋巴性白血病 (ALL),臨床血液學與血庫學/_topics/急性淋巴性白血病 (ALL).md,15,13,0.8667,False,Pending,,
+2,微生物學與臨床微生物學,螺旋體,微生物學與臨床微生物學/_topics/螺旋體.md,14,12,0.8571,False,Pending,,
+2,臨床血清免疫學與臨床病毒學,第二型與第三型過敏反應,臨床血清免疫學與臨床病毒學/_topics/第二型與第三型過敏反應.md,14,12,0.8571,False,Pending,,
+2,臨床血液學與血庫學,紅血球形態學與包涵體,臨床血液學與血庫學/_topics/紅血球形態學與包涵體.md,13,11,0.8462,False,Pending,,
+2,醫學分子檢驗學與臨床鏡檢學,人類白血球抗原(HLA)分型,醫學分子檢驗學與臨床鏡檢學/_topics/人類白血球抗原(HLA)分型.md,13,11,0.8462,False,Pending,,
+2,微生物學與臨床微生物學,人畜共通病原菌,微生物學與臨床微生物學/_topics/人畜共通病原菌.md,12,10,0.8333,False,Pending,,
+2,臨床血清免疫學與臨床病毒學,其他免疫學檢測技術,臨床血清免疫學與臨床病毒學/_topics/其他免疫學檢測技術.md,11,9,0.8182,False,Pending,,
+2,臨床生理學與病理學,腫瘤學：臨床表徵與診斷標記,臨床生理學與病理學/_topics/腫瘤學：臨床表徵與診斷標記.md,10,8,0.8000,False,Pending,,
+2,醫學分子檢驗學與臨床鏡檢學,核酸增幅與訊號放大技術,醫學分子檢驗學與臨床鏡檢學/_topics/核酸增幅與訊號放大技術.md,9,7,0.7778,False,Pending,,
+1,臨床血清免疫學與臨床病毒學,新興與人畜共通病毒及普利昂,臨床血清免疫學與臨床病毒學/_topics/新興與人畜共通病毒及普利昂.md,36,35,0.9722,True,Pending,,
+1,臨床生理學與病理學,心電圖學：心肌缺氧、梗塞與結構異常,臨床生理學與病理學/_topics/心電圖學：心肌缺氧、梗塞與結構異常.md,33,32,0.9697,False,Pending,,
+1,臨床血液學與血庫學,巨紅芽球性貧血與維生素B12／葉酸缺乏,臨床血液學與血庫學/_topics/巨紅芽球性貧血與維生素B12／葉酸缺乏.md,29,28,0.9655,False,Pending,,
+1,臨床血清免疫學與臨床病毒學,乳突與多瘤病毒科 (Papillomaviridae and Polyomaviridae),臨床血清免疫學與臨床病毒學/_topics/乳突與多瘤病毒科 (Papillomaviridae and Polyomaviridae).md,26,25,0.9615,False,Pending,,
+1,生物化學與臨床生化學,實驗室品質管理與統計學,生物化學與臨床生化學/_topics/實驗室品質管理與統計學.md,24,23,0.9583,False,Pending,,
+1,臨床生理學與病理學,血液與淋巴系統病理學,臨床生理學與病理學/_topics/血液與淋巴系統病理學.md,24,23,0.9583,False,Pending,,
+1,生物化學與臨床生化學,電解質平衡 (鈉、鉀、氯),生物化學與臨床生化學/_topics/電解質平衡 (鈉、鉀、氯).md,19,18,0.9474,False,Pending,,
+1,臨床生理學與病理學,消化道病理學,臨床生理學與病理學/_topics/消化道病理學.md,19,18,0.9474,False,Pending,,
+1,臨床生理學與病理學,肝、膽、胰系統病理學,臨床生理學與病理學/_topics/肝、膽、胰系統病理學.md,19,18,0.9474,False,Pending,,
+1,生物化學與臨床生化學,生殖內分泌學,生物化學與臨床生化學/_topics/生殖內分泌學.md,18,17,0.9444,False,Pending,,
+1,臨床生理學與病理學,心電圖學：傳導障礙與阻斷,臨床生理學與病理學/_topics/心電圖學：傳導障礙與阻斷.md,18,17,0.9444,False,Pending,,
+1,臨床血清免疫學與臨床病毒學,細菌與其他病原體的血清學診斷,臨床血清免疫學與臨床病毒學/_topics/細菌與其他病原體的血清學診斷.md,18,17,0.9444,False,Pending,,
+1,生物化學與臨床生化學,維生素的分類與功能,生物化學與臨床生化學/_topics/維生素的分類與功能.md,17,16,0.9412,False,Pending,,
+1,臨床血清免疫學與臨床病毒學,器官專一性自體免疫疾病,臨床血清免疫學與臨床病毒學/_topics/器官專一性自體免疫疾病.md,16,15,0.9375,False,Pending,,
+1,臨床血清免疫學與臨床病毒學,細胞激素與趨化素,臨床血清免疫學與臨床病毒學/_topics/細胞激素與趨化素.md,16,15,0.9375,False,Pending,,
+1,臨床生理學與病理學,呼吸系統病理學,臨床生理學與病理學/_topics/呼吸系統病理學.md,15,14,0.9333,False,Pending,,
+1,臨床血液學與血庫學,後天性凝血功能異常,臨床血液學與血庫學/_topics/後天性凝血功能異常.md,15,14,0.9333,False,Pending,,
+1,生物化學與臨床生化學,層析與電泳分離技術,生物化學與臨床生化學/_topics/層析與電泳分離技術.md,14,13,0.9286,False,Pending,,
+1,生物化學與臨床生化學,懷孕內分泌與產前篩檢,生物化學與臨床生化學/_topics/懷孕內分泌與產前篩檢.md,14,13,0.9286,False,Pending,,
+1,生物化學與臨床生化學,臨床質譜分析技術,生物化學與臨床生化學/_topics/臨床質譜分析技術.md,14,13,0.9286,False,Pending,,
+1,臨床生理學與病理學,腫瘤學總論：命名、良惡性區分與轉移,臨床生理學與病理學/_topics/腫瘤學總論：命名、良惡性區分與轉移.md,14,13,0.9286,False,Pending,,
+1,臨床血液學與血庫學,紅血球酶病變,臨床血液學與血庫學/_topics/紅血球酶病變.md,14,13,0.9286,False,Pending,,
+1,臨床血液學與血庫學,纖維蛋白溶解系統,臨床血液學與血庫學/_topics/纖維蛋白溶解系統.md,13,12,0.9231,False,Pending,,
+1,臨床血液學與血庫學,新生兒溶血症與捐血作業,臨床血液學與血庫學/_topics/新生兒溶血症與捐血作業.md,12,11,0.9167,False,Pending,,
+1,臨床血液學與血庫學,海洋性貧血,臨床血液學與血庫學/_topics/海洋性貧血.md,12,11,0.9167,False,Pending,,
+1,臨床生理學與病理學,男性生殖系統病理學,臨床生理學與病理學/_topics/男性生殖系統病理學.md,11,10,0.9091,False,Pending,,
+1,臨床血液學與血庫學,免疫性溶血性貧血,臨床血液學與血庫學/_topics/免疫性溶血性貧血.md,11,10,0.9091,False,Pending,,
+1,臨床血清免疫學與臨床病毒學,其他全身性自體免疫疾病,臨床血清免疫學與臨床病毒學/_topics/其他全身性自體免疫疾病.md,11,10,0.9091,False,Pending,,
+1,微生物學與臨床微生物學,奈瑟氏菌屬與相關菌種,微生物學與臨床微生物學/_topics/奈瑟氏菌屬與相關菌種.md,10,9,0.9000,False,Pending,,
+1,臨床血液學與血庫學,抗球蛋白試驗,臨床血液學與血庫學/_topics/抗球蛋白試驗.md,10,9,0.9000,False,Pending,,
+1,臨床血液學與血庫學,血液學自動化分析與儀器原理,臨床血液學與血庫學/_topics/血液學自動化分析與儀器原理.md,10,9,0.9000,False,Pending,,
+1,生物化學與臨床生化學,臨床免疫分析技術,生物化學與臨床生化學/_topics/臨床免疫分析技術.md,9,8,0.8889,False,Pending,,
+1,臨床血液學與血庫學,骨髓分化不良症候群 (MDS),臨床血液學與血庫學/_topics/骨髓分化不良症候群 (MDS).md,9,8,0.8889,False,Pending,,
+1,臨床血液學與血庫學,Rh血型系統,臨床血液學與血庫學/_topics/Rh血型系統.md,8,7,0.8750,False,Pending,,
+1,臨床血液學與血庫學,非免疫性溶血性貧血,臨床血液學與血庫學/_topics/非免疫性溶血性貧血.md,8,7,0.8750,False,Pending,,
+1,醫學分子檢驗學與臨床鏡檢學,染色體異常與細胞遺傳學檢測,醫學分子檢驗學與臨床鏡檢學/_topics/染色體異常與細胞遺傳學檢測.md,8,7,0.8750,False,Pending,,
+1,臨床血清免疫學與臨床病毒學,補體系統,臨床血清免疫學與臨床病毒學/_topics/補體系統.md,5,4,0.8000,False,Pending,,
+0,臨床生理學與病理學,呼吸生理學：肺功能測試（PFT）,臨床生理學與病理學/_topics/呼吸生理學：肺功能測試（PFT）.md,90,90,1.0000,False,Completed,Deployed successfully,2026-07-01 21:56
+0,臨床血液學與血庫學,白血球生成、功能與良性疾患,臨床血液學與血庫學/_topics/白血球生成、功能與良性疾患.md,87,87,1.0000,False,Completed,Deployed successfully,2026-07-01 22:13
+0,醫學分子檢驗學與臨床鏡檢學,尿液物理與化學分析,醫學分子檢驗學與臨床鏡檢學/_topics/尿液物理與化學分析.md,78,78,1.0000,False,Completed,Deployed successfully,2026-07-01 22:05
+0,微生物學與臨床微生物學,抗生素感受性試驗 (AST),微生物學與臨床微生物學/_topics/抗生素感受性試驗 (AST).md,71,71,1.0000,False,Completed,Deployed successfully,2026-07-01 21:12
+0,臨床血清免疫學與臨床病毒學,病毒學總論與實驗室診斷,臨床血清免疫學與臨床病毒學/_topics/病毒學總論與實驗室診斷.md,70,70,1.0000,False,Completed,Deployed successfully,2026-07-01 23:13
+0,臨床生理學與病理學,神經生理學：腦波（EEG）與睡眠生理,臨床生理學與病理學/_topics/神經生理學：腦波（EEG）與睡眠生理.md,68,68,1.0000,False,Completed,Deployed successfully,2026-07-01 23:19
+0,生物化學與臨床生化學,血漿蛋白質功能與電泳分析,生物化學與臨床生化學/_topics/血漿蛋白質功能與電泳分析.md,64,64,1.0000,False,Completed,Deployed successfully,2026-07-01 23:04
+0,生物化學與臨床生化學,脂質、脂蛋白代謝與運輸,生物化學與臨床生化學/_topics/脂質、脂蛋白代謝與運輸.md,63,63,1.0000,False,Completed,Deployed successfully,2026-07-03 15:02
+0,醫學分子檢驗學與臨床鏡檢學,分子檢驗檢體處理與品管,醫學分子檢驗學與臨床鏡檢學/_topics/分子檢驗檢體處理與品管.md,62,62,1.0000,False,Completed,Deployed successfully,2026-07-01 23:09
+0,生物化學與臨床生化學,非蛋白氮化合物與腎功能評估,生物化學與臨床生化學/_topics/非蛋白氮化合物與腎功能評估.md,61,61,1.0000,False,Completed,Deployed successfully,2026-07-03 15:07
+0,臨床生理學與病理學,心電圖學：基礎原理、導程與波形判讀,臨床生理學與病理學/_topics/心電圖學：基礎原理、導程與波形判讀.md,61,61,1.0000,False,Completed,Deployed successfully,2026-07-03 14:53
+0,臨床血清免疫學與臨床病毒學,T細胞生物學,臨床血清免疫學與臨床病毒學/_topics/T細胞生物學.md,56,56,1.0000,False,Completed,Deployed successfully,2026-07-04 15:22
+0,微生物學與臨床微生物學,特定部位感染與常見病原菌,微生物學與臨床微生物學/_topics/特定部位感染與常見病原菌.md,55,55,1.0000,False,Completed,Deployed successfully,2026-07-01 22:27
+0,微生物學與臨床微生物學,黴漿菌、披衣菌與立克次體,微生物學與臨床微生物學/_topics/黴漿菌、披衣菌與立克次體.md,54,54,1.0000,False,Completed,Deployed successfully,2026-07-01 22:48
+0,臨床血清免疫學與臨床病毒學,疱疹病毒科 (Herpesviridae),臨床血清免疫學與臨床病毒學/_topics/疱疹病毒科 (Herpesviridae).md,54,54,1.0000,False,Completed,Deployed successfully,2026-07-04 00:17
+0,微生物學與臨床微生物學,微生物培養基：種類、原理與應用,微生物學與臨床微生物學/_topics/微生物培養基：種類、原理與應用.md,53,53,1.0000,False,Completed,Deployed successfully,2026-07-03 14:49
+0,臨床生理學與病理學,血液氣體分析與酸鹼平衡,臨床生理學與病理學/_topics/血液氣體分析與酸鹼平衡.md,52,52,1.0000,False,Completed,Deployed successfully,2026-07-06 12:08
+0,臨床血液學與血庫學,凝血因子與凝血路徑,臨床血液學與血庫學/_topics/凝血因子與凝血路徑.md,51,51,1.0000,False,Completed,Deployed successfully,2026-07-05 16:06
+0,醫學分子檢驗學與臨床鏡檢學,固態腫瘤分子病理學,醫學分子檢驗學與臨床鏡檢學/_topics/固態腫瘤分子病理學.md,48,48,1.0000,False,Completed,Deployed successfully,2026-07-03 16:33
+0,臨床血清免疫學與臨床病毒學,肝炎病毒,臨床血清免疫學與臨床病毒學/_topics/肝炎病毒.md,47,47,1.0000,False,Completed,Deployed successfully,2026-07-05 18:41
+0,醫學分子檢驗學與臨床鏡檢學,精液分析與懷孕試驗,醫學分子檢驗學與臨床鏡檢學/_topics/精液分析與懷孕試驗.md,46,46,1.0000,False,Completed,Deployed successfully,2026-07-05 14:10
+0,臨床血清免疫學與臨床病毒學,正黏液與副黏液病毒科 (Orthomyxoviridae and Paramyxoviridae),臨床血清免疫學與臨床病毒學/_topics/正黏液與副黏液病毒科 (Orthomyxoviridae and Paramyxoviridae).md,45,45,1.0000,False,Completed,Deployed successfully,2026-07-05 17:34
+0,醫學分子檢驗學與臨床鏡檢學,分子生物學核心原理,醫學分子檢驗學與臨床鏡檢學/_topics/分子生物學核心原理.md,45,45,1.0000,False,Completed,Deployed successfully,2026-07-02 14:05
+0,微生物學與臨床微生物學,腸內菌科：鑑定通則與生化試驗,微生物學與臨床微生物學/_topics/腸內菌科：鑑定通則與生化試驗.md,44,44,1.0000,False,Completed,Deployed successfully,2026-07-03 14:55
+0,生物化學與臨床生化學,胺基酸結構、特性與代謝異常,生物化學與臨床生化學/_topics/胺基酸結構、特性與代謝異常.md,44,44,1.0000,False,Completed,Deployed successfully,2026-07-05 18:03
+0,生物化學與臨床生化學,臨床酵素學總論與動力學,生物化學與臨床生化學/_topics/臨床酵素學總論與動力學.md,44,44,1.0000,False,Completed,Deployed successfully,2026-07-05 18:06
+0,臨床血液學與血庫學,血小板生理與功能檢測,臨床血液學與血庫學/_topics/血小板生理與功能檢測.md,44,44,1.0000,False,Completed,Deployed successfully,2026-07-05 18:10
+0,臨床生理學與病理學,超音波學：物理原理與儀器操作,臨床生理學與病理學/_topics/超音波學：物理原理與儀器操作.md,42,42,1.0000,False,Completed,Deployed successfully,2026-07-05 17:37
+0,臨床血清免疫學與臨床病毒學,其他DNA病毒,臨床血清免疫學與臨床病毒學/_topics/其他DNA病毒.md,42,42,1.0000,False,Completed,Deployed successfully,2026-07-05 17:51
+0,生物化學與臨床生化學,糖尿病診斷與血糖監控,生物化學與臨床生化學/_topics/糖尿病診斷與血糖監控.md,41,41,1.0000,False,Completed,Deployed successfully,2026-07-05 18:22
+0,臨床血清免疫學與臨床病毒學,先天性免疫系統,臨床血清免疫學與臨床病毒學/_topics/先天性免疫系統.md,41,41,1.0000,False,Completed,Deployed successfully,2026-07-05 19:23
+0,醫學分子檢驗學與臨床鏡檢學,漿膜液分析,醫學分子檢驗學與臨床鏡檢學/_topics/漿膜液分析.md,41,41,1.0000,False,Completed,Deployed successfully,2026-07-05 17:59
+0,臨床生理學與病理學,免疫病理學與自體免疫疾病,臨床生理學與病理學/_topics/免疫病理學與自體免疫疾病.md,39,39,1.0000,False,Completed,Deployed successfully,2026-07-05 18:48
+0,微生物學與臨床微生物學,抗細菌藥物：作用機轉,微生物學與臨床微生物學/_topics/抗細菌藥物：作用機轉.md,38,38,1.0000,False,Completed,Deployed successfully,2026-07-05 15:33
+0,臨床血清免疫學與臨床病毒學,移植免疫學與HLA配對,臨床血清免疫學與臨床病毒學/_topics/移植免疫學與HLA配對.md,38,38,1.0000,False,Completed,Deployed successfully,2026-07-05 17:41
+0,醫學分子檢驗學與臨床鏡檢學,糞便常規與潛血檢查,醫學分子檢驗學與臨床鏡檢學/_topics/糞便常規與潛血檢查.md,38,38,1.0000,False,Completed,Deployed successfully,2026-07-05 16:18
+0,臨床血液學與血庫學,紅血球生成、結構與代謝,臨床血液學與血庫學/_topics/紅血球生成、結構與代謝.md,37,37,1.0000,False,Completed,Deployed successfully,2026-07-05 19:16
+0,醫學分子檢驗學與臨床鏡檢學,細菌與真菌分子鑑定與分型,醫學分子檢驗學與臨床鏡檢學/_topics/細菌與真菌分子鑑定與分型.md,37,37,1.0000,False,Completed,Deployed successfully,2026-07-05 17:45
+0,醫學分子檢驗學與臨床鏡檢學,醫學原蟲學診斷,醫學分子檢驗學與臨床鏡檢學/_topics/醫學原蟲學診斷.md,37,37,1.0000,False,Completed,Deployed successfully,2026-07-05 16:10
+0,臨床生理學與病理學,感染性疾病病理學,臨床生理學與病理學/_topics/感染性疾病病理學.md,36,36,1.0000,False,Completed,Deployed successfully,2026-07-05 18:26
+0,醫學分子檢驗學與臨床鏡檢學,腦脊髓液分析,醫學分子檢驗學與臨床鏡檢學/_topics/腦脊髓液分析.md,36,36,1.0000,False,Completed,Deployed successfully,2026-07-05 16:21
+0,微生物學與臨床微生物學,非發酵性革蘭氏陰性桿菌,微生物學與臨床微生物學/_topics/非發酵性革蘭氏陰性桿菌.md,35,35,1.0000,False,Completed,Deployed successfully,2026-07-05 16:00
+0,臨床血清免疫學與臨床病毒學,疫苗學與佐劑,臨床血清免疫學與臨床病毒學/_topics/疫苗學與佐劑.md,35,35,1.0000,False,Completed,Deployed successfully,2026-07-05 21:41
+0,臨床血液學與血庫學,白血球形態學與細胞化學染色,臨床血液學與血庫學/_topics/白血球形態學與細胞化學染色.md,34,34,1.0000,False,Completed,Deployed successfully,2026-07-05 18:38
+0,臨床血液學與血庫學,血小板數量與功能異常疾病,臨床血液學與血庫學/_topics/血小板數量與功能異常疾病.md,34,34,1.0000,False,Completed,Deployed successfully,2026-07-05 19:41
+0,醫學分子檢驗學與臨床鏡檢學,醫學蠕蟲學診斷,醫學分子檢驗學與臨床鏡檢學/_topics/醫學蠕蟲學診斷.md,34,34,1.0000,False,Completed,Deployed successfully,2026-07-05 16:14
+0,醫學分子檢驗學與臨床鏡檢學,基因變異篩檢技術,醫學分子檢驗學與臨床鏡檢學/_topics/基因變異篩檢技術.md,33,33,1.0000,False,Completed,Deployed successfully,2026-07-05 17:16
+0,臨床血清免疫學與臨床病毒學,黃病毒科與披膜病毒科 (Flaviviridae and Togaviridae),臨床血清免疫學與臨床病毒學/_topics/黃病毒科與披膜病毒科 (Flaviviridae and Togaviridae).md,32,32,1.0000,False,Completed,Deployed successfully,2026-07-05 21:34
+0,醫學分子檢驗學與臨床鏡檢學,表觀遺傳學與蛋白質體學應用,醫學分子檢驗學與臨床鏡檢學/_topics/表觀遺傳學與蛋白質體學應用.md,32,32,1.0000,False,Completed,Deployed successfully,2026-07-01 22:59
+0,微生物學與臨床微生物學,嗜血桿菌屬與其他苛求菌,微生物學與臨床微生物學/_topics/嗜血桿菌屬與其他苛求菌.md,31,31,1.0000,False,Completed,Deployed successfully,2026-07-05 17:22
+0,生物化學與臨床生化學,腫瘤標記原理與臨床應用,生物化學與臨床生化學/_topics/腫瘤標記原理與臨床應用.md,31,31,1.0000,False,Completed,Deployed successfully,2026-07-05 20:29
+0,生物化學與臨床生化學,醣類結構與基礎代謝,生物化學與臨床生化學/_topics/醣類結構與基礎代謝.md,31,31,1.0000,False,Completed,Deployed successfully,2026-07-05 19:13
+0,臨床血液學與血庫學,抗凝血／抗血小板治療與血栓傾向,臨床血液學與血庫學/_topics/抗凝血／抗血小板治療與血栓傾向.md,31,31,1.0000,False,Completed,Deployed successfully,2026-07-05 17:55
+0,臨床血液學與血庫學,ABO與H血型系統,臨床血液學與血庫學/_topics/ABO與H血型系統.md,30,30,1.0000,False,Completed,Deployed successfully,2026-07-05 18:45
+0,臨床血液學與血庫學,急性骨髓性白血病 (AML),臨床血液學與血庫學/_topics/急性骨髓性白血病 (AML).md,30,30,1.0000,False,Completed,Deployed successfully,2026-07-05 19:26
+0,微生物學與臨床微生物學,厭氧菌,微生物學與臨床微生物學/_topics/厭氧菌.md,29,29,1.0000,False,Completed,Deployed successfully,2026-07-05 15:57
+0,微生物學與臨床微生物學,微生物學總論與細菌結構,微生物學與臨床微生物學/_topics/微生物學總論與細菌結構.md,29,29,1.0000,False,Completed,Deployed successfully,2026-07-05 17:30
+0,微生物學與臨床微生物學,微生物檢驗技術：染色與鏡檢,微生物學與臨床微生物學/_topics/微生物檢驗技術：染色與鏡檢.md,29,29,1.0000,False,Completed,Deployed successfully,2026-07-03 16:07
+0,微生物學與臨床微生物學,革蘭氏陽性桿菌：產孢菌,微生物學與臨床微生物學/_topics/革蘭氏陽性桿菌：產孢菌.md,28,28,1.0000,False,Completed,Deployed successfully,2026-07-05 20:06
+0,生物化學與臨床生化學,生化相關之分子診斷學原理,生物化學與臨床生化學/_topics/生化相關之分子診斷學原理.md,28,28,1.0000,False,Completed,Deployed successfully,2026-07-05 20:09
+0,臨床生理學與病理學,環境與營養病理學,臨床生理學與病理學/_topics/環境與營養病理學.md,28,28,1.0000,False,Completed,Deployed successfully,2026-07-05 21:30
+0,臨床生理學與病理學,神經生理學：肌電圖（EMG）與神經傳導（NCV）,臨床生理學與病理學/_topics/神經生理學：肌電圖（EMG）與神經傳導（NCV）.md,28,28,1.0000,False,Pending,,
+0,醫學分子檢驗學與臨床鏡檢學,痰液與其他體液鏡檢,醫學分子檢驗學與臨床鏡檢學/_topics/痰液與其他體液鏡檢.md,28,28,1.0000,False,Completed,Deployed successfully,2026-07-05 20:13
+0,微生物學與臨床微生物學,腸內菌科：克雷伯氏菌、腸桿菌、沙雷氏菌與其他,微生物學與臨床微生物學/_topics/腸內菌科：克雷伯氏菌、腸桿菌、沙雷氏菌與其他.md,27,27,1.0000,False,Completed,Deployed successfully,2026-07-05 19:03
+0,微生物學與臨床微生物學,革蘭氏陽性桿菌：非產孢菌,微生物學與臨床微生物學/_topics/革蘭氏陽性桿菌：非產孢菌.md,27,27,1.0000,False,Completed,Deployed successfully,2026-07-05 18:34
+0,微生物學與臨床微生物學,革蘭氏陽性球菌：鏈球菌屬與腸球菌屬,微生物學與臨床微生物學/_topics/革蘭氏陽性球菌：鏈球菌屬與腸球菌屬.md,27,27,1.0000,False,Completed,Deployed successfully,2026-07-05 19:09
+0,微生物學與臨床微生物學,腸內菌科：大腸桿菌、志賀氏菌與沙門氏菌,微生物學與臨床微生物學/_topics/腸內菌科：大腸桿菌、志賀氏菌與沙門氏菌.md,26,26,1.0000,False,Completed,Deployed successfully,2026-07-05 21:48
+0,生物化學與臨床生化學,鐵、銅及其他微量元素,生物化學與臨床生化學/_topics/鐵、銅及其他微量元素.md,26,26,1.0000,False,Completed,Deployed successfully,2026-07-05 20:17
+0,臨床生理學與病理學,超音波學：臨床應用與影像判讀,臨床生理學與病理學/_topics/超音波學：臨床應用與影像判讀.md,26,26,1.0000,False,Pending,,
+0,臨床血液學與血庫學,貧血的鑑別診斷與紅血球參數判讀,臨床血液學與血庫學/_topics/貧血的鑑別診斷與紅血球參數判讀.md,26,26,1.0000,False,Completed,Deployed successfully,2026-07-05 20:24
+0,生物化學與臨床生化學,肝膽功能酵素指標,生物化學與臨床生化學/_topics/肝膽功能酵素指標.md,25,25,1.0000,False,Pending,,
+0,醫學分子檢驗學與臨床鏡檢學,尿液沉渣鏡檢學,醫學分子檢驗學與臨床鏡檢學/_topics/尿液沉渣鏡檢學.md,25,25,1.0000,False,Completed,Deployed successfully,2026-07-05 16:30
+0,微生物學與臨床微生物學,細菌抗藥性機轉,微生物學與臨床微生物學/_topics/細菌抗藥性機轉.md,23,23,1.0000,False,Completed,Deployed successfully,2026-07-05 18:56
+0,醫學分子檢驗學與臨床鏡檢學,病毒分子診斷與監測,醫學分子檢驗學與臨床鏡檢學/_topics/病毒分子診斷與監測.md,23,23,1.0000,False,Completed,Deployed successfully,2026-07-05 19:00
+0,醫學分子檢驗學與臨床鏡檢學,顯微鏡原理與應用,醫學分子檢驗學與臨床鏡檢學/_topics/顯微鏡原理與應用.md,23,23,1.0000,False,Completed,Deployed successfully,2026-07-05 20:37
+0,微生物學與臨床微生物學,抗真菌藥物,微生物學與臨床微生物學/_topics/抗真菌藥物.md,22,22,1.0000,False,Completed,Deployed successfully,2026-07-05 18:16
+0,微生物學與臨床微生物學,絲狀菌：皮癬菌與表淺黴菌,微生物學與臨床微生物學/_topics/絲狀菌：皮癬菌與表淺黴菌.md,22,22,1.0000,False,Completed,Deployed successfully,2026-07-05 18:52
+0,微生物學與臨床微生物學,細菌毒素與致病機轉,微生物學與臨床微生物學/_topics/細菌毒素與致病機轉.md,21,21,1.0000,False,Completed,Deployed successfully,2026-07-05 20:59
+0,微生物學與臨床微生物學,醫用真菌學總論與鑑定技術,微生物學與臨床微生物學/_topics/醫用真菌學總論與鑑定技術.md,21,21,1.0000,False,Completed,Deployed successfully,2026-07-05 21:06
+0,醫學分子檢驗學與臨床鏡檢學,核酸雜交技術,醫學分子檢驗學與臨床鏡檢學/_topics/核酸雜交技術.md,21,21,1.0000,False,Completed,Deployed successfully,2026-07-05 21:11
+0,臨床血液學與血庫學,輸血反應,臨床血液學與血庫學/_topics/輸血反應.md,18,18,1.0000,False,Pending,,
+0,微生物學與臨床微生物學,絲狀菌：伺機性與全身性黴菌,微生物學與臨床微生物學/_topics/絲狀菌：伺機性與全身性黴菌.md,17,17,1.0000,False,Completed,Deployed successfully,2026-07-05 17:26
+0,臨床血液學與血庫學,漿細胞腫瘤,臨床血液學與血庫學/_topics/漿細胞腫瘤.md,17,17,1.0000,False,Pending,,
+0,臨床血液學與血庫學,特殊輸血治療,臨床血液學與血庫學/_topics/特殊輸血治療.md,16,16,1.0000,False,Pending,,
+0,生物化學與臨床生化學,甲狀腺功能與疾病,生物化學與臨床生化學/_topics/甲狀腺功能與疾病.md,15,15,1.0000,False,Pending,,
+0,生物化學與臨床生化學,胰臟及其他臨床酵素,生物化學與臨床生化學/_topics/胰臟及其他臨床酵素.md,15,15,1.0000,False,Pending,,
+0,醫學分子檢驗學與臨床鏡檢學,血液惡性腫瘤分子診斷,醫學分子檢驗學與臨床鏡檢學/_topics/血液惡性腫瘤分子診斷.md,15,15,1.0000,False,Completed,Deployed successfully,2026-07-05 21:44
+0,臨床血清免疫學與臨床病毒學,第一型過敏反應,臨床血清免疫學與臨床病毒學/_topics/第一型過敏反應.md,13,13,1.0000,False,Pending,,
+0,生物化學與臨床生化學,電化學分析與感測器,生物化學與臨床生化學/_topics/電化學分析與感測器.md,12,12,1.0000,False,Pending,,
+0,臨床血清免疫學與臨床病毒學,免疫球蛋白的結構與功能,臨床血清免疫學與臨床病毒學/_topics/免疫球蛋白的結構與功能.md,12,12,1.0000,False,Pending,,
+0,醫學分子檢驗學與臨床鏡檢學,生物資訊學與數據判讀,醫學分子檢驗學與臨床鏡檢學/_topics/生物資訊學與數據判讀.md,12,12,1.0000,False,Completed,Deployed successfully,2026-07-05 19:50
+0,生物化學與臨床生化學,膽紅素代謝與黃疸,生物化學與臨床生化學/_topics/膽紅素代謝與黃疸.md,11,11,1.0000,False,Pending,,
+0,臨床血液學與血庫學,抗體篩檢與鑑定,臨床血液學與血庫學/_topics/抗體篩檢與鑑定.md,11,11,1.0000,False,Pending,,
+0,臨床血液學與血庫學,慢性淋巴性白血病 (CLL),臨床血液學與血庫學/_topics/慢性淋巴性白血病 (CLL).md,10,10,1.0000,False,Pending,,
+0,臨床血清免疫學與臨床病毒學,第四型過敏反應,臨床血清免疫學與臨床病毒學/_topics/第四型過敏反應.md,10,10,1.0000,False,Pending,,
+0,臨床血液學與血庫學,交叉試驗與輸血前作業,臨床血液學與血庫學/_topics/交叉試驗與輸血前作業.md,9,9,1.0000,False,Pending,,
+0,臨床血清免疫學與臨床病毒學,類風濕性關節炎與其他關節病變,臨床血清免疫學與臨床病毒學/_topics/類風濕性關節炎與其他關節病變.md,9,9,1.0000,False,Pending,,
+0,臨床血液學與血庫學,流式細胞分析技術,臨床血液學與血庫學/_topics/流式細胞分析技術.md,8,8,1.0000,False,Pending,,
+0,臨床血清免疫學與臨床病毒學,原發性與次發性免疫缺陷症,臨床血清免疫學與臨床病毒學/_topics/原發性與次發性免疫缺陷症.md,8,8,1.0000,False,Pending,,
+0,臨床血液學與血庫學,再生不良性貧血與骨髓衰竭,臨床血液學與血庫學/_topics/再生不良性貧血與骨髓衰竭.md,6,6,1.0000,False,Pending,,
+0,臨床血液學與血庫學,紅血球膜病變,臨床血液學與血庫學/_topics/紅血球膜病變.md,6,6,1.0000,False,Pending,,
+0,生物化學與臨床生化學,腎上腺髓質與兒茶酚胺,生物化學與臨床生化學/_topics/腎上腺髓質與兒茶酚胺.md,5,5,1.0000,False,Pending,,
+0,生物化學與臨床生化學,骨骼代謝生物標記,生物化學與臨床生化學/_topics/骨骼代謝生物標記.md,5,5,1.0000,False,Pending,,
+0,臨床生理學與病理學,乳房病理學,臨床生理學與病理學/_topics/乳房病理學.md,4,4,1.0000,False,Pending,,
+0,臨床生理學與病理學,血液動力學障礙、血栓與休克,臨床生理學與病理學/_topics/血液動力學障礙、血栓與休克.md,1,1,1.0000,False,Pending,,
+0,臨床血液學與血庫學,分子診斷技術原理與應用,臨床血液學與血庫學/_topics/分子診斷技術原理與應用.md,0,0,0.0000,True,Completed,Skipped: No questions,
+0,臨床血液學與血庫學,造血幹細胞移植與來源比較,臨床血液學與血庫學/_topics/造血幹細胞移植與來源比較.md,0,0,0.0000,True,Completed,Skipped: No questions,
+0,臨床血清免疫學與臨床病毒學,全身性紅斑性狼瘡 (SLE),臨床血清免疫學與臨床病毒學/_topics/全身性紅斑性狼瘡 (SLE).md,0,0,0.0000,True,Completed,Skipped: No questions,
+0,臨床血清免疫學與臨床病毒學,抗原呈現與主要組織相容性複合體 (MHC),臨床血清免疫學與臨床病毒學/_topics/抗原呈現與主要組織相容性複合體 (MHC).md,0,0,0.0000,True,Completed,Skipped: No questions,
+0,臨床血清免疫學與臨床病毒學,腸胃炎相關病毒,臨床血清免疫學與臨床病毒學/_topics/腸胃炎相關病毒.md,0,0,0.0000,True,Completed,Skipped: No questions,
+0,臨床血清免疫學與臨床病毒學,酵素連結免疫吸附分析法 (ELISA),臨床血清免疫學與臨床病毒學/_topics/酵素連結免疫吸附分析法 (ELISA).md,0,0,0.0000,True,Completed,Skipped: No questions,
+0,醫學分子檢驗學與臨床鏡檢學,分子診斷試驗性能評估,醫學分子檢驗學與臨床鏡檢學/_topics/分子診斷試驗性能評估.md,0,0,0.0000,True,Completed,Skipped: No questions,
+0,醫學分子檢驗學與臨床鏡檢學,實驗室品質管理與試劑管理,醫學分子檢驗學與臨床鏡檢學/_topics/實驗室品質管理與試劑管理.md,0,0,0.0000,True,Completed,Skipped: No questions,
+0,醫學分子檢驗學與臨床鏡檢學,檢體保存與抗凝劑原理,醫學分子檢驗學與臨床鏡檢學/_topics/檢體保存與抗凝劑原理.md,0,0,0.0000,True,Completed,Skipped: No questions,
+0,醫學分子檢驗學與臨床鏡檢學,細菌抗藥性機制,醫學分子檢驗學與臨床鏡檢學/_topics/細菌抗藥性機制.md,0,0,0.0000,True,Completed,Skipped: No questions,
+0,醫學分子檢驗學與臨床鏡檢學,腫瘤標記與癌症診斷,醫學分子檢驗學與臨床鏡檢學/_topics/腫瘤標記與癌症診斷.md,0,0,0.0000,True,Completed,Skipped: No questions,
+0,醫學分子檢驗學與臨床鏡檢學,醫學檢驗室品質管理與法規,醫學分子檢驗學與臨床鏡檢學/_topics/醫學檢驗室品質管理與法規.md,0,0,0.0000,True,Completed,Skipped: No questions,

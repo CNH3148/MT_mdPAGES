@@ -65,7 +65,7 @@ from human_input import (
 )
 
 # ── 設定 ──────────────────────────────────────────────────
-DATA_ROOT = Path("C:/Users/star0/Desktop/data_MD/data_MD_update")
+DATA_ROOT = Path(__file__).resolve().parent
 REF_FILE = DATA_ROOT / "reference_for_ai.txt"
 DUMPS_DIR = DATA_ROOT / "new_MD" / "dumps"
 IMAGE_DIR = DATA_ROOT / "images"
