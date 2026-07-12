@@ -24,8 +24,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional, Any
 
-# Add data_MD_update to path to import human_input
-sys.path.append(str(Path(__file__).resolve().parent.parent / "data_MD_update"))
+
 try:
     from human_input import (
         jsleep,
