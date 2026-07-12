@@ -7,6 +7,11 @@
 
 ## 快速上手
 
+**重要：** 所有的指令都必須在 `data_MD` 根目錄下執行：
+```bash
+cd C:\Users\star0\Desktop\data_MD_PAGE\data_MD
+```
+
 ### 一鍵全自動（推薦）
 
 ```bash
@@ -14,9 +19,7 @@
 uv run python data_MD_topic_update/01_generate_topic_list.py
 
 # 步驟 2：啟動全自動串聯流程
-uv run --with pydirectinput --with pyautogui --with pyperclip \
-       --with pygetwindow --with opencv-python --with pillow \
-       python data_MD_topic_update/07_auto_update_topics.py
+uv run --with pydirectinput --with pyautogui --with pyperclip --with pygetwindow --with opencv-python --with pillow python data_MD_topic_update/07_auto_update_topics.py
 ```
 
 ### 半自動模式（遭遇 reCAPTCHA 封鎖時）
