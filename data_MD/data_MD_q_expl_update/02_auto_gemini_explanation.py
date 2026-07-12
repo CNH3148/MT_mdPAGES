@@ -126,15 +126,33 @@ class AccountManager:
             return False
 
         logger.info(f"點擊 {current_icon} 開始切換至 account {target_id}...")
-        click_image(current_icon, timeout=2)
+        if not click_image(current_icon, timeout=2):
+            logger.error(f"無法點擊 {current_icon}，帳號切換中止。")
+            return False
         jsleep(2.0, 3.0)
-        click_image("change_profile.png", timeout=3)
+
+        if not click_image("change_profile.png", timeout=3):
+            logger.error("無法點擊 change_profile.png，帳號切換中止。")
+            return False
         jsleep(2.0, 3.0)
-        click_image(target_acct["profile"], timeout=3)
+
+        if not click_image(target_acct["profile"], timeout=3):
+            logger.error(
+                f"無法點擊 {target_acct['profile']}，帳號切換中止。"
+            )
+            return False
         jsleep(5.0, 6.0)
 
-        self.current_account_id = target_id
-        logger.info(f"已切換至 account {target_id}")
+        # 最終驗證：確認畫面上的帳號確實已切換
+        verified_id = self.detect_current_account()
+        if verified_id != target_id:
+            logger.error(
+                f"帳號切換驗證失敗: 預期 account {target_id}, "
+                f"實際偵測到 account {verified_id}。"
+            )
+            return False
+
+        logger.info(f"已成功切換並驗證 account {target_id}")
         return True
 
     def record_quota_exhausted(
@@ -989,6 +1007,8 @@ def main() -> None:
                     logger.info(f"切換至 account {next_acct} 繼續工作...")
                     if not account_mgr.switch_to_account(next_acct):
                         logger.critical("帳號切換失敗。終止腳本。")
+                        ts = time.strftime("%Y-%m-%d %H:%M:%S")
+                        update_question_status(csv_path, q["filename"], STATUS_FAILED, error_msg=f"Account Switch Failed at {ts}")
                         beep_alert()
                         sys.exit(1)
                     force_restart_side_panel(account_mgr)
@@ -1000,6 +1020,8 @@ def main() -> None:
                     logger.critical(
                         "三個帳號的恢復時間都超過 12 小時，終止腳本。"
                     )
+                    ts = time.strftime("%Y-%m-%d %H:%M:%S")
+                    update_question_status(csv_path, q["filename"], STATUS_FAILED, error_msg=f"All Accounts Quota Exhausted >12h at {ts}")
                     if args.auto_git:
                         logger.info("Performing final git commit before exit...")
                         git_commit_and_push(completed_count, failed_count)
@@ -1010,6 +1032,8 @@ def main() -> None:
                 earliest = account_mgr.get_earliest_recovery()
                 if earliest is None:
                     logger.critical("無法取得任何恢復時間。終止腳本。")
+                    ts = time.strftime("%Y-%m-%d %H:%M:%S")
+                    update_question_status(csv_path, q["filename"], STATUS_FAILED, error_msg=f"Missing Recovery Time at {ts}")
                     beep_alert()
                     sys.exit(1)
 
@@ -1040,6 +1064,8 @@ def main() -> None:
                 )
                 if not account_mgr.switch_to_account(target_id):
                     logger.critical("帳號切換失敗。終止腳本。")
+                    ts = time.strftime("%Y-%m-%d %H:%M:%S")
+                    update_question_status(csv_path, q["filename"], STATUS_FAILED, error_msg=f"Account Switch Failed After Wait at {ts}")
                     beep_alert()
                     sys.exit(1)
                 # 清除該帳號的恢復時間記錄
