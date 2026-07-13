@@ -89,11 +89,13 @@
 
             <!-- View: Practice (Card Mode) -->
             <div id="view-practice" class="view">
-                <div class="practice-top-bar" style="display: flex; justify-content: center; padding: 12px 16px; background: var(--bg-card); border-bottom: 1px solid var(--border-color); font-weight: 600; color: var(--primary);">
-                    <span id="list-accuracy" title="目前正確率">🎯 正確率: --%</span>
-                </div>
-                <div class="progress-bar-top">
-                    <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+                <div class="sticky-top-container" style="position: sticky; top: 0; z-index: 100; background: var(--bg-card);">
+                    <div class="practice-top-bar" style="display: flex; justify-content: center; padding: 12px 16px; border-bottom: 1px solid var(--border-color); font-weight: 600; color: var(--primary);">
+                        <span id="list-accuracy" title="目前正確率">🎯 正確率: --%</span>
+                    </div>
+                    <div class="progress-bar-top">
+                        <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+                    </div>
                 </div>
 
                 <div class="practice-area">
@@ -133,11 +135,13 @@
 
             <!-- View: Practice (List Mode) -->
             <div id="view-practice-list" class="view">
-                <div class="practice-top-bar" style="display: flex; justify-content: center; padding: 12px 16px; background: var(--bg-card); border-bottom: 1px solid var(--border-color); font-weight: 600; color: var(--primary);">
-                    <span id="list-accuracy-listmode" title="目前正確率">🎯 正確率: --%</span>
-                </div>
-                <div class="progress-bar-top">
-                    <div class="progress-fill" id="progress-fill-list" style="width: 0%;"></div>
+                <div class="sticky-top-container" style="position: sticky; top: 0; z-index: 100; background: var(--bg-card);">
+                    <div class="practice-top-bar" style="display: flex; justify-content: center; padding: 12px 16px; border-bottom: 1px solid var(--border-color); font-weight: 600; color: var(--primary);">
+                        <span id="list-accuracy-listmode" title="目前正確率">🎯 正確率: --%</span>
+                    </div>
+                    <div class="progress-bar-top">
+                        <div class="progress-fill" id="progress-fill-list" style="width: 0%;"></div>
+                    </div>
                 </div>
                 <div class="list-mode-container" id="list-mode-container">
                     <!-- All questions injected here by JS -->

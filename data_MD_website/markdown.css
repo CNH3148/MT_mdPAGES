@@ -76,7 +76,7 @@ mark {
 .markdown-body code {
     padding: 0.2em 0.4em;
     margin: 0;
-    font-size: 1rem;
+    font-size: 11pt;
     white-space: break-spaces;
     background-color: rgba(0, 243, 255, 0.15);
     border-radius: 6px;
