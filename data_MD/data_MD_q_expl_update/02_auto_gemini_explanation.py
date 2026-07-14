@@ -658,123 +658,311 @@ def input_prompt(q: dict) -> None:
     jsleep(1.0, 1.5)
 
 
+# Both visual variants of the stop button (model is still generating)
+STOP_BTN_IMAGES = ["gemini_stop_btn.png", "gemini_stop_btn_2.png"]
+
+
+# ---------------------------------------------------------------------------
+# GeminiState — UI state detection
+# ---------------------------------------------------------------------------
+class GeminiState:
+    """Gemini 側邊欄的 UI 狀態枚舉。"""
+    IDLE = "IDLE"                       # 閒置（輸入框空，模型沒在思考）
+    INPUT_OCCUPIED = "INPUT_OCCUPIED"   # 輸入框有文字（可按 send_btn）
+    GENERATING = "GENERATING"           # 模型正在思考（stop_btn 可見）
+    RESPONSE_READY = "RESPONSE_READY"   # 回覆已完成（gemini_mark 出現且非 GENERATING）
+    UNKNOWN = "UNKNOWN"                 # 無法判斷
+
+
+def detect_gemini_state() -> str:
+    """偵測當前 Gemini 側邊欄的 UI 狀態。
+
+    優先順序: GENERATING > INPUT_OCCUPIED > RESPONSE_READY > IDLE > UNKNOWN
+    """
+    has_stop = locate_image(STOP_BTN_IMAGES, timeout=1.5) is not None
+    if has_stop:
+        return GeminiState.GENERATING
+
+    has_send = locate_image("gemini_send_btn.png", timeout=1.0) is not None
+    if has_send:
+        return GeminiState.INPUT_OCCUPIED
+
+    has_live = locate_image("live_mode_btn.png", timeout=1.5) is not None
+    has_mark = locate_image("gemini_mark.png", timeout=1.0) is not None
+
+    if has_mark and has_live:
+        return GeminiState.RESPONSE_READY
+    if has_live:
+        return GeminiState.IDLE
+    if has_mark:
+        return GeminiState.RESPONSE_READY
+
+    return GeminiState.UNKNOWN
+
+
 # ===================================================================
 #  Step (9) — Submit
 # ===================================================================
-def submit_prompt(manual_send: bool = False) -> bool:
-    """Press Enter or click send button to submit the prompt.
-       Returns True if skill activated successfully, False otherwise.
+def submit_prompt(manual_send: bool = False) -> tuple[bool, Optional[float]]:
+    """送出 prompt 並驗證是否成功。
+
+    Returns:
+        (success, submit_time) — success 表示是否確認送出成功；
+        submit_time 是按下送出按鈕的時間戳（用於後續超時計算）。
     """
     if manual_send:
-        logger.info("Manual-send mode — please send the prompt yourself")
+        logger.info("Manual-send mode — 請手動送出 prompt")
         beep_alert()
         deadline = time.time() + 60
         while time.time() < deadline:
-            if locate_image("gemini_stop_btn.png", timeout=1) is not None:
-                return True
+            if locate_image(STOP_BTN_IMAGES, timeout=1) is not None:
+                return True, time.time()
             jsleep(1.0, 1.5)
-        logger.warning("stop_btn never appeared in manual-send wait")
-        return False
+        logger.warning("manual-send 等待期間 stop_btn 從未出現")
+        return False, None
 
-    logger.info("Step 9: Submitting prompt")
-    if not click_image("gemini_send_btn.png", timeout=3):
-        logger.info("send_btn not found — pressing Enter as fallback")
-        human_press("enter")
-    
-    logger.info("Checking if skill was triggered successfully...")
+    logger.info("Step 9: 送出 prompt")
+
+    # 1) 確認 send_btn 存在（代表輸入框有文字可送出）
+    send_loc = locate_image("gemini_send_btn.png", timeout=3)
+    if send_loc is None:
+        logger.error(
+            "gemini_send_btn 不存在 — 輸入框可能沒有文字，無法送出 prompt"
+        )
+        return False, None
+
+    # 2) 確認送出前沒有殘留的 stop_btn（前一題仍在生成中）
+    pre_stop = locate_image(STOP_BTN_IMAGES, timeout=1) is not None
+    if pre_stop:
+        logger.warning(
+            "送出前就偵測到 gemini_stop_btn — 前一個 prompt 可能仍在生成中！"
+        )
+        return False, None
+
+    # 3) 點擊送出
+    click_image("gemini_send_btn.png", timeout=3)
+    submit_time = time.time()
+    jsleep(1.0, 1.5)
+
+    # 4) 驗證送出：send_btn 應消失，stop_btn 應出現（狀態轉換）
+    logger.info("驗證 prompt 是否成功送出...")
     success = False
-    deadline = time.time() + 10  # 10 seconds to verify
+    deadline = time.time() + 15  # 15 秒驗證窗口
     while time.time() < deadline:
-        has_stop = locate_image("gemini_stop_btn.png", timeout=0.5) is not None
+        has_send = locate_image("gemini_send_btn.png", timeout=0.5) is not None
+        has_stop = locate_image(STOP_BTN_IMAGES, timeout=0.5) is not None
         has_skill = locate_image("skill_activated.png", timeout=0.5) is not None
-        if has_stop and has_skill:
-            logger.info("Skill activation confirmed!")
+
+        if has_stop and not has_send:
+            if has_skill:
+                logger.info(
+                    "✓ 送出成功確認：send_btn 消失 + stop_btn 出現 + skill 觸發"
+                )
+            else:
+                logger.info(
+                    "✓ 送出成功確認：send_btn 消失 + stop_btn 出現（無 skill）"
+                )
             success = True
             break
         jsleep(0.5, 1.0)
-        
-    if success:
-        return True
-        
-    logger.warning("Skill not activated or not generating properly.")
-    
-    # Click stop if it's generating something else
-    if click_image("gemini_stop_btn.png", timeout=2):
-        logger.info("Clicked stop button.")
-        jsleep(1.5, 2.5)
-        
-    return False
+
+    if not success:
+        logger.warning(
+            "Prompt 送出驗證失敗（send_btn 未消失或 stop_btn 未出現）"
+        )
+        # 如果 stop_btn 出現了，先終止
+        if click_image(STOP_BTN_IMAGES, timeout=2):
+            logger.info("已點擊 stop_btn 終止殘留生成。")
+            jsleep(1.5, 2.5)
+        return False, None
+
+    return True, submit_time
 
 
 # ===================================================================
 #  Generation wait helper (used by both wait_and_copy and input_prompt
 #  flush logic)
 # ===================================================================
-def _wait_for_generation_complete(timeout: int = 240) -> bool:
-    """Wait for gemini_stop_btn to disappear, then confirm live_mode_btn appears.
+def _wait_for_generation_complete(
+    timeout: int = 240,
+    submit_time: Optional[float] = None,
+    max_total_wait: int = 300,
+) -> str:
+    """等待生成完成：gemini_stop_btn 消失且 live_mode_btn 出現。
 
-    Returns True if the generation completed successfully (live_mode_btn seen),
-    False if it timed out or live_mode_btn was never detected.
+    Args:
+        timeout: 基礎等待超時秒數（從現在起算）。
+        submit_time: prompt 送出的時間戳，用於計算硬上限。
+        max_total_wait: 從 submit_time 起算的最大等待秒數（硬上限）。
+
+    Returns:
+        "ok"               — 生成完成，live_mode_btn 已出現
+        "stuck_generating"  — 超時且 stop_btn 仍存在（模型可能卡住）
+        "no_mark"           — stop_btn 消失但 live_mode_btn 未出現
+        "timeout"           — 達到硬上限超時
     """
     deadline = time.time() + timeout
-    while time.time() < deadline:
-        if locate_image("gemini_stop_btn.png", timeout=1) is None:
-            logger.info("gemini_stop_btn not detected, verifying...")
+    hard_deadline = (submit_time or time.time()) + max_total_wait
+
+    while time.time() < min(deadline, hard_deadline):
+        if locate_image(STOP_BTN_IMAGES, timeout=1) is None:
+            logger.info("gemini_stop_btn 未偵測到，驗證中...")
             jsleep(2.0, 3.0)
-            if locate_image("gemini_stop_btn.png", timeout=2) is None:
-                logger.info("Confirmed gemini_stop_btn has disappeared.")
+            if locate_image(STOP_BTN_IMAGES, timeout=2) is None:
+                logger.info("確認 gemini_stop_btn 已消失。")
                 # live_mode_btn 與 stop_btn 在同一位置，理論上應立即出現
                 if locate_image("live_mode_btn.png", timeout=5) is not None:
-                    logger.info("live_mode_btn detected — generation confirmed complete.")
-                    return True
+                    logger.info(
+                        "live_mode_btn 已出現 — 生成確認完成。"
+                    )
+                    return "ok"
                 else:
-                    logger.warning("live_mode_btn NOT detected after stop_btn disappeared.")
-                    return False
+                    logger.warning(
+                        "live_mode_btn 未出現（stop_btn 已消失）。"
+                    )
+                    return "no_mark"
             else:
-                logger.info("gemini_stop_btn reappeared. Continuing wait...")
+                logger.info("gemini_stop_btn 又出現了，繼續等待...")
         jsleep(3.0, 5.0)
-    logger.warning(f"Timed out after {timeout}s waiting for generation to complete.")
-    return False
+
+    # 超時後：檢查最終狀態
+    if locate_image(STOP_BTN_IMAGES, timeout=1) is not None:
+        logger.warning(
+            f"超時 — gemini_stop_btn 仍然存在"
+            f"（模型可能卡住，已等待 {timeout}s / hard {max_total_wait}s）。"
+        )
+        return "stuck_generating"
+
+    logger.warning(
+        f"等待超時 ({timeout}s / hard {max_total_wait}s)。"
+    )
+    return "timeout"
+
+
+# ===================================================================
+#  ensure_clean_state — 確保 UI 處於乾淨狀態
+# ===================================================================
+def ensure_clean_state(
+    account_mgr: Optional["AccountManager"] = None,
+) -> None:
+    """確保 Gemini 側邊欄處於乾淨的 IDLE 狀態，可以接受新 prompt。
+
+    根據偵測到的狀態執行不同的清理動作：
+    - GENERATING: 點擊 stop_btn 終止 → 開新對話
+    - INPUT_OCCUPIED: 清空輸入框 → 開新對話
+    - RESPONSE_READY / IDLE: 直接開新對話
+    - UNKNOWN: force_restart_side_panel → 重試一次
+    """
+    state = detect_gemini_state()
+    logger.info(f"ensure_clean_state: 當前偵測狀態 = {state}")
+
+    if state == GeminiState.GENERATING:
+        logger.warning("偵測到模型仍在生成中，點擊 stop_btn 終止...")
+        clicked = click_image(STOP_BTN_IMAGES, timeout=3)
+        if clicked:
+            logger.info("已點擊 stop_btn，等待模型停止...")
+            jsleep(3.0, 5.0)
+        else:
+            logger.warning("無法點擊 stop_btn，嘗試 force_restart...")
+            force_restart_side_panel(account_mgr)
+            jsleep(2.0, 3.0)
+        # 終止後開新對話
+        start_new_chat()
+        jsleep(1.5, 2.0)
+
+    elif state == GeminiState.INPUT_OCCUPIED:
+        logger.warning("輸入框有殘留文字，清空後開新對話...")
+        # 嘗試點擊輸入框並清空
+        click_image(
+            ["gemini_input_box.png", "gemini_input_box_2.png"], timeout=2
+        )
+        jsleep(0.3, 0.5)
+        human_hotkey("ctrl", "a")
+        jsleep(0.2, 0.3)
+        human_press("backspace")
+        jsleep(0.5, 1.0)
+        start_new_chat()
+        jsleep(1.5, 2.0)
+
+    elif state in (GeminiState.RESPONSE_READY, GeminiState.IDLE):
+        logger.info(f"狀態正常 ({state})，開新對話。")
+        start_new_chat()
+        jsleep(1.5, 2.0)
+
+    elif state == GeminiState.UNKNOWN:
+        logger.warning("無法辨識 UI 狀態，嘗試 force_restart...")
+        force_restart_side_panel(account_mgr)
+        jsleep(2.0, 3.0)
+        # 重試一次
+        retry_state = detect_gemini_state()
+        if retry_state == GeminiState.UNKNOWN:
+            raise RuntimeError(
+                "force_restart 後仍無法辨識 UI 狀態，無法繼續。"
+            )
+        logger.info(f"force_restart 後狀態 = {retry_state}，開新對話。")
+        start_new_chat()
+        jsleep(1.5, 2.0)
 
 
 # ===================================================================
 #  Steps (10)-(12) — Wait for response, scroll, copy
 # ===================================================================
-def wait_and_copy(model: str) -> str:
-    """Wait for generation to finish, scroll to copy button, copy text.
+def wait_and_copy(
+    model: str,
+    submit_time: Optional[float] = None,
+) -> str:
+    """等待生成完成，捲動至 copy button，複製回應文字。
 
     Flow:
       1. Initial wait (model-dependent).
-      2. Poll: gemini_stop_btn disappears → live_mode_btn appears (confirms
-         that the prompt was actually submitted and the model finished).
-      3. Poll: gemini_mark appears (confirms the response bubble is rendered).
-      4. Scroll down to locate gemini_copy_btn, check for quota limit, copy.
+      2. Poll: gemini_stop_btn 消失 → live_mode_btn 出現
+         （確認 prompt 已送出且模型完成思考）。
+      3. Poll: gemini_mark 出現（確認回覆泡泡已渲染）。
+      4. 捲動至 gemini_copy_btn，檢查 quota limit，複製。
     """
     initial_wait = 20 if model == "flash" else 40
-    logger.info(f"Step 10: Waiting {initial_wait}s for {model}…")
+    logger.info(f"Step 10: 等待 {initial_wait}s ({model})…")
     jsleep(initial_wait, initial_wait + 5)
 
     # --- Phase 1: stop_btn → live_mode_btn ---
-    gen_ok = _wait_for_generation_complete(timeout=180)
-    if not gen_ok:
+    gen_result = _wait_for_generation_complete(
+        timeout=240,
+        submit_time=submit_time,
+        max_total_wait=300,
+    )
+
+    if gen_result == "stuck_generating":
         raise RuntimeError(
-            "Generation did not complete properly "
-            "(live_mode_btn never appeared — prompt may not have been submitted)"
+            "模型思考超時（stop_btn 仍存在） — 可能當機，需重啟新對話"
         )
+    elif gen_result == "timeout":
+        raise RuntimeError(
+            "等待生成完成超時（5 分鐘硬上限） — 可能送出失敗或模型異常"
+        )
+    elif gen_result == "no_mark":
+        # stop_btn 消失但 live_mode_btn 未出現 — 可能 UI glitch
+        logger.warning(
+            "stop_btn 消失但 live_mode_btn 未出現，"
+            "嘗試繼續（等待 gemini_mark 作為備案）..."
+        )
+    # gen_result == "ok" → 正常繼續
     jsleep(2.0, 3.0)
 
-    # --- Phase 2: wait for gemini_mark (response bubble fully rendered) ---
-    logger.info("Step 11: Waiting for gemini_mark to confirm response is rendered...")
+    # --- Phase 2: 等待 gemini_mark（回覆泡泡完全渲染）---
+    logger.info("Step 11: 等待 gemini_mark 確認回覆已渲染...")
     mark_loc = None
-    mark_deadline = time.time() + 30
+    mark_deadline = time.time() + 60  # 從 30s 延長至 60s
     while time.time() < mark_deadline:
         mark_loc = locate_image("gemini_mark.png", timeout=2)
         if mark_loc is not None:
-            logger.info("gemini_mark detected.")
+            logger.info("gemini_mark 已偵測到。")
             break
         jsleep(1.0, 2.0)
     if mark_loc is None:
-        raise RuntimeError("Could not find gemini_mark")
+        raise RuntimeError(
+            "gemini_mark 遲遲未出現（等待 60 秒） — "
+            "可能送出失敗或回覆未渲染"
+        )
 
     # Hover near the mark to focus the scrollable area without clicking
     pyautogui.moveTo(mark_loc.left + mark_loc.width + 100, mark_loc.top + 10)
@@ -813,26 +1001,33 @@ def process_question(q: dict, manual_send: bool) -> bool:
 
     try:
         model = setup_model(q["difficulty"])
-        
+
+        submit_time: Optional[float] = None
         success_trigger = False
         for attempt in range(3):
             if attempt > 0:
                 logger.info(f"Retrying prompt submission (Attempt {attempt+1})...")
-                # 重開新對話串以確保 UI 狀態乾淨
+                # 使用 ensure_clean_state 確保 UI 狀態乾淨
                 try:
-                    start_new_chat()
-                    jsleep(1.0, 2.0)
+                    ensure_clean_state()
                 except Exception as e:
-                    logger.warning(f"Failed to start new chat before retry: {e}")
+                    logger.warning(f"ensure_clean_state 重試前失敗: {e}")
+                    try:
+                        start_new_chat()
+                        jsleep(1.0, 2.0)
+                    except Exception:
+                        pass
             input_prompt(q)
-            if submit_prompt(manual_send):
+            ok, t = submit_prompt(manual_send)
+            if ok:
+                submit_time = t
                 success_trigger = True
                 break
-                
+
         if not success_trigger:
             raise RuntimeError("Failed to activate skill after multiple submit attempts")
-            
-        response = wait_and_copy(model)
+
+        response = wait_and_copy(model, submit_time=submit_time)
 
         if not response or len(response.strip()) < 50:
             raise RuntimeError("Copied response is empty or too short")
@@ -1052,18 +1247,19 @@ def main() -> None:
             logger.info(f"Processing: {q['filename']}  (difficulty={q['difficulty']})")
             update_question_status(csv_path, q["filename"], STATUS_IN_PROGRESS)
 
-            # Always start a new chat for every question to avoid scrolling issues
+            # 確保 UI 處於乾淨狀態再處理新題目
             try:
-                start_new_chat()
+                ensure_clean_state(account_mgr)
             except Exception as e:
-                logger.error(f"Failed to start new chat: {e}")
-                # Recovery: Force restart side panel
+                logger.error(f"ensure_clean_state 失敗: {e}")
                 force_restart_side_panel(account_mgr)
-                jsleep(1.0, 2.0)
+                jsleep(2.0, 3.0)
                 try:
-                    start_new_chat()
+                    ensure_clean_state(account_mgr)
                 except Exception:
-                    logger.critical("Cannot recover new-chat flow. Halting.")
+                    logger.critical(
+                        "二次 ensure_clean_state 仍然失敗，終止腳本。"
+                    )
                     beep_alert()
                     sys.exit(1)
 
@@ -1180,9 +1376,13 @@ def main() -> None:
                     beep_alert()
                     sys.exit(1)
                 logger.warning(f"Fail #{consecutive_fails}. Attempting recovery…")
-                # Recovery: force close and reopen side panel
-                force_restart_side_panel(account_mgr)
-                jsleep(2.0, 3.0)
+                # Recovery: 確保 UI 狀態乾淨
+                try:
+                    ensure_clean_state(account_mgr)
+                except Exception as e:
+                    logger.warning(f"ensure_clean_state 恢復失敗: {e}")
+                    force_restart_side_panel(account_mgr)
+                    jsleep(2.0, 3.0)
 
             # --- Periodic git commit & panel reset (regardless of success/fail) ---
             if (time.time() - last_commit_time) >= commit_interval:

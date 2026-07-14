@@ -108,6 +108,18 @@ uv run --with pyautogui --with pydirectinput --with pyperclip --with pygetwindow
 - 三個帳號全部耗盡時，自動等待**恢復時間最早**的帳號，等待至恢復時間 + 5 分鐘後切換繼續工作
 - 若三個帳號的恢復時間都超過 12 小時，才終止腳本
 
+**UI 狀態偵測與錯誤恢復**：
+- 透過 `GeminiState` 枚舉和 `detect_gemini_state()` 函式，精準判斷 Gemini 側邊欄目前的 UI 狀態（IDLE / INPUT_OCCUPIED / GENERATING / RESPONSE_READY / UNKNOWN）
+- 每次處理新題目前，`ensure_clean_state()` 會自動偵測並清理殘留狀態：
+  - `GENERATING`（模型仍在思考）→ 點擊 stop_btn 終止 → 開新對話
+  - `INPUT_OCCUPIED`（輸入框有殘留文字）→ 清空 → 開新對話
+  - `IDLE` / `RESPONSE_READY`（正常）→ 直接開新對話
+  - `UNKNOWN`（無法辨識）→ force_restart_side_panel → 重試
+- `submit_prompt()` 送出前驗證：send_btn 必須存在（輸入框有文字）且 stop_btn 不存在（無殘留生成）
+- `submit_prompt()` 送出後驗證：確認 send_btn 消失 + stop_btn 出現的**狀態轉換**，避免誤判前一題殘留狀態
+- `_wait_for_generation_complete()` 基礎等待 240 秒，加上從送出時間起算 5 分鐘硬上限
+- 超時後根據 stop_btn 是否仍存在，區分 `stuck_generating`（模型當機）和 `timeout`（一般超時）
+
 **自動 Git 備份 (`--auto-git`)**：
 - 啟動時先執行 `git ls-remote` 驗證 GitHub 憑證是否有效；若過期會立刻彈出登入視窗
 - 每到達 `--commit-interval` 後，在題目間的 cooldown 期間自動執行：
