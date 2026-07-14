@@ -560,12 +560,53 @@ def setup_model(difficulty: str) -> str:
 #  Steps (6)-(8) — Input prompt
 # ===================================================================
 def input_prompt(q: dict) -> None:
-    """Click input box → construct prompt with skill prefix → paste question."""
-    logger.info("Step 6: Clicking input box and clearing it")
-    if not click_image(["gemini_input_box.png", "gemini_input_box_2.png"], timeout=5):
-        raise RuntimeError("Could not find input box")
-    jsleep(0.8, 1.2)
+    """Click input box → construct prompt with skill prefix → paste question.
     
+    If the input box is occupied by stale text (gemini_send_btn visible but
+    gemini_input_box not found), try to clear it via the model-button offset.
+    If the model button also cannot be found, submit the stale prompt, wait for
+    the response to finish, then discard it by starting a new chat — this
+    guarantees the UI returns to a clean state.
+    """
+    logger.info("Step 6: Clicking input box and clearing it")
+    clicked_box = click_image(["gemini_input_box.png", "gemini_input_box_2.png"], timeout=3)
+    if not clicked_box:
+        logger.warning("Could not find empty input box. Checking if it is occupied...")
+        if locate_image("gemini_send_btn.png", timeout=2) is not None:
+            logger.info("gemini_send_btn detected -> input box is occupied. Attempting to clear it.")
+            # 透過點擊模型按鈕上方一行高度的位置來點擊輸入框
+            model_btn_loc = None
+            for btn in ["switch_model_from_flash.png", "switch_model_from_pro.png", "switch_model_from_auto.png", "switch_model_from_flash-lite.png", "flash_thinking.png", "pro_thinking.png", "flash-lite_thinking.png"]:
+                model_btn_loc = locate_image(btn, timeout=0.5)
+                if model_btn_loc:
+                    break
+            
+            if model_btn_loc:
+                # 點擊模型按鈕上方約 40 pixels (一行高度)
+                human_click(model_btn_loc.left + 50, model_btn_loc.top - 40)
+                jsleep(0.8, 1.2)
+            else:
+                # 無法定位模型按鈕 — 直接送出殘留 prompt 並捨棄回覆，再開新對話
+                logger.warning(
+                    "Cannot locate model button. Submitting stale prompt to flush, "
+                    "then discarding the response via new chat..."
+                )
+                click_image("gemini_send_btn.png", timeout=3)
+                # 等待回覆結束 (stop_btn 出現再消失)
+                _wait_for_generation_complete(timeout=240)
+                jsleep(1.0, 2.0)
+                # 開新對話以重置 UI
+                start_new_chat()
+                jsleep(1.0, 2.0)
+                # 現在輸入框應該已經清空，走正常流程重新填入正確 prompt
+                if not click_image(["gemini_input_box.png", "gemini_input_box_2.png"], timeout=5):
+                    raise RuntimeError(
+                        "Could not find input box even after flushing stale prompt and starting new chat"
+                    )
+                jsleep(0.8, 1.2)
+        else:
+            raise RuntimeError("Could not find input box")
+
     # Clear any existing text (useful for retries)
     human_hotkey("ctrl", "a")
     jsleep(0.3, 0.5)
@@ -666,30 +707,72 @@ def submit_prompt(manual_send: bool = False) -> bool:
 
 
 # ===================================================================
-#  Steps (10)-(12) — Wait for response, scroll, copy
+#  Generation wait helper (used by both wait_and_copy and input_prompt
+#  flush logic)
 # ===================================================================
-def wait_and_copy(model: str) -> str:
-    """Wait for generation to finish, scroll to copy button, copy text."""
-    initial_wait = 20 if model == "flash" else 40
-    logger.info(f"Step 10: Waiting {initial_wait}s for {model}…")
-    jsleep(initial_wait, initial_wait + 5)
+def _wait_for_generation_complete(timeout: int = 240) -> bool:
+    """Wait for gemini_stop_btn to disappear, then confirm live_mode_btn appears.
 
-    # Poll until stop_btn disappears (max 3 min)
-    deadline = time.time() + 180
+    Returns True if the generation completed successfully (live_mode_btn seen),
+    False if it timed out or live_mode_btn was never detected.
+    """
+    deadline = time.time() + timeout
     while time.time() < deadline:
         if locate_image("gemini_stop_btn.png", timeout=1) is None:
             logger.info("gemini_stop_btn not detected, verifying...")
             jsleep(2.0, 3.0)
             if locate_image("gemini_stop_btn.png", timeout=2) is None:
-                logger.info("Confirmed gemini_stop_btn has disappeared. Generation finished.")
-                break
+                logger.info("Confirmed gemini_stop_btn has disappeared.")
+                # live_mode_btn 與 stop_btn 在同一位置，理論上應立即出現
+                if locate_image("live_mode_btn.png", timeout=5) is not None:
+                    logger.info("live_mode_btn detected — generation confirmed complete.")
+                    return True
+                else:
+                    logger.warning("live_mode_btn NOT detected after stop_btn disappeared.")
+                    return False
             else:
                 logger.info("gemini_stop_btn reappeared. Continuing wait...")
         jsleep(3.0, 5.0)
+    logger.warning(f"Timed out after {timeout}s waiting for generation to complete.")
+    return False
+
+
+# ===================================================================
+#  Steps (10)-(12) — Wait for response, scroll, copy
+# ===================================================================
+def wait_and_copy(model: str) -> str:
+    """Wait for generation to finish, scroll to copy button, copy text.
+
+    Flow:
+      1. Initial wait (model-dependent).
+      2. Poll: gemini_stop_btn disappears → live_mode_btn appears (confirms
+         that the prompt was actually submitted and the model finished).
+      3. Poll: gemini_mark appears (confirms the response bubble is rendered).
+      4. Scroll down to locate gemini_copy_btn, check for quota limit, copy.
+    """
+    initial_wait = 20 if model == "flash" else 40
+    logger.info(f"Step 10: Waiting {initial_wait}s for {model}…")
+    jsleep(initial_wait, initial_wait + 5)
+
+    # --- Phase 1: stop_btn → live_mode_btn ---
+    gen_ok = _wait_for_generation_complete(timeout=180)
+    if not gen_ok:
+        raise RuntimeError(
+            "Generation did not complete properly "
+            "(live_mode_btn never appeared — prompt may not have been submitted)"
+        )
     jsleep(2.0, 3.0)
 
-    logger.info("Step 11: Generation done — locating gemini_mark")
-    mark_loc = locate_image("gemini_mark.png", timeout=5)
+    # --- Phase 2: wait for gemini_mark (response bubble fully rendered) ---
+    logger.info("Step 11: Waiting for gemini_mark to confirm response is rendered...")
+    mark_loc = None
+    mark_deadline = time.time() + 30
+    while time.time() < mark_deadline:
+        mark_loc = locate_image("gemini_mark.png", timeout=2)
+        if mark_loc is not None:
+            logger.info("gemini_mark detected.")
+            break
+        jsleep(1.0, 2.0)
     if mark_loc is None:
         raise RuntimeError("Could not find gemini_mark")
 
@@ -735,6 +818,12 @@ def process_question(q: dict, manual_send: bool) -> bool:
         for attempt in range(3):
             if attempt > 0:
                 logger.info(f"Retrying prompt submission (Attempt {attempt+1})...")
+                # 重開新對話串以確保 UI 狀態乾淨
+                try:
+                    start_new_chat()
+                    jsleep(1.0, 2.0)
+                except Exception as e:
+                    logger.warning(f"Failed to start new chat before retry: {e}")
             input_prompt(q)
             if submit_prompt(manual_send):
                 success_trigger = True
