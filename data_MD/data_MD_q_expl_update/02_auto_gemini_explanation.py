@@ -414,6 +414,32 @@ def force_restart_side_panel(
     if account_mgr is not None and account_mgr.current_account_id is not None:
         account_mgr.ensure_account(account_mgr.current_account_id)
 
+# user_icon 圖片清單（用於偵測彈窗是否已開啟）
+USER_ICON_IMAGES: list[str] = [
+    "user_icon_1.png", "user_icon_2.png", "user_icon_3.png",
+]
+
+
+def _is_side_panel_open() -> bool:
+    """判斷 Gemini 側邊欄是否已開啟。
+
+    優先檢查 gemini_input_box；若不存在，則以 user_icon 作為備案
+    （輸入框有時會當掉不顯示，但 user_icon 仍可見）。
+    """
+    if locate_image(
+        ["gemini_input_box.png", "gemini_input_box_2.png"], timeout=1
+    ) is not None:
+        return True
+    # 輸入框未偵測到 — 嘗試 user_icon 作為備案
+    if locate_image(USER_ICON_IMAGES, timeout=1.5) is not None:
+        logger.info(
+            "gemini_input_box 未偵測到，但 user_icon 可見 — "
+            "判定彈窗已開啟（輸入框可能當機）。"
+        )
+        return True
+    return False
+
+
 def open_side_panel() -> None:
     """Alt+G to open the Gemini side panel.
     Checks if it's already open first."""
@@ -427,19 +453,19 @@ def open_side_panel() -> None:
     except Exception:
         pass
 
-    if locate_image(["gemini_input_box.png", "gemini_input_box_2.png"], timeout=1) is not None:
+    if _is_side_panel_open():
         logger.info("Side panel is already open.")
         return
-        
+
     for attempt in range(3):
         logger.info(f"Opening Gemini side panel (Alt+G) - Attempt {attempt+1}")
         human_hotkey("alt", "g")
         jsleep(2.0, 3.0)
 
-        if locate_image(["gemini_input_box.png", "gemini_input_box_2.png"], timeout=3) is not None:
+        if _is_side_panel_open():
             return
         logger.warning("Side panel not detected — retrying Alt+G")
-        
+
     raise RuntimeError("Could not open side panel after multiple attempts")
 
 
@@ -667,17 +693,22 @@ STOP_BTN_IMAGES = ["gemini_stop_btn.png", "gemini_stop_btn_2.png"]
 # ---------------------------------------------------------------------------
 class GeminiState:
     """Gemini 側邊欄的 UI 狀態枚舉。"""
-    IDLE = "IDLE"                       # 閒置（輸入框空，模型沒在思考）
-    INPUT_OCCUPIED = "INPUT_OCCUPIED"   # 輸入框有文字（可按 send_btn）
-    GENERATING = "GENERATING"           # 模型正在思考（stop_btn 可見）
-    RESPONSE_READY = "RESPONSE_READY"   # 回覆已完成（gemini_mark 出現且非 GENERATING）
-    UNKNOWN = "UNKNOWN"                 # 無法判斷
+    IDLE = "IDLE"                             # 閒置（輸入框空，模型沒在思考）
+    IDLE_INPUT_FROZEN = "IDLE_INPUT_FROZEN"   # 閒置但輸入框當機（live_mode_btn 可見，input_box 不可見）
+    INPUT_OCCUPIED = "INPUT_OCCUPIED"         # 輸入框有文字（可按 send_btn）
+    GENERATING = "GENERATING"                 # 模型正在思考（stop_btn 可見）
+    RESPONSE_READY = "RESPONSE_READY"         # 回覆已完成（gemini_mark 出現且非 GENERATING）
+    UNKNOWN = "UNKNOWN"                       # 無法判斷
 
 
 def detect_gemini_state() -> str:
     """偵測當前 Gemini 側邊欄的 UI 狀態。
 
-    優先順序: GENERATING > INPUT_OCCUPIED > RESPONSE_READY > IDLE > UNKNOWN
+    優先順序:
+      GENERATING > INPUT_OCCUPIED > RESPONSE_READY
+      > IDLE (正常: input_box 可見)
+      > IDLE_INPUT_FROZEN (異常: live_mode_btn 可見但 input_box 不可見)
+      > UNKNOWN
     """
     has_stop = locate_image(STOP_BTN_IMAGES, timeout=1.5) is not None
     if has_stop:
@@ -693,7 +724,18 @@ def detect_gemini_state() -> str:
     if has_mark and has_live:
         return GeminiState.RESPONSE_READY
     if has_live:
-        return GeminiState.IDLE
+        # live_mode_btn 可見 — 再確認輸入框是否正常
+        has_input_box = locate_image(
+            ["gemini_input_box.png", "gemini_input_box_2.png"], timeout=1.0
+        ) is not None
+        if has_input_box:
+            return GeminiState.IDLE
+        else:
+            logger.warning(
+                "live_mode_btn 可見但 gemini_input_box 不可見 — "
+                "輸入框可能當機。"
+            )
+            return GeminiState.IDLE_INPUT_FROZEN
     if has_mark:
         return GeminiState.RESPONSE_READY
 
@@ -883,6 +925,61 @@ def ensure_clean_state(
         jsleep(0.5, 1.0)
         start_new_chat()
         jsleep(1.5, 2.0)
+
+    elif state == GeminiState.IDLE_INPUT_FROZEN:
+        logger.warning(
+            "偵測到輸入框當機（live_mode_btn 可見但 input_box 不可見），"
+            "開新對話串以脫離當機狀態..."
+        )
+        start_new_chat()
+        jsleep(1.5, 2.0)
+        # 開新對話後驗證輸入框是否恢復
+        if locate_image(
+            ["gemini_input_box.png", "gemini_input_box_2.png"], timeout=3
+        ) is None:
+            logger.warning(
+                "開新對話後輸入框仍未恢復，"
+                "嘗試透過 model button 偏移量定位並點擊輸入框區域..."
+            )
+            # 與 input_prompt() 相同的定位方法
+            model_btn_loc = None
+            for btn in [
+                "switch_model_from_flash.png",
+                "switch_model_from_pro.png",
+                "switch_model_from_auto.png",
+                "switch_model_from_flash-lite.png",
+                "flash_thinking.png",
+                "pro_thinking.png",
+                "flash-lite_thinking.png",
+            ]:
+                model_btn_loc = locate_image(btn, timeout=0.5)
+                if model_btn_loc:
+                    break
+
+            if model_btn_loc:
+                # 點擊模型按鈕上方約 40 pixels（輸入框區域）
+                human_click(
+                    model_btn_loc.left + 50, model_btn_loc.top - 40
+                )
+                jsleep(0.8, 1.2)
+                # 清空可能的殘留文字
+                human_hotkey("ctrl", "a")
+                jsleep(0.2, 0.3)
+                human_press("backspace")
+                jsleep(0.5, 1.0)
+                logger.info(
+                    "已透過 model button 偏移量點擊並清空輸入框區域，"
+                    "後續流程將正常嘗試輸入 prompt。"
+                )
+            else:
+                # model button 也找不到 — 最後手段 force_restart
+                logger.warning(
+                    "model button 也無法定位，嘗試 force_restart..."
+                )
+                force_restart_side_panel(account_mgr)
+                jsleep(2.0, 3.0)
+                start_new_chat()
+                jsleep(1.5, 2.0)
 
     elif state in (GeminiState.RESPONSE_READY, GeminiState.IDLE):
         logger.info(f"狀態正常 ({state})，開新對話。")
