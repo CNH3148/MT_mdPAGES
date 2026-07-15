@@ -631,7 +631,35 @@ def input_prompt(q: dict) -> None:
                     )
                 jsleep(0.8, 1.2)
         else:
-            raise RuntimeError("Could not find input box")
+            # input_box 和 send_btn 都找不到 — 輸入框可能 UI 當機
+            # 嘗試透過 model button 偏移量定位並點擊輸入框區域
+            logger.warning(
+                "input_box 和 send_btn 都找不到（輸入框可能 UI 當機），"
+                "嘗試透過 model button 偏移量定位..."
+            )
+            model_btn_loc = None
+            for btn in [
+                "switch_model_from_flash.png",
+                "switch_model_from_pro.png",
+                "switch_model_from_auto.png",
+                "switch_model_from_flash-lite.png",
+                "flash_thinking.png",
+                "pro_thinking.png",
+                "flash-lite_thinking.png",
+            ]:
+                model_btn_loc = locate_image(btn, timeout=0.5)
+                if model_btn_loc:
+                    break
+
+            if model_btn_loc:
+                # 點擊模型按鈕上方約 40 pixels（輸入框區域）
+                human_click(model_btn_loc.left + 50, model_btn_loc.top - 40)
+                jsleep(0.8, 1.2)
+                logger.info(
+                    "已透過 model button 偏移量點擊輸入框區域，繼續正常流程。"
+                )
+            else:
+                raise RuntimeError("Could not find input box")
 
     # Clear any existing text (useful for retries)
     human_hotkey("ctrl", "a")
