@@ -1494,12 +1494,50 @@ def main() -> None:
                 consecutive_fails += 1
                 failed_count += 1
                 if consecutive_fails >= 3:
-                    logger.critical("3 consecutive failures — halting.")
-                    if args.auto_git:
-                        logger.info("Performing final git commit before exit...")
-                        git_commit_and_push(completed_count, failed_count)
-                    beep_alert()
-                    sys.exit(1)
+                    # --- 嘗試切換到其他帳號而非直接終止 ---
+                    logger.warning(
+                        f"連續失敗 {consecutive_fails} 次，"
+                        "嘗試切換至其他可用帳號以繼續工作..."
+                    )
+                    switched = False
+                    if account_mgr is not None:
+                        next_id = account_mgr.get_next_available_account()
+                        if next_id is not None:
+                            logger.info(
+                                f"準備從 account {account_mgr.current_account_id} "
+                                f"切換至 account {next_id}..."
+                            )
+                            # force_restart 重開彈窗，確保 UI 乾淨
+                            force_restart_side_panel(account_mgr)
+                            jsleep(2.0, 3.0)
+                            if account_mgr.switch_to_account(next_id):
+                                logger.info(
+                                    f"✓ 已切換至 account {next_id}，"
+                                    "重置連續失敗計數，繼續執行。"
+                                )
+                                consecutive_fails = 0
+                                switched = True
+                                # 切換帳號後需重開彈窗以載入新帳號的 session
+                                force_restart_side_panel(account_mgr)
+                                jsleep(2.0, 3.0)
+                            else:
+                                logger.error(
+                                    f"切換至 account {next_id} 失敗。"
+                                )
+                        else:
+                            logger.warning("沒有其他可用帳號可切換。")
+                    else:
+                        logger.warning("account_mgr 未初始化，無法切換帳號。")
+
+                    if not switched:
+                        logger.critical(
+                            f"連續失敗 {consecutive_fails} 次且無法切換帳號 — halting."
+                        )
+                        if args.auto_git:
+                            logger.info("Performing final git commit before exit...")
+                            git_commit_and_push(completed_count, failed_count)
+                        beep_alert()
+                        sys.exit(1)
                 logger.warning(f"Fail #{consecutive_fails}. Attempting recovery…")
                 # Recovery: 確保 UI 狀態乾淨
                 try:
