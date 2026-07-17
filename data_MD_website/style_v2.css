@@ -1126,3 +1126,204 @@ body {
         padding: 12px;
     }
 }
+
+/* ========================================
+   Exam Mode (試卷模式) Styles
+   ======================================== */
+
+/* Subject card row - wraps card + exam button */
+.subject-card-row {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+}
+
+.subject-card-row .subject-card {
+    flex: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+}
+
+.btn-exam-mode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px 16px;
+    min-width: 72px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-left: 1px dashed var(--border-color);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-family: inherit;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+    white-space: nowrap;
+}
+
+.btn-exam-mode:hover {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+.btn-exam-mode:active {
+    transform: scale(0.97);
+}
+
+.btn-exam-mode .exam-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+
+/* Exam Select Page */
+.exam-select-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.exam-select-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.exam-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.exam-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.exam-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+}
+
+.exam-item:active {
+    transform: translateY(0);
+}
+
+.exam-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.exam-item-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.exam-item-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    gap: 12px;
+}
+
+.exam-item-arrow {
+    color: var(--text-muted);
+    font-size: 18px;
+    transition: transform 0.2s;
+}
+
+.exam-item:hover .exam-item-arrow {
+    transform: translateX(4px);
+    color: var(--primary);
+}
+
+/* Exam item completion indicator */
+.exam-item-progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.exam-item-progress-bar {
+    width: 60px;
+    height: 4px;
+    background: var(--bg-hover);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.exam-item-progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.exam-item-progress-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    min-width: 40px;
+    text-align: right;
+}
+
+/* Topic tag badge in exam mode explanations */
+.topic-tag-container {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.topic-tag-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: rgba(59, 130, 246, 0.08);
+    color: var(--primary);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.topic-tag-badge:hover {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.topic-tag-badge:active {
+    transform: translateY(0);
+}
+
+@media (prefers-color-scheme: dark) {
+    .topic-tag-badge {
+        background: rgba(96, 165, 250, 0.12);
+        border-color: rgba(96, 165, 250, 0.25);
+    }
+    
+    .btn-exam-mode {
+        border-left-color: var(--border-color);
+    }
+}

@@ -25,6 +25,8 @@ let aiTopicSummaries = {};
 let currentPracticeQuestions = [];
 let currentQuestionIndex = 0;
 let practiceMode = 'card'; // 'card' | 'list'
+let currentExamYear = null;
+let isExamMode = false;
 
 // 將作答紀錄存在 localStorage
 const STORAGE_KEY = 'mt_answers_v3';
@@ -41,6 +43,7 @@ const viewTopicList = document.getElementById('view-topic-list');
 const viewTopicDetail = document.getElementById('view-topic-detail');
 const viewPractice = document.getElementById('view-practice');
 const viewPracticeList = document.getElementById('view-practice-list');
+const viewExamSelect = document.getElementById('view-exam-select');
 const btnBack = document.getElementById('btn-back');
 
 const bcHome = document.getElementById('bc-home');
@@ -59,16 +62,30 @@ async function init() {
 
 function renderHomeSubjectGrid() {
     const grid = document.getElementById('subject-grid');
-    // 保留全科，加入其他單科
+    // 保留全科，加入其他單科（含試卷模式按鈕）
     SUBJECTS.forEach(sub => {
+        const row = document.createElement('div');
+        row.className = 'subject-card-row';
+
         const btn = document.createElement('button');
         btn.className = 'subject-card';
         btn.innerHTML = `<h2>📚 ${sub}</h2><p>針對單一科目進行地毯式複習</p>`;
-        btn.onclick = () => navigateTo(`subject`, sub);
-        grid.appendChild(btn);
+        btn.onclick = () => navigateTo('subject', sub);
+
+        const examBtn = document.createElement('button');
+        examBtn.className = 'btn-exam-mode';
+        examBtn.innerHTML = `<span class="exam-icon">📝</span>試卷模式`;
+        examBtn.onclick = (e) => {
+            e.stopPropagation();
+            navigateTo('exam-select', sub);
+        };
+
+        row.appendChild(btn);
+        row.appendChild(examBtn);
+        grid.appendChild(row);
     });
 
-    document.querySelector('.all-subjects').onclick = () => navigateTo(`subject`, 'all');
+    document.querySelector('.all-subjects').onclick = () => navigateTo('subject', 'all');
 }
 
 function setupEventListeners() {
@@ -76,7 +93,15 @@ function setupEventListeners() {
     
     btnBack.onclick = () => window.history.back();
     bcHome.onclick = () => navigateTo('home');
-    bcSubject.onclick = () => { if(currentSubject) navigateTo('subject', currentSubject); };
+    bcSubject.onclick = () => {
+        if (currentSubject) {
+            if (isExamMode) {
+                navigateTo('exam-select', currentSubject);
+            } else {
+                navigateTo('subject', currentSubject);
+            }
+        }
+    };
 
     // 排序按鈕
     document.querySelectorAll('.btn-sort').forEach(btn => {
@@ -110,6 +135,11 @@ function navigateTo(view, param = null) {
     else if (view === 'subject') hash = `#sub=${encodeURIComponent(param)}`;
     else if (view === 'detail') hash = `#sub=${encodeURIComponent(currentSubject)}&topic=${encodeURIComponent(param)}`;
     else if (view === 'practice') hash = `#sub=${encodeURIComponent(currentSubject)}&topic=${encodeURIComponent(param)}&mode=practice`;
+    else if (view === 'exam-select') {
+        currentSubject = param;
+        hash = `#sub=${encodeURIComponent(param)}&exam=select`;
+    }
+    else if (view === 'exam-practice') hash = `#sub=${encodeURIComponent(currentSubject)}&exam=${encodeURIComponent(param)}&mode=practice`;
     
     window.history.pushState({ view, param }, '', hash || window.location.pathname);
     handleRoute(hash);
@@ -121,6 +151,8 @@ async function handleRoute(hash) {
     if (!hash || hash === '#' || hash === '#home') {
         currentSubject = null;
         currentTopic = null;
+        currentExamYear = null;
+        isExamMode = false;
         updateHeaderUI('home');
         viewHome.classList.add('active');
         return;
@@ -130,11 +162,57 @@ async function handleRoute(hash) {
     const sub = params.get('sub');
     const topic = params.get('topic');
     const mode = params.get('mode');
+    const exam = params.get('exam');
 
-    if (sub && !topic) {
+    // --- 試卷模式路由 ---
+    if (sub && exam === 'select') {
+        // 試卷選擇頁面
+        currentSubject = sub;
+        currentTopic = null;
+        currentExamYear = null;
+        isExamMode = true;
+        updateHeaderUI('exam-select');
+        viewExamSelect.classList.add('active');
+        document.getElementById('exam-select-title').textContent = sub;
+        document.getElementById('exam-list-container').innerHTML = '<div style="text-align:center; padding: 40px; color: var(--text-muted);">資料載入中...</div>';
+        
+        await loadSubjectData(sub);
+        renderExamList();
+    }
+    else if (sub && exam && exam !== 'select') {
+        // 試卷練習頁面
+        currentSubject = sub;
+        currentExamYear = exam;
+        currentTopic = null;
+        isExamMode = true;
+        updateHeaderUI('exam-practice');
+        
+        if (filteredData.length === 0) {
+            await loadSubjectData(sub);
+        }
+        
+        // 篩選該年度試卷的題目，按題號升冪排列
+        currentPracticeQuestions = filteredData
+            .filter(q => q.year === exam)
+            .sort((a, b) => (parseInt(a.no) || 0) - (parseInt(b.no) || 0));
+
+        if (mode === 'list') {
+            practiceMode = 'list';
+            viewPracticeList.classList.add('active');
+            renderListMode();
+        } else {
+            practiceMode = 'card';
+            viewPractice.classList.add('active');
+            currentQuestionIndex = 0;
+            renderQuestionCard();
+        }
+    }
+    // --- 原有主題模式路由 ---
+    else if (sub && !topic) {
         // Level 2: 選擇科目後，載入該科主題清單
         currentSubject = sub;
         currentTopic = null;
+        isExamMode = false;
         updateHeaderUI('subject');
         viewTopicList.classList.add('active');
         document.getElementById('current-subject-title').textContent = sub === 'all' ? '🌟 全科綜合' : sub;
@@ -160,6 +238,7 @@ async function handleRoute(hash) {
         // Level 4: 進入特定主題練習 (卡片或清單模式)
         currentSubject = sub;
         currentTopic = topic;
+        isExamMode = false;
         updateHeaderUI('practice');
         
         if (filteredData.length === 0) {
@@ -187,6 +266,7 @@ function hideAllViews() {
     viewTopicDetail.classList.remove('active');
     viewPractice.classList.remove('active');
     viewPracticeList.classList.remove('active');
+    viewExamSelect.classList.remove('active');
 }
 
 function updateHeaderUI(level) {
@@ -228,6 +308,30 @@ function updateHeaderUI(level) {
         bcSepTopic.style.display = 'inline';
         bcTopic.style.display = 'inline';
         bcTopic.textContent = currentTopic + " (練習)";
+        bcTopic.classList.add('bc-active');
+        listAccuracy.style.display = 'block';
+    } else if (level === 'exam-select') {
+        btnBack.style.display = 'flex';
+        bcHome.classList.remove('bc-active');
+        bcSepSub.style.display = 'inline';
+        bcSubject.style.display = 'inline';
+        bcSubject.textContent = currentSubject;
+        bcSubject.classList.remove('bc-active');
+        bcSepTopic.style.display = 'inline';
+        bcTopic.style.display = 'inline';
+        bcTopic.textContent = '試卷模式';
+        bcTopic.classList.add('bc-active');
+        listAccuracy.style.display = 'none';
+    } else if (level === 'exam-practice') {
+        btnBack.style.display = 'flex';
+        bcHome.classList.remove('bc-active');
+        bcSepSub.style.display = 'inline';
+        bcSubject.style.display = 'inline';
+        bcSubject.textContent = currentSubject;
+        bcSubject.classList.remove('bc-active');
+        bcSepTopic.style.display = 'inline';
+        bcTopic.style.display = 'inline';
+        bcTopic.textContent = currentExamYear + ' (練習)';
         bcTopic.classList.add('bc-active');
         listAccuracy.style.display = 'block';
     }
@@ -286,6 +390,61 @@ async function loadSubjectData(sub) {
         }
         if (!topicGroups[t]) topicGroups[t] = [];
         topicGroups[t].push(q);
+    });
+}
+
+// --- 試卷選擇頁面渲染 ---
+function renderExamList() {
+    // 收集所有不重複的 year 值並按降冪排列
+    const yearSet = new Set();
+    filteredData.forEach(q => yearSet.add(q.year));
+    const years = Array.from(yearSet).sort((a, b) => {
+        const [ya, sa] = a.split('-').map(Number);
+        const [yb, sb] = b.split('-').map(Number);
+        return yb !== ya ? yb - ya : sb - sa;
+    });
+
+    document.getElementById('exam-stat-total').textContent = `${years.length} 份試卷`;
+
+    const container = document.getElementById('exam-list-container');
+    container.innerHTML = '';
+
+    years.forEach(year => {
+        const questions = filteredData.filter(q => q.year === year);
+        const count = questions.length;
+
+        // 計算已作答數
+        let answeredCount = 0;
+        let correctCount = 0;
+        questions.forEach(q => {
+            const ans = userAnswers[q.qid];
+            if (ans) {
+                answeredCount++;
+                if (ans.isCorrect) correctCount++;
+            }
+        });
+        const progressPct = count > 0 ? Math.round((answeredCount / count) * 100) : 0;
+
+        const item = document.createElement('div');
+        item.className = 'exam-item';
+        item.innerHTML = `
+            <div class="exam-item-info">
+                <div class="exam-item-title">📝 ${year}</div>
+                <div class="exam-item-meta">
+                    <span>共 ${count} 題</span>
+                    ${answeredCount > 0 ? `<span>已答 ${answeredCount}/${count}${answeredCount > 0 ? ` (${Math.round((correctCount / answeredCount) * 100)}%)` : ''}</span>` : ''}
+                </div>
+            </div>
+            <div class="exam-item-progress">
+                <div class="exam-item-progress-bar">
+                    <div class="exam-item-progress-fill" style="width: ${progressPct}%;"></div>
+                </div>
+                <span class="exam-item-progress-text">${progressPct}%</span>
+                <span class="exam-item-arrow">›</span>
+            </div>
+        `;
+        item.onclick = () => navigateTo('exam-practice', year);
+        container.appendChild(item);
     });
 }
 
@@ -512,6 +671,11 @@ function renderQuestionCard() {
         if (savedState) {
             expPanel.style.display = 'block';
             let expHtml = '';
+
+            // 試卷模式：顯示所屬 topic 標籤
+            if (isExamMode && q.topic) {
+                expHtml += `<div class="topic-tag-container"><span class="topic-tag-badge" onclick="navigateTo('detail', '${q.topic.replace(/'/g, "\\'")}')">📂 ${q.topic}</span></div>`;
+            }
             
             // 顯示難易度
             if (q.difficulty) {
@@ -941,7 +1105,12 @@ function switchToListMode(scrollToIndex) {
     viewPracticeList.classList.add('active');
 
     // 更新 URL hash 但不觸發 handleRoute
-    const hash = `#sub=${encodeURIComponent(currentSubject)}&topic=${encodeURIComponent(currentTopic)}&mode=list`;
+    let hash;
+    if (isExamMode && currentExamYear) {
+        hash = `#sub=${encodeURIComponent(currentSubject)}&exam=${encodeURIComponent(currentExamYear)}&mode=list`;
+    } else {
+        hash = `#sub=${encodeURIComponent(currentSubject)}&topic=${encodeURIComponent(currentTopic)}&mode=list`;
+    }
     window.history.replaceState({ view: 'practice', param: currentTopic }, '', hash);
 
     renderListMode(scrollToIndex);
@@ -957,7 +1126,12 @@ function switchToCardMode(questionIndex) {
     viewPractice.classList.add('active');
 
     // 更新 URL hash 但不觸發 handleRoute
-    const hash = `#sub=${encodeURIComponent(currentSubject)}&topic=${encodeURIComponent(currentTopic)}&mode=practice`;
+    let hash;
+    if (isExamMode && currentExamYear) {
+        hash = `#sub=${encodeURIComponent(currentSubject)}&exam=${encodeURIComponent(currentExamYear)}&mode=practice`;
+    } else {
+        hash = `#sub=${encodeURIComponent(currentSubject)}&topic=${encodeURIComponent(currentTopic)}&mode=practice`;
+    }
     window.history.replaceState({ view: 'practice', param: currentTopic }, '', hash);
 
     currentQuestionIndex = questionIndex;
@@ -1066,15 +1240,21 @@ function renderListMode(scrollToIndex = -1) {
         const expDiv = document.createElement('div');
         expDiv.className = 'list-item-quick-explanation';
 
+        // 試卷模式：在快速破題前顯示 topic 標籤
+        let topicTagHtml = '';
+        if (isExamMode && q.topic) {
+            topicTagHtml = `<div class="topic-tag-container"><span class="topic-tag-badge" onclick="event.stopPropagation(); navigateTo('detail', '${q.topic.replace(/'/g, "\\'")}')">📂 ${q.topic}</span></div>`;
+        }
+
         if (q.explanation) {
             const quickExp = extractQuickExplanation(q.explanation);
             if (quickExp) {
-                expDiv.innerHTML = `<div class="quick-exp-content"><div class="markdown-body" style="font-size:14px; margin-top:4px;">${safeMarkdown(quickExp)}</div></div>`;
+                expDiv.innerHTML = `${topicTagHtml}<div class="quick-exp-content"><div class="markdown-body" style="font-size:14px; margin-top:4px;">${safeMarkdown(quickExp)}</div></div>`;
             } else {
-                expDiv.innerHTML = `<div class="quick-exp-content"><div class="markdown-body" style="font-size:14px; margin-top:4px;">${safeMarkdown(q.explanation)}</div></div>`;
+                expDiv.innerHTML = `${topicTagHtml}<div class="quick-exp-content"><div class="markdown-body" style="font-size:14px; margin-top:4px;">${safeMarkdown(q.explanation)}</div></div>`;
             }
         } else {
-            expDiv.innerHTML = '<div class="no-explanation">目前尚無快速破題解析。</div>';
+            expDiv.innerHTML = `${topicTagHtml}<div class="no-explanation">目前尚無快速破題解析。</div>`;
         }
 
         itemDiv.appendChild(expDiv);
