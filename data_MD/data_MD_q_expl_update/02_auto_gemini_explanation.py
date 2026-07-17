@@ -747,7 +747,7 @@ def detect_gemini_state() -> str:
         return GeminiState.INPUT_OCCUPIED
 
     has_live = locate_image("live_mode_btn.png", timeout=1.5) is not None
-    has_mark = locate_image("gemini_mark.png", timeout=1.0) is not None
+    has_mark = (locate_image("gemini_mark.png", timeout=1.0) is not None) or (locate_image("gemini_mark_2.png", timeout=1.0) is not None)
 
     if has_mark and has_live:
         return GeminiState.RESPONSE_READY
@@ -1074,13 +1074,13 @@ def wait_and_copy(
     jsleep(2.0, 3.0)
 
     # --- Phase 2: 等待 gemini_mark（回覆泡泡完全渲染）---
-    logger.info("Step 11: 等待 gemini_mark 確認回覆已渲染...")
+    logger.info("Step 11: 等待 gemini_mark/gemini_mark_2 確認回覆已渲染...")
     mark_loc = None
     mark_deadline = time.time() + 60  # 從 30s 延長至 60s
     while time.time() < mark_deadline:
-        mark_loc = locate_image("gemini_mark.png", timeout=2)
+        mark_loc = locate_image("gemini_mark.png", timeout=2) or locate_image("gemini_mark_2.png", timeout=2)
         if mark_loc is not None:
-            logger.info("gemini_mark 已偵測到。")
+            logger.info("gemini_mark/gemini_mark_2 已偵測到。")
             break
         jsleep(1.0, 2.0)
     if mark_loc is None:
