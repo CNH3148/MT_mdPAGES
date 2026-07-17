@@ -67,6 +67,27 @@ aliases: []
 | 細小病毒 (Parvoviridae)      | 微小病毒 B19 (Parvovirus B19) | VP1/VP2 (Capsid)            | 結合紅血球前驅細胞 P antigen (Globoside) → 破壞造血 → 傳染性紅斑[🖼️](https://www.google.com/search?q=%22slapped+cheek+rash%22+erythema+infectiosum&tbm=isch&udm=2)                                                                                | 臨床檢驗不使用 HA 今：PCR (測 Viral load)、血清學                                                                                                          |
 | 冠狀病毒 (Coronaviridae)     | 人類冠狀病毒 (OC43, HKU1)       | HE (Hemagglutinin-esterase) | 結合 O-acetylated sialic acid → 輔助病毒附著與釋放                                                                                                                                                                                          | 臨床檢驗不使用 HA 今：Multiplex RT-PCR                                                                                                                |
 
+### 具備「細胞融合 (Syncytia) 」能力之病毒
+
+>血球凝集 (Hemagglutination) 主要是病毒表面的蛋白質（如 HA）作為橋樑連接紅血球；而細胞融合 (Syncytia formation) 則是病毒的融合蛋白 (Fusion protein, F protein) 促使受感染細胞與鄰近健康細胞的細胞膜互相融合，形成包含多個細胞核的巨大細胞（多核巨細胞）。
+>
+>雖然有些病毒（像副流感病毒）同時具備這兩種能力，但兩者的分子機制是不同的。
+
+1. F 蛋白的必要性：副黏液病毒科（如 RSV、麻疹）的融合作用，F protein 是絕對必要的。而麻疹、副流感等病毒還需要附著蛋白（H 或 HN）的輔助才能完成膜融合。
+2. 臨床病理診斷：在傳統檢驗中，觀察到特定的「多核巨細胞」是重要的診斷線索。例如麻疹的 Warthin-Finkeldey cells 和疱疹病毒的 Tzanck smear 結果。
+3. 病毒散播策略：形成 Syncytia 允許病毒直接從一個細胞內部傳播到相鄰細胞的細胞質，無需暴露於細胞外環境，這是一種逃避宿主中和抗體 (Neutralizing antibodies) 攻擊的有效免疫逃脫策略。
+
+| 病毒類別                    | 病毒名稱                  | 促融合關鍵蛋白                | 細胞病變特徵 / 臨床表徵                                                | 檢驗/病理學觀察特徵                                                                                                                                         |
+| ----------------------- | --------------------- | ---------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 副黏液病毒 (Paramyxoviridae) | 呼吸道融合病毒 (RSV)         | F protein (Fusion)     | 引發嬰幼兒細支氣管炎 細胞培養呈典型 Syncytia                                  | 細胞培養 CPE：多核巨細胞[🖼️](https://www.google.com/search?q=%22syncytia%22+cytopathic+effect&tbm=isch&udm=2) 今首選：Multiplex PCR                             |
+|                         | 麻疹病毒 (Measles)        | F protein + H protein  | 呼吸道上皮/淋巴組織融合 臨床見 Koplik spots                                | 病理抹片見 Warthin-Finkeldey giant cells[🖼️](https://www.google.com/search?q=%22Warthin-Finkeldey+giant+cells%22+histology&tbm=isch&udm=2) (具多核的淋巴巨細胞) |
+|                         | 副流感病毒 (Parainfluenza) | F protein + HN protein | 引發兒童哮吼 (Croup)                                               | 細胞培養可見 Syncytia，但較不顯著                                                                                                                              |
+|                         | 腮腺炎病毒 (Mumps)         | F protein + HN protein | 引起腮腺腫大、睪丸炎                                                   | 細胞培養可見 Syncytia                                                                                                                                    |
+| 疱疹病毒 (Herpesviridae)    | 單純疱疹病毒 (HSV-1, HSV-2) | gB, gH/gL 等醣蛋白複合體      | 感染表皮細胞造成水泡 膜融合導致細胞病變                                         | Tzanck smear (傳統抹片)：見多核巨細胞[🖼️](https://www.google.com/search?q=%22multinucleated+giant+cells%22+Tzanck+smear&tbm=isch&udm=2) 及核內包涵體               |
+|                         | 水痘-帶狀疱疹病毒 (VZV)       | gB, gH/gL 等醣蛋白複合體      | 引發水痘、帶狀疱疹                                                    | Tzanck smear：同 HSV 可見多核巨細胞                                                                                                                         |
+|                         | 巨細胞病毒 (CMV)           | 醣蛋白複合體                 | 感染細胞顯著腫大 (Cytomegaly) （雖名為巨細胞，但較少形成典型的多核 syncytia，主要為單核巨大細胞） | 組織切片見 Owl's eye inclusion bodies (貓頭鷹眼核內包涵體)[🖼️](https://www.google.com/search?q=%22owl%27s+eye+inclusion%22+CMV&tbm=isch&udm=2)                  |
+| 反轉錄病毒 (Retroviridae)    | 人類免疫缺乏病毒 (HIV)        | gp120 / gp41           | gp41 促使受感染之 CD4+ T 細胞與鄰近未感染 T 細胞融合                           | 造成 CD4+ T 細胞大量耗損死亡 臨床檢驗主要測 Viral load (PCR) 或 Ag/Ab                                                                                                |
+
 ## Anki 聯想卡
 ```Anki
 正黏液病毒 v.s. 副黏液病毒【最大差異點】？;<ans>基因組 (分節 vs. 不分節)<br>複製地點 (細胞核 vs. 細胞質)</ans><br><br>📌正黏液(流感)在<b>細胞核</b>複製，才能進行RNA splicing；副黏液家族都在<b>細胞質</b>複製。
