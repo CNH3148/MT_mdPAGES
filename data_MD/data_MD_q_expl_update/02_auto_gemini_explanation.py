@@ -509,7 +509,7 @@ def setup_model(difficulty: str) -> str:
     Returns the model name string ('flash' or 'pro').
     """
     target_model = "flash"
-    if difficulty in ("適中", "困難", "非常困難"):
+    if difficulty in ("適中", "困難", "非常困難") or not difficulty:
         target_model = "pro"
 
     logger.info(f"Step 4: target model={target_model} (difficulty={difficulty})")
@@ -1125,7 +1125,7 @@ def process_question(q: dict, manual_send: bool) -> bool:
     csv_path = Path(__file__).resolve().parent / CSV_FILENAME
 
     try:
-        model = setup_model(q["difficulty"])
+        model = setup_model(q.get("difficulty", ""))
 
         submit_time: Optional[float] = None
         success_trigger = False
