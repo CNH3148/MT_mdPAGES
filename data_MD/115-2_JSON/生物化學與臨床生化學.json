@@ -1,0 +1,1282 @@
+[
+  {
+    "type": "question",
+    "qid": "115-2_5_1",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 1,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列那一個電泳技術可使用電滲流（electroendosmotic flow）原理進行待測物分離？",
+    "choices": [
+      "A.瓊脂糖凝膠電泳（agarose gel electrophoresis）",
+      "B.毛細管區帶電泳（capillary zone electrophoresis）",
+      "C.醋酸纖維素電泳（cellulose acetate electrophoresis）",
+      "D.等電位聚焦電泳（isoelectric focusing electrophoresis）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_2",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 2,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列那一個光源最適合用於原子吸收光譜儀（atomic absorption spectrometer）？",
+    "choices": [
+      "A.鎢絲燈（tungsten）",
+      "B.氘燈（deuterium lamp）",
+      "C.氙弧燈（xenon acr lamp）",
+      "D.中空陰極燈（hollow cathode lamp）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_3",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 3,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關脂血（lipemia）檢體之敘述，下列何者最不適當？",
+    "choices": [
+      "A.來自乳糜微粒和極低密度脂蛋白",
+      "B.脂肪顆粒吸收的波長在 300～700 nm",
+      "C.用離子選擇電極間接法測鈉會產生偽性高鈉血症",
+      "D.離心 20,000 g，15 分鐘可減少脂質干擾"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_4",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 4,
+    "subject": "生物化學與臨床生化學",
+    "question": "離心機的轉子半徑 100 mm，轉速 3,000 rpm 時，相對離心力（RCF）約為多少？",
+    "choices": [
+      "A.10,006 × g",
+      "B.3,006 × g",
+      "C.1,006 × g",
+      "D.906 × g"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_5",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 5,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種血液檢體之抗凝劑，其機制與 Ca2+形成複合物或螯合最不相關？",
+    "choices": [
+      "A.EDTA",
+      "B.肝素（heparin）",
+      "C.檸檬酸鹽（citrate）",
+      "D.草酸鹽（oxalates）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_6",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 6,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關 6σ（six-sigma）品質管理標準之敘述，下列何者最不適當？",
+    "choices": [
+      "A.σ值可用來評估檢驗之品質",
+      "B.σ值可代表不同檢驗品質等級，6σ較 1σ等級高",
+      "C.利用可容許總誤差、偏差以及變異係數求得σ值",
+      "D.σ值以百分比表示，CAP 外部能力試驗須達 99％"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_7",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 7,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關接受者操作特性曲線（receiver operating characteristic curve, ROC curve）的敘述，下列何者最適當？",
+    "choices": [
+      "A.ROC 曲線下面積（area under ROC curve, AUC）可用以診斷準確性之比較",
+      "B.ROC 曲線之 X 軸代表 1-特異性（偽陰性）",
+      "C.藉由 ROC 曲線中偽陰性和偽陽性可訂定疾病之發生率",
+      "D.ROC 曲線愈靠近座標圖左下方愈佳"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_8",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 8,
+    "subject": "生物化學與臨床生化學",
+    "question": "醫學實驗室的品質成本（quality costs）分為符合性成本（costs of conformance）與不符合性成本（costs of nonconformance）。下列何者屬於不符合性成本？",
+    "choices": [
+      "A.檢驗人員訓練",
+      "B.儀器設備維護",
+      "C.實驗室品管稽核",
+      "D.檢體重複檢驗要求"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_9",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 9,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列血漿蛋白那些屬於急性期反應蛋白質？①α1–抗胰蛋白酶（α1-antitrypsin） ②α2–巨球蛋白（α2-macroglobulin） ③C–反應蛋白（C-reactive protein） ④胱蛋白 C（cystatin C）",
+    "choices": [
+      "A.①②",
+      "B.②③",
+      "C.③④",
+      "D.①③"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_10",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 10,
+    "subject": "生物化學與臨床生化學",
+    "question": "血清蛋白在瓊脂凝膠（agarose gel）電泳分離後，下列何種蛋白不出現於β-區（β-zone）？",
+    "choices": [
+      "A.C-reactive protein（CRP）",
+      "B.補體 C3",
+      "C.運鐵蛋白（transferrin）",
+      "D.低密度脂蛋白（LDL）"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_11",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 11,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關銨離子（NH4+）代謝的敘述，下列何者最不適當？",
+    "choices": [
+      "A.腦中過量的銨離子轉換成 glutamate 或 glutamine 來移除",
+      "B.肌肉中過量的銨離子透過 glucose-alanine cycle 轉換送到肝臟",
+      "C.氨在正常生理 pH 值下以銨離子的形式存在",
+      "D.urea cycle 轉換 2 個胺基，分別來自銨離子及 alanine"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_12",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 12,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關疾病或特殊飲食情況與其血液樣品檢測值的敘述，下列何者最不適當？",
+    "choices": [
+      "A.尿路阻塞：BUN/creatinine 比率上升，creatinine 數值上升",
+      "B.嚴重肝臟疾病：BUN/creatinine 比率下降，urea 數值下降",
+      "C.腎臟疾病：BUN/creatinine 比率上升，BUN 與 creatinine 數值上升",
+      "D.低蛋白質攝入：BUN/creatinine 比率下降，urea 數值下降"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_13",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 13,
+    "subject": "生物化學與臨床生化學",
+    "question": "人體中主要負責合成尿素的器官是下列那一個？",
+    "choices": [
+      "A.腎臟",
+      "B.肝臟",
+      "C.膀胱",
+      "D.胰臟"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_14",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 14,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種成分在人體內不是由酪胺酸（tyrosine）代謝而生合成？",
+    "choices": [
+      "A.S-腺苷基甲硫胺酸（S-adenosyl methionine）",
+      "B.腎上腺素（epinephrine）",
+      "C.黑色素（melanin）",
+      "D.多巴胺（dopamine）"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_15",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 15,
+    "subject": "生物化學與臨床生化學",
+    "question": "蛋白磷酸酶（protein phosphatase）的主要酵素功能與下列何項蛋白質的酵素功能相反？",
+    "choices": [
+      "A.絲胺酸蛋白酶（serine protease）",
+      "B.胱胺酸蛋白酶（cysteinyl protease）",
+      "C.蛋白激酶（protein kinase）",
+      "D.金屬蛋白酶（metalloprotease）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_16",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 16,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關尿酸（uric acid）的敘述，下列何者最不適當？",
+    "choices": [
+      "A.嘌呤（purine）代謝產物",
+      "B.生成尿酸的最終酵素為黃嘌呤氧化酶（xanthine oxidase）",
+      "C.體內尿酸產生主要來自尿素循環（urea cycle）",
+      "D.尿酸在近端腎小管再吸收"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_17",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 17,
+    "subject": "生物化學與臨床生化學",
+    "question": "在穩定血液鈣離子濃度中，腎臟扮演的角色主要是下列何者？",
+    "choices": [
+      "A.產生副甲狀腺素（parathyroid hormone）",
+      "B.活化維生素 D",
+      "C.降解鈣離子",
+      "D.產生抑鈣素（calcitonin）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_18",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 18,
+    "subject": "生物化學與臨床生化學",
+    "question": "醛固酮在腎臟中會調節下列何種電解質的排出（excretion）？",
+    "choices": [
+      "A.鈣",
+      "B.鉀",
+      "C.鎂",
+      "D.磷酸鹽"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_19",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 19,
+    "subject": "生物化學與臨床生化學",
+    "question": "健康成人的血中尿素氮（BUN）濃度單位以 mmol/L 表示，參考值最接近下列何者？",
+    "choices": [
+      "A.0.5～1.5",
+      "B.2～7",
+      "C.6～20",
+      "D.17～55"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_20",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 20,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何者最不適合作為評估腎臟 GFR 之指標？",
+    "choices": [
+      "A.肌酸酐（creatinine）",
+      "B.尿素（urea）",
+      "C.血清胱蛋白 C（cystatin C）",
+      "D.菊糖（inulin）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_21",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 21,
+    "subject": "生物化學與臨床生化學",
+    "question": "孕母血的胎兒唐氏症（Down syndrome）篩檢，下列何者與高風險群最相關？",
+    "choices": [
+      "A.AFP 上升",
+      "B.hCG 下降",
+      "C.inhibin A 下降",
+      "D.unconjugated estriol（uE3）下降"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_22",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 22,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列那一個是最簡單的胺基酸（amino acid），其支鏈（side chain）只有含一氫元素（-H）？",
+    "choices": [
+      "A.丙胺酸（alanine）",
+      "B.甘胺酸（glycine）",
+      "C.纈胺酸（valine）",
+      "D.絲胺酸（serine）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_23",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 23,
+    "subject": "生物化學與臨床生化學",
+    "question": "若單純使用質譜儀（mass spectrometer）檢測胺基酸，下列何種優點最不易達到？",
+    "choices": [
+      "A.容易鑑別異構物",
+      "B.高特異性",
+      "C.高檢測速率",
+      "D.可客製化檢測項目"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_24",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 24,
+    "subject": "生物化學與臨床生化學",
+    "question": "檢測血糖與糖化血色素時，分別使用那一種採血管最適當？",
+    "choices": [
+      "A.灰頭管與紫頭管",
+      "B.紅頭管與灰頭管",
+      "C.藍頭管與綠頭管",
+      "D.綠頭管與紅頭管"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_25",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 25,
+    "subject": "生物化學與臨床生化學",
+    "question": "在膽固醇反向運輸（reverse cholesterol transport）機制中，下列何種酵素主要負責將游離膽固醇酯化？",
+    "choices": [
+      "A.肝臟脂酶（hepatic lipase）",
+      "B.脂蛋白脂酶（lipoprotein lipase, LPL）",
+      "C.卵磷脂膽固醇醯基轉移酶（lecithin cholesterol acyltransferase, LCAT）",
+      "D.膽固醇酯轉移蛋白（cholesterol ester transfer protein, CETP）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_26",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 26,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種荷爾蒙的合成源自膽固醇（cholesterol）？",
+    "choices": [
+      "A.甲狀腺刺激素（TSH）",
+      "B.皮質醇（cortisol）",
+      "C.抗利尿激素（ADH）",
+      "D.腎上腺皮質刺激素（ACTH）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_27",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 27,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種基因的變異最不會造成家族性高膽固醇血症（familial hypercholesterolemia）？",
+    "choices": [
+      "A.low-density lipoprotein receptor（LDLR）",
+      "B.proprotein convertase subtilisin/kexin type 9（PCSK9）",
+      "C.ATP-binding cassette A1（ABCA1）",
+      "D.autosomal recessive hypercholesterolemia（ARH1）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_28",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 28,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關高脂蛋白血症（hyperlipoproteinemia）之敘述，下列何者最不適當？",
+    "choices": [
+      "A.第一型是罕見的類型且以 chylomicron 過量為主",
+      "B.第二型以 LDL 過量為主",
+      "C.第三型以 IDL 過量為主",
+      "D.第四型是常見的類型且以 HDL 過量為主"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_29",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 29,
+    "subject": "生物化學與臨床生化學",
+    "question": "利用酵素法檢測血液三酸甘油酯（triglyceride, TG）濃度時，不會使用下列何種酵素？",
+    "choices": [
+      "A.脂酶（lipase）",
+      "B.甘油激酶（glycerokinase）",
+      "C.腺苷酸激酶（adenylate kinase）",
+      "D.過氧化酶（peroxidase）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_30",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 30,
+    "subject": "生物化學與臨床生化學",
+    "question": "糖解作用（glycolysis）和β-氧化作用（β-oxidation）產生何種分子進入三羧酸循環（TCA cycle）？",
+    "choices": [
+      "A.乙醯輔酶 A（acetyl-CoA）",
+      "B.葡萄糖 6 磷酸（glucose-6-phosphate）",
+      "C.β-烴基丁酸輔酶 A（β-hydroxybutyryl CoA）",
+      "D.丙酮酸（pyruvic acid）"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_31",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 31,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關胰島素功能之敘述，下列何者最不適當？",
+    "choices": [
+      "A.刺激肝臟進行糖質新生作用",
+      "B.促進醣類轉變成肝醣或脂肪進行儲存",
+      "C.刺激蛋白質合成",
+      "D.刺激肌肉細胞吸收葡萄糖進行能量利用"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_32",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 32,
+    "subject": "生物化學與臨床生化學",
+    "question": "瓦氏效應（Warburg effect）是指下列那一種葡萄糖代謝途徑，其主要為癌細胞所利用？",
+    "choices": [
+      "A.葡萄糖代謝成乳酸（lactic acid）",
+      "B.葡萄糖代謝成乙醇（ethanol）",
+      "C.葡萄糖代謝成乙醯輔酶 A（acetyl-CoA）",
+      "D.葡萄糖代謝成 NADH"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_33",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 33,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列那一型肝醣儲積症（glycogen storage disease）較會有肝腫大和低血糖的臨床症狀？",
+    "choices": [
+      "A.type Ⅰ",
+      "B.type Ⅱ",
+      "C.type Ⅴ",
+      "D.type Ⅶ"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_34",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 34,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種脂蛋白（lipoproteins）組成中含有較多的磷脂質（phospholipids）？",
+    "choices": [
+      "A.極低密度脂蛋白（VLDL）",
+      "B.低密度脂蛋白（LDL）",
+      "C.高密度脂蛋白 2（HDL2）",
+      "D.高密度脂蛋白 3（HDL3）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_35",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 35,
+    "subject": "生物化學與臨床生化學",
+    "question": "一般評估血清中 VLDL cholesterol（VLDL-C）的濃度，會以下列何種濃度為判斷依據？",
+    "choices": [
+      "A.50％ total cholesterol",
+      "B.20％ total cholesterol",
+      "C.50％ total triglyceride",
+      "D.20％ total triglyceride"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_36",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 36,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關血中酮體（ketone body）的敘述，下列何者最不適當？",
+    "choices": [
+      "A.丙酮（acetone）可由呼吸排出體外",
+      "B.乙醯輔酶 A（acetyl-CoA）為酮體合成起始物",
+      "C.β-羥基丁酸（β-hydroxybutyrate）為最早生成的酮體",
+      "D.β-羥基丁酸（β-hydroxybutyrate）為濃度最高的酮體"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_37",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 37,
+    "subject": "生物化學與臨床生化學",
+    "question": "正常成人血液內糖化血色素（HbA1c）的參考值範圍，下列何者最適當？",
+    "choices": [
+      "A.4～6 mg/dL",
+      "B.2～3 mg/dL",
+      "C.4～6％",
+      "D.2～3％"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_38",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 38,
+    "subject": "生物化學與臨床生化學",
+    "question": "健康人體中，下列何種物質的濃度與血漿滲透壓（osmolality）的變化最不相關？",
+    "choices": [
+      "A.鈉（sodium）",
+      "B.葡萄糖（glucose）",
+      "C.尿素氮（BUN）",
+      "D.磷（phosphorus）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_39",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 39,
+    "subject": "生物化學與臨床生化學",
+    "question": "檢測總鎂量時，可使用下列何種分子去除鈣的干擾？",
+    "choices": [
+      "A.麩胱甘肽過氧化酶（GPX）",
+      "B.鹽酸（HCl）",
+      "C.金屬硫蛋白（metallothionein）",
+      "D.乙二醇雙氨乙基醚四乙酸（EGTA）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_40",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 40,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關電解質排除效應（electrolyte exclusion effect），下列敘述何者最不適當？",
+    "choices": [
+      "A.血漿中的水相約 93％",
+      "B.高血脂（hyperlipidemia）的檢體電解質濃度假性升高",
+      "C.嚴重低蛋白血症（hypoproteinemia）的檢體電解質濃度些微升高",
+      "D.高蛋白血症（hyperproteinemia）的檢體電解質濃度假性降低"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_41",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 41,
+    "subject": "生物化學與臨床生化學",
+    "question": "磷酸鹽（phosphate）在血漿中主要以何種形式存在？",
+    "choices": [
+      "A.phosphate ester",
+      "B.ATP",
+      "C.hydroxyapatite",
+      "D.H2PO4-"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_42",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 42,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種元素參與超氧化物歧化酶（superoxide dismutase）抗氧化、細胞色素氧化酶（cytochrome c oxidase）協同製造 ATP，與結締組織的形成？",
+    "choices": [
+      "A.鐵",
+      "B.銅",
+      "C.鋅",
+      "D.鉬"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_43",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 43,
+    "subject": "生物化學與臨床生化學",
+    "question": "健康人一次喝下 500 mL 的市售檸檬汁，血中酸鹼值最有可能會落在下列那一個區間？",
+    "choices": [
+      "A.6.50～6.90",
+      "B.7.00～7.20",
+      "C.7.35～7.45",
+      "D.8.00～8.25"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_44",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 44,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種作用力最少出現在酵素與受質之間的結合？",
+    "choices": [
+      "A.氫鍵（hydrogen bond）",
+      "B.厭水性交互作用（hydrophobic interaction）",
+      "C.凡德瓦力（van der Waals force）",
+      "D.雙硫鍵（disulfide bond）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_45",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 45,
+    "subject": "生物化學與臨床生化學",
+    "question": "可用於血漿酸鹼失衡鑑別診斷的陰離子隙（anion gap），其計算公式為下列何者？",
+    "choices": [
+      "A.[Na+]＋[K+]－[Cl-]",
+      "B.[K+]＋[Ca2+]－[Cl-]",
+      "C.[K+]－[PO43-]－[HCO3-]",
+      "D.[Na+]－[Cl-]－[HCO3-]"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_46",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 46,
+    "subject": "生物化學與臨床生化學",
+    "question": "尿毒症（uremia）是指腎功能衰竭，因而使蛋白質代謝後產物，如尿素等廢棄物無法排出所產生的中毒現象。患者血液檢驗可能還會有下列那一種情形？",
+    "choices": [
+      "A.陰離子間隙（anion gap）上升之代謝性酸中毒",
+      "B.陰離子間隙（anion gap）正常之代謝性酸中毒",
+      "C.陰離子間隙（anion gap）上升之代謝性鹼中毒",
+      "D.陰離子間隙（anion gap）正常之代謝性鹼中毒"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_47",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 47,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種酵素與骨骼功能異常的鑑別診斷最相關？",
+    "choices": [
+      "A.酸性磷酸酶（acid phosphatase）",
+      "B.肝醣磷酸化酶（glycogen phosphorylase）",
+      "C.鹼性磷酸酶（alkaline phosphatase）",
+      "D.胰凝乳蛋白酶（chymotrypsin）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_48",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 48,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種分子在臨床上最不適用於診斷心臟血管疾病？",
+    "choices": [
+      "A.肌鈣蛋白（troponin T）",
+      "B.同半胱胺酸（homocysteine）",
+      "C.N 端腦利鈉肽前驅物（NT-proBNP）",
+      "D.5'-核苷酸酶（5'-nucleotidase）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_49",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 49,
+    "subject": "生物化學與臨床生化學",
+    "question": "血液中非結合型膽紅素（unconjugated bilirubin）之濃度上升，最有可能是下列何種疾病？",
+    "choices": [
+      "A.肝硬化（liver cirrhosis）",
+      "B.膽道阻塞（biliary obstruction）",
+      "C.溶血性貧血（hemolytic anemia）",
+      "D.威爾森病（Wilson disease）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_50",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 50,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種酵素活性上升與急性胰臟炎最不相關？",
+    "choices": [
+      "A.澱粉酶（amylase）",
+      "B.醛縮酶（aldolase）",
+      "C.脂酶（lipase）",
+      "D.胰蛋白酶（trypsin）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_51",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 51,
+    "subject": "生物化學與臨床生化學",
+    "question": "抑制劑與受質（substrate）的結構類似時，抑制劑以下列那一種方式抑制酵素作用？",
+    "choices": [
+      "A.競爭型抑制（competitive inhibition）",
+      "B.非競爭型抑制（noncompetitive inhibition）",
+      "C.不競爭型抑制（uncompetitive inhibition）",
+      "D.不可逆型抑制（irreversible inhibition）"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_52",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 52,
+    "subject": "生物化學與臨床生化學",
+    "question": "酵素與受質在零級反應（zero-order kinetics）狀態下，下列敘述何者最適當？",
+    "choices": [
+      "A.使用飽和的酵素濃度",
+      "B.可測出 Vmax",
+      "C.用於檢測受質的濃度",
+      "D.受質濃度應小於 Km值"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_53",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 53,
+    "subject": "生物化學與臨床生化學",
+    "question": "遵循 Michaelis-Menten 動力學，當[S]＝2×10-5 μmol/L，v＝20 μmol/min，Vmax＝60 μmol/min，這個酵素的 Km是多少μmol/L？",
+    "choices": [
+      "A.1×10-5",
+      "B.2×10-5",
+      "C.4×10-5",
+      "D.8×10-5"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_54",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 54,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列那一種檢驗數值異常，最適用於初步判定膽道鬱積性肝臟疾病（intrahepatic cholestasis）？",
+    "choices": [
+      "A.天門冬胺酸轉胺酶（AST）",
+      "B.鹼性磷酸酶（ALP）",
+      "C.乳酸去氫酶（LDH）",
+      "D.丙胺酸轉胺酶（ALT）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_55",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 55,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種酵素血中濃度降低時，導致外科手術用之肌肉鬆弛劑（如：suxamethonium 或 mivacurium）水解減少而延長藥效時間？",
+    "choices": [
+      "A.5'-核苷酸酶（5'-nucleotidase）",
+      "B.肌酸激酶（creatine kinase）",
+      "C.膽鹼酯酶（cholinesterase）",
+      "D.乳酸去氫酶（lactate dehydrogenase）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_56",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 56,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關血清γ-glutamyltransferase（GGT）之敘述，下列何者最不適當？",
+    "choices": [
+      "A.為酵素系統分類的轉移酶（transferase）類",
+      "B.主要存在腎臟、胰臟、肝臟與小腸",
+      "C.glycylglycine 為γ-glutamyl group 之提供者",
+      "D.阻塞性肝膽疾病時上升"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_57",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 57,
+    "subject": "生物化學與臨床生化學",
+    "question": "肝臟可將未結合型膽紅素（unconjugated bilirubin）與下列何種物質結合，形成結合型膽紅素（conjugated bilirubin）？",
+    "choices": [
+      "A.葡萄糖酸（gluconic acid）",
+      "B.葡萄糖二酸（glucaric acid）",
+      "C.葡萄糖醛酸（glucuronic acid）",
+      "D.葡萄糖酸內酯（gluconolactone）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_58",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 58,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種鹼性磷酸酶（ALP）同功酶最耐熱？",
+    "choices": [
+      "A.胎盤",
+      "B.肝臟",
+      "C.小腸",
+      "D.骨骼"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_59",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 59,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何者可用來區分腦下腺性庫欣病（pituitary Cushing disease）及腎上腺性庫欣症候群（adrenal Cushing syndrome）？",
+    "choices": [
+      "A.腎上腺皮質刺激素（ACTH）",
+      "B.抗利尿激素（ADH）",
+      "C.甲狀腺刺激素（TSH）",
+      "D.醛固酮（aldosterone）"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_60",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 60,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列那一種激素最不具有晝夜節奏（circadian rhythms）的特性？",
+    "choices": [
+      "A.腎上腺皮質刺激素（ACTH）",
+      "B.皮質醇（cortisol）",
+      "C.副甲狀腺素（PTH）",
+      "D.甲狀腺刺激素（TSH）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_61",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 61,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種激素不是由腦下腺前葉（anterior pituitary）分泌？",
+    "choices": [
+      "A.甲狀腺刺激素（TSH）",
+      "B.泌乳激素（prolactin）",
+      "C.抗利尿激素（ADH）",
+      "D.腎上腺皮質刺激素（ACTH）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_62",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 62,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何者最適合作為乳癌的腫瘤標誌？",
+    "choices": [
+      "A.Cyfra 21-1",
+      "B.CA15-3",
+      "C.Bence-Jones protein",
+      "D.hCG"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_63",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 63,
+    "subject": "生物化學與臨床生化學",
+    "question": "胱硫醚-β-合成酶（cystathionine-β-synthase）活性不足引起高同半胱胺酸血症（hyperhomocysteinemia）時，主要用下列何種維生素以降低心血管疾病風險？",
+    "choices": [
+      "A.維生素 B2",
+      "B.維生素 B6",
+      "C.維生素 B9",
+      "D.維生素 B12"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_64",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 64,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關橋本甲狀腺炎（Hashimoto thyroiditis）的敘述，下列何者最不適當？",
+    "choices": [
+      "A.屬於自體免疫疾病",
+      "B.通常可檢測出 anti-TPO 抗體",
+      "C.血中游離甲狀腺素濃度偏高",
+      "D.也稱為慢性淋巴球性甲狀腺炎（chronic lymphocytic thyroiditis）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_65",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 65,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關抗利尿激素不當分泌症候群（syndrome of inappropriate antidiuretic hormone secretion, SIADH）的敘述，下列何者最不適當？",
+    "choices": [
+      "A.尿量減少",
+      "B.高血鈉",
+      "C.尿液滲透壓上升",
+      "D.血液尿素氮濃度降低"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_66",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 66,
+    "subject": "生物化學與臨床生化學",
+    "question": "葡萄糖負荷試驗（glucose loading test）可用來評估下列何種荷爾蒙的分泌是否過多？",
+    "choices": [
+      "A.皮質醇（cortisol）",
+      "B.生長激素（growth hormone）",
+      "C.升糖素（glucagon）",
+      "D.腎上腺皮質刺激素（adrenocorticotropic hormone）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_67",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 67,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何者之血中濃度愈高表示細菌性敗血症或敗血性休克可能性愈高？",
+    "choices": [
+      "A.前白蛋白（prealbumin）",
+      "B.C-胜肽（C-peptide）",
+      "C.降鈣素（calcitonin）",
+      "D.前降鈣素原（procalcitonin, PCT）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_68",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 68,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關生長荷爾蒙（growth hormone）分泌之調控，下列敘述何者最不適當？",
+    "choices": [
+      "A.下視丘會釋放 GHRH 抑制生長荷爾蒙分泌",
+      "B.飢餓狀態會促進生長荷爾蒙分泌",
+      "C.睡眠會促進生長荷爾蒙分泌",
+      "D.正常狀況下 50 歲的人較 20 歲的人濃度低"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_69",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 69,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種測試通常用於篩檢甲狀腺功能障礙？",
+    "choices": [
+      "A.食鹽水注射檢測（saline infusion test）",
+      "B.血清 TSH 檢測",
+      "C.dexamethasone suppression test",
+      "D.24 小時尿液 catecholamines test"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_70",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 70,
+    "subject": "生物化學與臨床生化學",
+    "question": "類升糖素胜肽（GLP-1）激素主要由下列那一個器官／組織生合成？",
+    "choices": [
+      "A.腸",
+      "B.肝臟",
+      "C.脂肪組織",
+      "D.胃"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_71",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 71,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何者為人體中血液濃度最高的糖皮質激素（glucocorticoid hormone）？",
+    "choices": [
+      "A.aldosterone",
+      "B.cortisone",
+      "C.cortisol",
+      "D.DHEA"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_72",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 72,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種維生素最不易於人體儲存，由尿液排出並大多可以做為輔酶？",
+    "choices": [
+      "A.維生素 A（retinol）",
+      "B.維生素 D2（ergocalciferol）",
+      "C.維生素 B12（cyanocobalamin）",
+      "D.維生素 K1（phylloquinones）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_73",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 73,
+    "subject": "生物化學與臨床生化學",
+    "question": "關於乳癌的腫瘤標誌檢測，下列敘述何者最不適當？",
+    "choices": [
+      "A.女性具有 BRCA1 或 BRCA2 基因突變，罹患乳癌的風險會增加",
+      "B.血清中 CA125 濃度超過參考值，可作為乳癌確診唯一指標",
+      "C.血清中 CA15-3 可以作為手術治療後復發監控之指標",
+      "D.美國 FDA 已核准抗 HER2 標靶藥物用於 HER2 過量表現的乳癌病患治療"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_74",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 74,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關乙醯胺酚（acetaminophen）的敘述，下列何者最不適當？",
+    "choices": [
+      "A.超劑量會對肝臟有危害",
+      "B.超過 50％的乙醯胺酚經細胞色素 P450（cytochrome P450, CYP）代謝",
+      "C.乙醯半胱胺酸（N-acetylcysteine, NAC）可預防性解其肝毒性",
+      "D.使用免疫分析法較便利、準確"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_75",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 75,
+    "subject": "生物化學與臨床生化學",
+    "question": "執行腎臟移植之病患，為避免排斥反應發生，下列何種藥物最不適合使用？",
+    "choices": [
+      "A.tacrolimus",
+      "B.cyclosporine",
+      "C.sirolimus",
+      "D.theophylline"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_76",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 76,
+    "subject": "生物化學與臨床生化學",
+    "question": "有關抗生素之敘述，下列何者最不適當？",
+    "choices": [
+      "A.gentamicin 與 amikacin 皆屬於 aminoglycoside",
+      "B.gentamicin 的治療效果屬於濃度依賴性",
+      "C.vancomycin 的治療效果屬於時間依賴性",
+      "D.僅監測血中抗生素濃度的高峰值即可調整病患用藥劑量"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_77",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 77,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列何種重金屬不會與蛋白質的硫氫（-SH）官能基結合，而影響到蛋白質的活性？",
+    "choices": [
+      "A.砷（arsenic）",
+      "B.汞（mercury）",
+      "C.鉈（thallium）",
+      "D.鋁（aluminum）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_78",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 78,
+    "subject": "生物化學與臨床生化學",
+    "question": "下列那一個技術不屬於高通量定序（massively parallel sequencing）或次世代定序（next-generation sequencing）？",
+    "choices": [
+      "A.nanopore sequencing",
+      "B.single molecule sequencing",
+      "C.Sanger sequencing",
+      "D.semiconductor sequencing"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_79",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 79,
+    "subject": "生物化學與臨床生化學",
+    "question": "色胺酸（tryptophan）的標準遺傳密碼子編碼為何？",
+    "choices": [
+      "A.UGA",
+      "B.UAA",
+      "C.AUG",
+      "D.UGG"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_5_80",
+    "exam_id": "5",
+    "year": "115-2",
+    "question_number": 80,
+    "subject": "生物化學與臨床生化學",
+    "question": "我國在實驗室開發檢測（lab developed tests, LDTs）實施的人員資格規定上，那一類人員可不需要醫事檢驗師或專科醫師資格？",
+    "choices": [
+      "A.專任品質主管",
+      "B.專任技術人員",
+      "C.專任檢測開發、分析、校正、生物資訊處理人員",
+      "D.核發檢測報告人員"
+    ],
+    "answer": "C"
+  }
+]

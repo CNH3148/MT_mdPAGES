@@ -1,0 +1,1282 @@
+[
+  {
+    "type": "question",
+    "qid": "115-2_4_1",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 1,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關 Hugh and Leifson's Oxidative-Fermentative（OF）培養基的敘述，下列何者正確？",
+    "choices": [
+      "A.carbohydrate 和 peptone 比例為 1：5",
+      "B.carbohydrate 和 peptone 比例為 5：1",
+      "C.指示劑為 phenol red",
+      "D.指示劑為 neutral red"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_2",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 2,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關生物安全操作櫃的敘述，下列何者正確？",
+    "choices": [
+      "A.第一類生物安全操作櫃適用於生物安全等級第四級的實驗室",
+      "B.A 型第二類生物安全操作櫃適用於有毒化學物質的操作",
+      "C.B 型第二類生物安全操作櫃 70％空氣通過 HEPA 再循環",
+      "D.第三類生物安全操作櫃提供操作人員最高級保護"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_3",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 3,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關細菌基因組（genome）的敘述，下列何者最不適當？",
+    "choices": [
+      "A.細菌的基因組包含染色體（chromosome）以及 mobilome（mobile genetic elements）",
+      "B.細菌在複製的過程中有可能失去質體（plasmid）",
+      "C.Transposable elements 可以在質體以及染色體間移動",
+      "D.Insertion sequence（IS）經常攜帶多種抗藥性基因"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_4",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 4,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何者最適於區分 Acinetobacter baumannii 與 Acinetobacter lwoffii？",
+    "choices": [
+      "A.運動性（motility）",
+      "B.氧化酶（oxidase）反應",
+      "C.β溶血（β-hemolysis）反應",
+      "D.葡萄糖氧化（glucose oxidizer）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_5",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 5,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種細菌的分離培養以胃活體組織為最佳檢體來源？",
+    "choices": [
+      "A.Yersinia enterocolitica",
+      "B.Acinetobacter baumannii",
+      "C.Vibrio parahaemolyticus",
+      "D.Helicobacter pylori"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_6",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 6,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關細菌藥敏試驗的敘述，下列何者最不適當？",
+    "choices": [
+      "A.臺灣目前主要依據美國 CLSI 所制定的標準",
+      "B.常用的紙錠擴散法屬於半定量法",
+      "C.一般紙錠擴散法建議的濁度為 0.5 McFarland standard",
+      "D.綠膿桿菌接種後須在含有二氧化碳的溫箱培養"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_7",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 7,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種細菌經革蘭氏染色後菌體呈現人字型或英文字母 V、Y 等形狀排列？",
+    "choices": [
+      "A.Corynebacterium diphtheriae",
+      "B.Listeria monocytogenes",
+      "C.Campylobacter jejuni",
+      "D.Erysipelothrix rhusiopathiae"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_8",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 8,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列細菌何者是微需氧（microaerophile）致病菌？",
+    "choices": [
+      "A.Campylobacter jejuni",
+      "B.Neisseria meningitidis",
+      "C.Clostridium tetani",
+      "D.Bacteroides fragilis"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_9",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 9,
+    "subject": "微生物學與臨床微生物學",
+    "question": "痰檢體在低倍（100X）鏡檢中，觀察到下列何種情況可視為臨床最有意義的檢體？",
+    "choices": [
+      "A.嗜中性球＜25，鱗狀上皮細胞＜10",
+      "B.嗜中性球＞10，鱗狀上皮細胞＞25",
+      "C.嗜中性球＜10，鱗狀上皮細胞＞25",
+      "D.嗜中性球＞25，鱗狀上皮細胞＜10"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_10",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 10,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種培養基較常用於區別 Staphylococcus aureus 和 Staphylococcus epidermidis？",
+    "choices": [
+      "A.EMB agar",
+      "B.chocolate agar",
+      "C.mannitol salt agar",
+      "D.XLD agar"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_11",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 11,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種大腸桿菌的構造與接合作用（conjugation）最有關？",
+    "choices": [
+      "A.capsule",
+      "B.flagella",
+      "C.lipoprotein",
+      "D.sex pilus"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_12",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 12,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關 B 型鏈球菌的敘述，下列何者最不適當？",
+    "choices": [
+      "A.可造成新生兒感染導致肺炎",
+      "B.可造成新生兒感染導致腦膜炎",
+      "C.莢膜為重要的致病因子",
+      "D.孕婦建議於孕期第 35 至 37 週時接種疫苗"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_13",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 13,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關 A 型鏈球菌毒力因子的敘述，下列何者正確？①lipopolysaccharide 引起敗血性休克 ②莢膜抵抗吞噬細胞吞噬 ③lipoteichoic acid 幫助菌體貼附上皮細胞 ④hyaluronidase 為固著因子",
+    "choices": [
+      "A.①②③",
+      "B.②③④",
+      "C.僅②③",
+      "D.①④"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_14",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 14,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關 Staphylococcus epidermidis 的敘述，下列何者錯誤？",
+    "choices": [
+      "A.為皮膚和黏膜的正常微生物群（normal flora）內成員",
+      "B.catalase 測試呈陽性",
+      "C.不會在 Columbia colistin-nalidixic acid（CNA）agar 中生長",
+      "D.可在 5％ sheep blood agar 與 chocolate agar 中生長"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_15",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 15,
+    "subject": "微生物學與臨床微生物學",
+    "question": "Multidrug-resistant（MDR）tuberculosis 是指至少對下列那兩種抗生素具抗藥性？",
+    "choices": [
+      "A.rifampin 及 amikacin",
+      "B.rifampin 及 isoniazid",
+      "C.amikacin 及 linezolid",
+      "D.cycloserine 及 streptomycin"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_16",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 16,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關金黃色葡萄球菌（Staphylococcus aureus）的致病因子敘述，下列何者錯誤？",
+    "choices": [
+      "A.觸媒（catalase）會將過氧化氫（H2O2）轉化成水和氧氣",
+      "B.蛋白質 A（protein A）會使宿主血液中的 fibrin 產生凝集並附著於菌體表面而逃避吞噬細胞的作用",
+      "C.脫皮毒素（exfoliative toxin）會切割上皮組織的黏多醣而產生水泡",
+      "D.腸毒素（enterotoxin）屬於超級抗原（superantigen）會引起嘔吐及腹瀉"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_17",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 17,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種細菌最常引起食物中毒？",
+    "choices": [
+      "A.Bacillus cereus",
+      "B.Bacillus mycoides",
+      "C.Bacillus subtilis",
+      "D.Bacillus thuringiensis"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_18",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 18,
+    "subject": "微生物學與臨床微生物學",
+    "question": "對萬古黴素具中度感受性之金黃色葡萄球菌（vancomycin-intermediate Staphylococcus aureus, VISA）的主要抗藥機轉為何？",
+    "choices": [
+      "A.產生分解萬古黴素的酵素",
+      "B.改變細胞膜通透性",
+      "C.增加細胞壁的厚度",
+      "D.合成將萬古黴素打出胞外的幫浦（efflux pump）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_19",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 19,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關路鄧葡萄球菌（Staphylococcus lugdunensis）的敘述，下列何者最不適當？",
+    "choices": [
+      "A.凝固酶陽性",
+      "B.ornithine decarboxylase 及 PYR test 均為陽性",
+      "C.可以利用凝固酶試驗和金黃色葡萄球菌（Staphylococcus aureus）加以區別",
+      "D.會引起侵襲性的感染甚至導致死亡"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_20",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 20,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關鏈球菌的敘述，下列何者最不適當？",
+    "choices": [
+      "A.不具運動性",
+      "B.catalase (－)",
+      "C.Lancefield 分型係依據細胞壁上之肽聚醣",
+      "D.包含對人類有益的益生菌"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_21",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 21,
+    "subject": "微生物學與臨床微生物學",
+    "question": "白喉毒素（diphtheria toxin）主要經由抑制何種機制，導致細胞死亡？",
+    "choices": [
+      "A.DNA replication",
+      "B.transcription",
+      "C.translation",
+      "D.cell division"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_22",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 22,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何者通常不是 group B streptococci 的特性？",
+    "choices": [
+      "A.對 bacitracin（0.04 unit disk）呈抗性",
+      "B.CAMP test 呈陽性",
+      "C.hippurate hydrolysis 呈陽性",
+      "D.esculin hydrolysis 呈陽性"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_23",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 23,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關鏈球菌 streptolysin O 之敘述，下列何者正確？",
+    "choices": [
+      "A.在有氧的情況下，可增強 streptolysin O 的活性",
+      "B.膽固醇可增強 streptolysin O 的活性",
+      "C.Streptolysin O 沒有抗原性（non-immunogenic）",
+      "D.anti-streptolysin O（ASO）效價可作為造成風濕熱的指標"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_24",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 24,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何者通常不是 Klebsiella aerogenes（舊稱 Enterobacter aerogenes）的生化特性？",
+    "choices": [
+      "A.citrate utilization (＋)",
+      "B.ornithine decarboxylation (＋)",
+      "C.Voges-Proskauer test (＋)",
+      "D.arginine dihydrolase test (＋)"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_25",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 25,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種菌在 MacConkey agar 生長時，呈現紅色菌落？",
+    "choices": [
+      "A.Enterobacter cloacae",
+      "B.Yersinia pestis",
+      "C.Providencia alcalifaciens",
+      "D.Edwardsiella tarda"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_26",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 26,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何菌擁有鞭毛，對許多常用抗生素具有抗藥性，在接受長期抗生素治療的患者特別容易受其感染？",
+    "choices": [
+      "A.Stenotrophomonas maltophilia",
+      "B.Acinetobacter baumannii",
+      "C.Neisseria meningitidis",
+      "D.Klebsiella pneumoniae"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_27",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 27,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種大腸桿菌的感染最易引起腸道 attaching and effacing lesion（A/E lesion）？",
+    "choices": [
+      "A.腸凝集性大腸桿菌（enteroaggregative E. coli）",
+      "B.腸致病性大腸桿菌（enteropathogenic E. coli）",
+      "C.腸侵襲性大腸桿菌（enteroinvasive E. coli）",
+      "D.腸產毒性大腸桿菌（enterotoxigenic E. coli）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_28",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 28,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關克雷伯氏桿菌（Klebsiella spp.）的敘述，下列何者最不適當？",
+    "choices": [
+      "A.大多不具有鞭毛（flagella）及運動性",
+      "B.K. oxytoca 不具有色胺酸酶（tryptophanase），而 K. pneumoniae 具有色胺酸酶",
+      "C.K. pneumoniae 大多對 ampicillin 具有抗藥性",
+      "D.K. pneumoniae 可以引起肺炎、泌尿道感染以及肝膿瘍"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_29",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 29,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關 Pseudomonas aeruginosa 的特性，下列何者最不適當？",
+    "choices": [
+      "A.產生 pyoverdine",
+      "B.產生 pyocyanin",
+      "C.具有運動性",
+      "D.無法於 42℃生長"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_30",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 30,
+    "subject": "微生物學與臨床微生物學",
+    "question": "嗜血桿菌（Haemophilus spp.）之生長，下列何者通常只需 X 因子，不需要 V 因子？",
+    "choices": [
+      "A.H. influenzae",
+      "B.H. ducreyi",
+      "C.H. aegyptius",
+      "D.H. haemolyticus"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_31",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 31,
+    "subject": "微生物學與臨床微生物學",
+    "question": "培養退伍軍人菌屬（Legionella spp.）所使用的培養基，需要外加下列何種物質來提高陽性培養率？",
+    "choices": [
+      "A.PBS",
+      "B.L-cysteine",
+      "C.HCl",
+      "D.NaOH"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_32",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 32,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列那一種菌與鼠咬熱（rat bite fever）最相關？",
+    "choices": [
+      "A.Francisella tularensis",
+      "B.Brucella melitensis",
+      "C.Pasteurella multocida",
+      "D.Spirillum minus"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_33",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 33,
+    "subject": "微生物學與臨床微生物學",
+    "question": "培養淋病雙球菌（Neisseria gonorrhoeae）時，儘量不用棉花棒採檢，是因為棉花中含有下列何者成分會抑制菌株生長？",
+    "choices": [
+      "A.carbohydrate",
+      "B.calcium alginate",
+      "C.protein",
+      "D.fatty acid"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_34",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 34,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列那一菌屬的雙極染色（Wayson stain）通常為陽性？",
+    "choices": [
+      "A.Bordetella",
+      "B.Legionella",
+      "C.Haemophilus",
+      "D.Kingella"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_35",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 35,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種細菌主要存在土壤及死水中，被美軍稱為「越南的定時炸彈」，曾在臺灣南部二仁溪流域爆發感染？",
+    "choices": [
+      "A.Burkholderia mallei",
+      "B.Burkholderia pseudomallei",
+      "C.Bacillus anthracis",
+      "D.Vibrio vulnificus"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_36",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 36,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列培養基中，何者 bile salts（sodium deoxycholate）的濃度最高？",
+    "choices": [
+      "A.Hektoen enteric agar",
+      "B.Salmonella-Shigella agar",
+      "C.xylose-lysine-deoxycholate（XLD）agar",
+      "D.MacConkey agar"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_37",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 37,
+    "subject": "微生物學與臨床微生物學",
+    "question": "臨床鑑定細菌 motility 所使用的洋菜濃度，通常為下列何者？",
+    "choices": [
+      "A.0.2％",
+      "B.0.4％",
+      "C.0.7％",
+      "D.1.0％"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_38",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 38,
+    "subject": "微生物學與臨床微生物學",
+    "question": "tryptophan 被 tryptophanase 催化產生何種化學物質？",
+    "choices": [
+      "A.indole",
+      "B.cadaverine",
+      "C.citrulline",
+      "D.putrescine"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_39",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 39,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關 tularemia 疾病的敘述，下列何者最不適當？",
+    "choices": [
+      "A.其病原菌為 Brucella tularemia",
+      "B.人的感染可經由 ticks 咬傷所致",
+      "C.人的感染可因喝下被病原菌污染的水",
+      "D.其病原菌具有很高的傳染性"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_40",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 40,
+    "subject": "微生物學與臨床微生物學",
+    "question": "感染下列何種微生物，患者除了胃腸道疾病外，較常有溶血性尿毒症（hemolytic uremic syndrome）的併發症？",
+    "choices": [
+      "A.腸炎弧菌（Vibrio parahaemolyticus）",
+      "B.O157 型大腸桿菌（Escherichia coli O157）",
+      "C.大腸曲狀桿菌（Campylobacter coli）",
+      "D.鮑氏不動桿菌（Acinetobacter baumannii）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_41",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 41,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何者為引起鼠疫之致病菌？",
+    "choices": [
+      "A.Yersinia ruckeri",
+      "B.Yersinia enterocolitica",
+      "C.Yersinia pseudotuberculosis",
+      "D.Yersinia pestis"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_42",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 42,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關 Peptostreptococcus anaerobius 的敘述，下列何者正確？",
+    "choices": [
+      "A.革蘭氏陰性球菌",
+      "B.通常具 endospore",
+      "C.對於 sodium polyanethol sulfonate 具有感受性",
+      "D.在 blood agar 上呈現雙圈溶血現象"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_43",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 43,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種細菌通常較不會造成人類氣性壞疽／肌肉壞死（gas gangrene/myonecrosis）？",
+    "choices": [
+      "A.Clostridioides difficile",
+      "B.Clostridium septicum",
+      "C.Clostridium perfringens",
+      "D.Clostridium novyi"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_44",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 44,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何菌早期又被稱為 pleuropneumonia-like organism（PPLO）？",
+    "choices": [
+      "A.Mycoplasma pneumoniae",
+      "B.Streptococcus pneumoniae",
+      "C.Cardiobacterium hominis",
+      "D.Bordetella pertussis"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_45",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 45,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列檢測，何者最適用於區分 Mycoplasma pneumoniae 與 Ureaplasma urealyticum？",
+    "choices": [
+      "A.細胞壁觀察",
+      "B.革蘭氏染色",
+      "C.penicillin 感受性試驗",
+      "D.尿素酶活性反應"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_46",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 46,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關 Orientia tsutsugamushi 的敘述，下列何者最適當？",
+    "choices": [
+      "A.細胞壁含有脂多醣（lipopolysaccharide）",
+      "B.屬於 Anaplasmataceae",
+      "C.絕對胞內寄生細菌",
+      "D.經由 tick 傳染人體"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_47",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 47,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關厭氧菌的鑑定，下列何者最不適當？",
+    "choices": [
+      "A.spot indole 主要是測試 phenylalanine 分解成為 indole",
+      "B.厭氧菌 catalase test 通常使用 15％ H2O2",
+      "C.agar dilution method 可以適用於厭氧菌的抗生素敏感性測試",
+      "D.Nagler 試驗是測試 lecithinase 活性"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_48",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 48,
+    "subject": "微生物學與臨床微生物學",
+    "question": "在厭氧革蘭氏陽性不產孢桿菌中，下列何者可水解 esculin 的能力較強？",
+    "choices": [
+      "A.Actinomyces israelii",
+      "B.Bifidobacterium dentium",
+      "C.Eubacterium lentum",
+      "D.Cutibacterium acnes"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_49",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 49,
+    "subject": "微生物學與臨床微生物學",
+    "question": "對於潛伏期的梅毒患者（latent syphilis），下列何種檢驗方法檢出率最高？",
+    "choices": [
+      "A.菌株培養",
+      "B.FISH",
+      "C.Gram stain",
+      "D.血清免疫診斷"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_50",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 50,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關 colistin 的敘述，下列何者最不適當？",
+    "choices": [
+      "A.作用在細菌細胞膜",
+      "B.通常為殺菌型抗生素",
+      "C.治療抗萬古黴素腸球菌的最後一線用藥",
+      "D.可用來治療 NDM-1 腸道菌感染症"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_51",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 51,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何者不是手術部位感染（surgical site infection）常見的病原？",
+    "choices": [
+      "A.Streptococcus pyogenes",
+      "B.Staphylococcus aureus",
+      "C.Escherichia coli",
+      "D.Pseudomonas aeruginosa"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_52",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 52,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種抗微生物製劑最不建議用來治療 Klebsiella pneumoniae 感染？",
+    "choices": [
+      "A.colistin",
+      "B.ciprofloxacin",
+      "C.vancomycin",
+      "D.amikacin"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_53",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 53,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種抗微生物製劑，通常屬於抑菌類（bacteriostatic）？",
+    "choices": [
+      "A.colistin",
+      "B.fosfomycin",
+      "C.levofloxacin",
+      "D.tetracycline"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_54",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 54,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種腸內桿菌科細菌較常對 colistin 具有天然抗藥性（intrinsic resistance）？",
+    "choices": [
+      "A.Escherichia coli",
+      "B.Klebsiella pneumoniae",
+      "C.Serratia marcescens",
+      "D.Citrobacter freundii"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_55",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 55,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種方式通常不是細菌產生抗藥性的主要原因？",
+    "choices": [
+      "A.獲得分解抗生素的酵素（enzyme destruction）",
+      "B.改變藥物作用標的（altered target）",
+      "C.減少抗生素進入細菌內（decreased uptake）",
+      "D.增加抗生素累積（accumulation of antibiotic）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_56",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 56,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種細菌酵素不能水解碳青黴烯（carbapenem）？",
+    "choices": [
+      "A.Klebsiella pneumoniae carbapenemase（KPC）",
+      "B.New Delhi Metallo-β-lactamase（NDM）",
+      "C.oxacillinase（OXA）",
+      "D.chloramphenicol acetyltransferase（CAT）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_57",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 57,
+    "subject": "微生物學與臨床微生物學",
+    "question": "腸內桿菌科採用瓊脂稀釋法（agar dilution method）測定抗生素藥敏試驗時，接種菌數（CFU/spot）為何？",
+    "choices": [
+      "A.1×10^2",
+      "B.1×10^4",
+      "C.1×10^6",
+      "D.1×10^8"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_58",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 58,
+    "subject": "微生物學與臨床微生物學",
+    "question": "使用 broth dilution method 進行黴菌抗生素感受性試驗，最常使用下列何種培養基？",
+    "choices": [
+      "A.Müeller-Hinton medium",
+      "B.RMPI 1640",
+      "C.Middlebrook 7H10",
+      "D.Löwenstein-Jensen"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_59",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 59,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列關於β-內醯胺酶抑制劑（β-lactamase inhibitor）之敘述，何者最不適當？",
+    "choices": [
+      "A.單獨使用時效果很弱",
+      "B.作用機制為直接抑制細菌細胞壁合成",
+      "C.結合β-lactam 類抗生素使用時具協同效果（synergy）",
+      "D.會與β-lactamase 結合使之失效"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_60",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 60,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何者不是細菌對β-lactam 類抗生素產生抗藥性的主要原因？",
+    "choices": [
+      "A.產生β-lactamase",
+      "B.PBPs 改變",
+      "C.降低抗生素之吸收",
+      "D.細菌分裂速率增加"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_61",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 61,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種細菌最不常見於泌尿道感染？",
+    "choices": [
+      "A.腐生葡萄球菌（Staphylococcus saprophyticus）",
+      "B.大腸桿菌（Escherichia coli）",
+      "C.綠膿桿菌（Pseudomonas aeruginosa）",
+      "D.流行性感冒嗜血桿菌（Haemophilus influenzae）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_62",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 62,
+    "subject": "微生物學與臨床微生物學",
+    "question": "淋病患者的採檢流程，下列何者最不適當？",
+    "choices": [
+      "A.生殖道採檢拭子有兩套，其一可直接抹片檢查",
+      "B.採檢後檢體運送要保持低溫",
+      "C.接種檢體於 chocolate agar 或 modified Thayer-Martin agar",
+      "D.接種之培養基置入 3～5％二氧化碳培養箱"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_63",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 63,
+    "subject": "微生物學與臨床微生物學",
+    "question": "一位養豬場獸醫師手指浮腫且出現紫斑，反覆發燒，經血液培養為革蘭氏陽性桿菌，Columbia blood agar plate（BAP）上呈現α-溶血，catalase (－)，oxidase (－)，具 gelatinase，最可能為下列何種病原菌？",
+    "choices": [
+      "A.Erysipelothrix rhusiopathiae",
+      "B.Listeria monocytogenes",
+      "C.Bacillus anthracis",
+      "D.Corynebacterium diphtheriae"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_64",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 64,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列那些細菌最常產生毒素引起食物中毒？①Clostridioides difficile ②Klebsiella pneumoniae ③Bacillus cereus ④Helicobacter pylori ⑤Staphylococcus auerus",
+    "choices": [
+      "A.①②",
+      "B.僅③⑤",
+      "C.①③⑤",
+      "D.②③④"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_65",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 65,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列那些藥物的作用機轉，主要和真菌細胞膜無關？",
+    "choices": [
+      "A.amphotericin B",
+      "B.naftifine",
+      "C.nystatin",
+      "D.caspofungin"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_66",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 66,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種 Candida spp.常自尿液檢體中分離，不具菌絲但具海藻糖（trehalose）快速同化的特徵？",
+    "choices": [
+      "A.Candida albicans",
+      "B.Candida glabrata",
+      "C.Candida krusei",
+      "D.Candida tropicalis"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_67",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 67,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何真菌通常能分解角質（keratin）？",
+    "choices": [
+      "A.Aspergillus",
+      "B.Trichosporon",
+      "C.Trichophyton",
+      "D.Sporothrix"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_68",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 68,
+    "subject": "微生物學與臨床微生物學",
+    "question": "患者因肩頸處出現明顯的色斑（如圖 1），色斑表面不凸起但有脫屑的現象。Wood's lamp 檢查呈現黃綠色螢光。KOH 直接鏡檢，可發現約 4～8 μm 的 budding yeasts，以及分隔的菌絲，呈意大利麵和肉丸狀外觀（如圖 2），此致病菌最可能是下列何者？",
+    "choices": [
+      "A.Malassezia furfur",
+      "B.Piedraia hortae",
+      "C.Trichosporon spp.",
+      "D.Hortaea werneckii"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_69",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 69,
+    "subject": "微生物學與臨床微生物學",
+    "question": "以病患頭髮染色鏡檢發現髮軸（hair shaft）充滿關節孢子（arthroconidia），具 endothrix 特徵，最可能為下列何種真菌感染？",
+    "choices": [
+      "A.Trichophyton rubrum",
+      "B.Epidermophyton floccosum",
+      "C.Piedraia hortae",
+      "D.Hortaea werneckii"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_70",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 70,
+    "subject": "微生物學與臨床微生物學",
+    "question": "臨床分離最多的致病真菌屬於下列那一類？",
+    "choices": [
+      "A.Mucorales",
+      "B.Ascomycota",
+      "C.Basidiomycota",
+      "D.Fungi imperfecti"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_71",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 71,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種真菌可產生 sporangiospores？",
+    "choices": [
+      "A.Mucor",
+      "B.Aspergillus",
+      "C.Penicillium",
+      "D.Microsporum"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_72",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 72,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關暗色絲狀菌病（phaeohyphomycosis）的特性，下列敘述何者最適當？",
+    "choices": [
+      "A.病原多屬於雙型性真菌",
+      "B.病原的菌絲較寬且沒有中隔（septa），生長速度較快",
+      "C.受感染組織的病理切片可見褐色銅板狀的硬化體（sclerotic bodies）",
+      "D.病原的菌絲中具有黑色素"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_73",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 73,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何者不是人畜共通的病原菌？",
+    "choices": [
+      "A.Campylobacter jejuni",
+      "B.Pasteurella multocida",
+      "C.Brucella abortus",
+      "D.Haemophilus ducreyi"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_74",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 74,
+    "subject": "微生物學與臨床微生物學",
+    "question": "下列何種微生物最有可能在同時含有 imipenem、vancomycin 和 amphotericin B 的培養基上生長？",
+    "choices": [
+      "A.Streptococcus pyogenes",
+      "B.Stenotrophomonas maltophilia",
+      "C.Candida albicans",
+      "D.Clostridioides difficile"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_75",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 75,
+    "subject": "微生物學與臨床微生物學",
+    "question": "從病患足部膿腫樣本進行顯微鏡檢查，發現有球狀及許多分枝細絲狀的革蘭氏陽性菌，並觀察到有黃色的硫磺顆粒（sulfur granules），最可能由下列何種細菌所引起？",
+    "choices": [
+      "A.金黃色葡萄球菌（Staphylococcus aureus）",
+      "B.星型奴卡氏菌（Nocardia asteroides）",
+      "C.創傷弧菌（Vibrio vulnificus）",
+      "D.痤瘡丙酸桿菌（Cutibacterium acnes）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_76",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 76,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關疾病與病原菌之配對，下列何者最不適當？",
+    "choices": [
+      "A.龐蒂亞克熱（Pontiac fever）／嗜肺性退伍軍人桿菌（Legionella pneumophila）",
+      "B.Q 熱（Query fever）／貝氏考克斯菌（Coxiella burnetii）",
+      "C.鼠咬熱（rat-bite fever）／念珠狀鏈桿菌（Streptobacillus moniliformis）",
+      "D.回歸熱（relapsing fever）／伯氏疏螺旋體（Borrelia burgdorferi）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_77",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 77,
+    "subject": "微生物學與臨床微生物學",
+    "question": "為測定高壓蒸氣滅菌法的效果，常用的生物指示劑為下列何者？",
+    "choices": [
+      "A.金黃色葡萄球菌（Staphylococcus aureus）",
+      "B.嗜熱脂肪芽孢桿菌（Geobacillus stearothermophilus）",
+      "C.星型奴卡氏菌（Nocardia asteroides）",
+      "D.痤瘡丙酸桿菌（Cutibacterium acnes）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_78",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 78,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關使用抗生素所引起之偽膜性腸炎（pseudomembranous colitis）的敘述，下列何者最不適當？",
+    "choices": [
+      "A.皆為外源性（exogenous）感染之疾病",
+      "B.常由艱難梭狀桿菌（Clostridioides difficile）所引起",
+      "C.糞菌移植（fecal microbiota transplantation）通常具療效",
+      "D.可以甲硝達唑（metronidazole）或萬古黴素（vancomycin）治療"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_79",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 79,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關使用暗視野顯微鏡觀察微生物之敘述，下列何者最適當？",
+    "choices": [
+      "A.須製片染色",
+      "B.微生物體表會出現螢光",
+      "C.常用於綠膿桿菌的檢測",
+      "D.主要用於螺旋體的觀察"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_4_80",
+    "exam_id": "4",
+    "year": "115-2",
+    "question_number": 80,
+    "subject": "微生物學與臨床微生物學",
+    "question": "有關革蘭氏染色法（Gram stain）在臨床微生物診斷上之應用，下列何者最不適當？",
+    "choices": [
+      "A.細菌培養過久而老化會改變菌體的染色性",
+      "B.革蘭氏染色法不適用於對臨床檢體的直接染色鏡檢",
+      "C.抑制菌體細胞壁合成之抗生素，容易造成革蘭氏陽性細菌對脫色液之敏感性增加",
+      "D.嗜中性球之細胞核經革蘭氏染色後，常呈粉紅色"
+    ],
+    "answer": "B"
+  }
+]

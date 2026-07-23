@@ -10,3 +10,10 @@
   - `build_website.py`: 
     - **核心功能**: 自動複製靜態檔案、呼叫 `cache_builder` 將 Markdown 轉為 JSON 快取、並透過正則表達式自動註解掉 JS 中的後端 API 呼叫，同時修正 HTML 的相對路徑。
     - **歷史使用紀錄**: 初始化建立，用於 GitHub Actions 自動化部署流程。
+
+### 2. Generate-Markdown
+- **用途概述**: 負責從結構化資料來源（如 JSON 題目檔案）自動生成符合專案規範的 Markdown 檔案，包含正確的 YAML frontmatter 與內容骨架。
+- **包含腳本**:
+  - `generate_md_from_json.py`:
+    - **核心功能**: 讀取 JSON 題目陣列，為每道題目自動產生包含 YAML 區塊與題目/筆記段落骨架的 Markdown 檔案。支援 dry-run 模式與重複執行防呆。
+    - **歷史使用紀錄**: 2026-07-23 初始化建立，用於 115-2 年度 6 科 JSON 批次轉換 (480 個檔案)。

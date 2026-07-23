@@ -1,0 +1,1282 @@
+[
+  {
+    "type": "question",
+    "qid": "115-2_1_1",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 1,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何者是心內膜下梗塞的心電圖變化？",
+    "choices": [
+      "A.持續性 ST 上升",
+      "B.暫時性 ST 上升",
+      "C.持續性 ST 下降",
+      "D.連續變化 ST 上升"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_2",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 2,
+    "subject": "臨床生理學與病理學",
+    "question": "正常心臟蒲金氏纖維（Purkinje fiber）的傳導速度約為何？",
+    "choices": [
+      "A.1 m/sec",
+      "B.1 cm/sec",
+      "C.4 m/sec",
+      "D.4 cm/sec"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_3",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 3,
+    "subject": "臨床生理學與病理學",
+    "question": "心電圖圖形中，ST 段下降者，較不會出現於下列何種心臟疾病？",
+    "choices": [
+      "A.心室肥大",
+      "B.急性心肌梗塞的相對性變化（reciprocal change）",
+      "C.束支傳導障礙",
+      "D.急性心包膜炎"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_4",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 4,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何者不常在高血鉀症（hyperkalemia）的心電圖上出現？",
+    "choices": [
+      "A.高而尖的 T 波",
+      "B.QRS 變寬",
+      "C.低 P 波",
+      "D.高 U 波"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_5",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 5,
+    "subject": "臨床生理學與病理學",
+    "question": "EKG 出現技術性右位心（technical dextrocardia）之變化，是何種原因所造成？",
+    "choices": [
+      "A.肌肉顫抖",
+      "B.接觸不良",
+      "C.左右手導程錯置",
+      "D.交流電干擾"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_6",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 6,
+    "subject": "臨床生理學與病理學",
+    "question": "有關心電圖導程之敘述，下列何者錯誤？",
+    "choices": [
+      "A.Lead Ⅰ的向量為由右到左",
+      "B.Lead Ⅱ的向量為右上到左下",
+      "C.V1 的向量為心臟中心往胸骨左側",
+      "D.V6 的向量為心臟中心往左側腋中線"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_7",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 7,
+    "subject": "臨床生理學與病理學",
+    "question": "此 QRS 波型出現在何種導程時可視為正常？",
+    "choices": [
+      "A.aVF 導程",
+      "B.aVR 導程",
+      "C.Ⅰ導程",
+      "D.V6 導程"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_8",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 8,
+    "subject": "臨床生理學與病理學",
+    "question": "有關心肌梗塞的心電圖敘述，下列何者錯誤？",
+    "choices": [
+      "A.非 ST 段上升型心肌梗塞可呈現負向 T 波或 ST 段下降",
+      "B.ST 段上升型急性心肌梗塞與急性心包膜炎的心電圖無法區分",
+      "C.右心室心肌梗塞需記錄右側心電圖方能確定",
+      "D.後壁心肌梗塞 V1 導程會呈現高的 R 波"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_9",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 9,
+    "subject": "臨床生理學與病理學",
+    "question": "肌肉顫抖的心電圖易與下列何種波形相類似？",
+    "choices": [
+      "A.心室撲動（ventricular flutter）",
+      "B.心房撲動（atrial flutter）",
+      "C.心房顫動（atrial fibrillation）",
+      "D.房室阻斷（atrioventricular block, AV block）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_10",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 10,
+    "subject": "臨床生理學與病理學",
+    "question": "有關心電圖波形的敘述，下列何者正確？",
+    "choices": [
+      "A.P 波代表心房再極化",
+      "B.QRS 波代表心室再極化",
+      "C.T 波代表心室再極化",
+      "D.Q 波代表心房去極化"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_11",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 11,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何者最無法藉由心臟超音波加以評估？",
+    "choices": [
+      "A.心臟瓣膜狹窄程度",
+      "B.冠狀動脈狹窄程度",
+      "C.左心室收縮功能",
+      "D.肺動脈壓力"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_12",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 12,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何者不是醫用超音波的特性？",
+    "choices": [
+      "A.有游離輻射",
+      "B.非侵入式",
+      "C.可提供量測組織或血流動態資訊",
+      "D.影像解析度高"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_13",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 13,
+    "subject": "臨床生理學與病理學",
+    "question": "下列心電圖的判讀何者正確？",
+    "choices": [
+      "A.竇性頻脈（sinus tachycardia）",
+      "B.二度房室傳導阻斷（second-degree AV block）",
+      "C.右束支傳導阻斷（right bundle branch block）",
+      "D.上心室頻脈（supraventricular tachycardia）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_14",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 14,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何項生理檢查縱軸的訊號強度單位與心電圖相同？",
+    "choices": [
+      "A.運動神經傳導檢查",
+      "B.心臟 M-mode 超音波",
+      "C.腦波",
+      "D.肺功能檢查"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_15",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 15,
+    "subject": "臨床生理學與病理學",
+    "question": "有關神經傳導檢查的後期反應（late response）之檢驗與操作原理，F 波和 H 反射何者相同？",
+    "choices": [
+      "A.訊號傳入路徑",
+      "B.訊號傳出路徑",
+      "C.電量刺激強度",
+      "D.反應性質"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_16",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 16,
+    "subject": "臨床生理學與病理學",
+    "question": "下列神經傳導檢查儀器，何者不是重要設備？",
+    "choices": [
+      "A.電極貼片",
+      "B.放大器",
+      "C.示波器",
+      "D.同軸雙極針電極"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_17",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 17,
+    "subject": "臨床生理學與病理學",
+    "question": "下列那一睡眠腦波週期和做夢期有關？",
+    "choices": [
+      "A.非快速動眼期睡眠第一期",
+      "B.非快速動眼期睡眠第三期",
+      "C.快速動眼期睡眠",
+      "D.非快速動眼期睡眠第二期"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_18",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 18,
+    "subject": "臨床生理學與病理學",
+    "question": "正常成人清醒時腦波頻率（Hz）和振幅（amplitude）由頭前方至頭後方分布如何？",
+    "choices": [
+      "A.頻率由快變慢，振幅由低變高",
+      "B.頻率由慢變快，振幅由高變低",
+      "C.頻率無變化，振幅由低變高",
+      "D.頻率由快變慢，振幅由高變低"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_19",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 19,
+    "subject": "臨床生理學與病理學",
+    "question": "有關癲癇腦波紀錄的敘述，下列何者最適當？",
+    "choices": [
+      "A.在頭皮記錄到大腦皮質所產生的癲癇樣放電波（epileptiform discharge）一定是正電",
+      "B.在頭皮可以輕易且直接記錄到明顯的深部皮質的正電波形",
+      "C.失神性癲癇通常好發與首發於中老年人為主，且以男性較容易記錄到",
+      "D.失神性癲癇容易以過度呼吸誘發且記錄到"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_20",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 20,
+    "subject": "臨床生理學與病理學",
+    "question": "當神經或神經元病變時，運動單位電位（motor unit potential）的變化，下列何者較為正確？",
+    "choices": [
+      "A.振幅增加，波寬減少（large amplitude，short duration）",
+      "B.振幅增加，波寬增加（large amplitude，long duration）",
+      "C.振幅減少，波寬減少（small amplitude，short duration）",
+      "D.振幅減少，波寬增加（small amplitude，long duration）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_21",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 21,
+    "subject": "臨床生理學與病理學",
+    "question": "運動神經傳導檢查，量測距離（distance）、近端潛值（proximal latency）與遠端潛值（distal latency），則神經傳導速度（motor NCV）為何？",
+    "choices": [
+      "A.距離 ÷（近端潛值－遠端潛值）",
+      "B.距離 ÷（遠端潛值－近端潛值）",
+      "C.（近端潛值－遠端潛值）÷ 距離",
+      "D.（遠端潛值－近端潛值）÷ 距離"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_22",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 22,
+    "subject": "臨床生理學與病理學",
+    "question": "有關血液二氧化碳之敘述，下列何者錯誤？",
+    "choices": [
+      "A.紅血球及血漿中之重碳酸鹽（HCO3-）及碳酸離子（CO32-），占最大部分合計 93％",
+      "B.血漿及紅血球之溶解 CO2（dissolved CO2）及氣體性 CO2占 25％",
+      "C.血紅素結合之碳醯胺基血紅素（HbCO2）占 2％",
+      "D.三種不同型態之 CO2在細胞內外液中，互有動力學之平衡關係，並帶動組織與肺泡膜之 O2與 CO2氣體交換"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_23",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 23,
+    "subject": "臨床生理學與病理學",
+    "question": "有關血液酸鹼異常之敘述，下列何者錯誤？",
+    "choices": [
+      "A.代謝性酸中毒 pH＜7.35，HCO3-↓",
+      "B.代謝性鹼中毒 pH＞7.45，HCO3-↑",
+      "C.呼吸性酸中毒 pH＜7.35，PCO2↑",
+      "D.呼吸性鹼中毒 pH＞7.45，PCO2↑"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_24",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 24,
+    "subject": "臨床生理學與病理學",
+    "question": "有關血液氣體分析的檢體處理，下列何者錯誤？",
+    "choices": [
+      "A.血液一旦和大氣接觸，會被空氣中 O2及 CO2中和",
+      "B.全血在無栓塞（開放）下置放室溫，因流失 CO2而降低 PaCO2，並使 pH 值下降",
+      "C.若不能立即進行血液氣體檢查，可暫置於冰水中保存",
+      "D.血液氣體與 pH 值在檢體中變化很快"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_25",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 25,
+    "subject": "臨床生理學與病理學",
+    "question": "一般正常人動脈血氧分壓（PaO2）為 100 mmHg 時，其動脈血氧飽和濃度（SaO2）最接近多少？",
+    "choices": [
+      "A.65",
+      "B.75",
+      "C.85",
+      "D.98"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_26",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 26,
+    "subject": "臨床生理學與病理學",
+    "question": "20 歲男性，FVC 預測值為 4.5 L， 肺活量顯示如下圖，最可能的診斷為何？",
+    "choices": [
+      "A.肺氣腫",
+      "B.肺纖維化",
+      "C.氣喘",
+      "D.正常"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_27",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 27,
+    "subject": "臨床生理學與病理學",
+    "question": "有關呼氣儲備容積（expiratory residual volume），下列敘述何者正確？",
+    "choices": [
+      "A.代表總肺量（total lung capacity, TLC）內，所能呼出之最大氣量",
+      "B.代表潮氣容積（tidal volume）吸氣終了時，能再呼出之氣體量",
+      "C.代表功能餘氣量（functional residual capacity）內，能再呼出之最大氣量",
+      "D.通常較吸氣儲備容積（inspiratory residual volume）大"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_28",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 28,
+    "subject": "臨床生理學與病理學",
+    "question": "20 歲的男性肺功能檢查結果顯示，FEV1.0％是預測值 78％， FVC 是預測值 70％，下列選項何者較為合適？\n（FEV1.0％：第一秒呼氣率；FVC：用力肺活量）",
+    "choices": [
+      "A.阻塞型肺部疾病（obstructive pulmonary disease）",
+      "B.侷限型肺部疾病（restrictive pulmonary disease）",
+      "C.混合型肺部疾病（mixed pulmonary disease）",
+      "D.正常"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_29",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 29,
+    "subject": "臨床生理學與病理學",
+    "question": "有關功能餘氣量（functional residual capacity, FRC）的測量，何者錯誤？",
+    "choices": [
+      "A.體箱計法（body plethysmography）是根據波義耳定律（Boyle's law）",
+      "B.波義耳定律（Boyle's law）是指壓力乘以體積等於常數",
+      "C.氮洗出法（nitrogen washout method）沒辦法測得 FRC",
+      "D.使用氦氣是因為氦氣在血液中溶解度低"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_30",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 30,
+    "subject": "臨床生理學與病理學",
+    "question": "肺功能檢查結果顯示吸氣儲備容積（IRV）1.5 L、潮氣容積（TV）0.5 L、呼氣儲備容積（ERV）1.1 L、肺餘容積（RV）0.6 L，功能餘氣量（FRC） 1.7 L，此時總肺量（TLC）約為多少 L？",
+    "choices": [
+      "A.3.1",
+      "B.3.7",
+      "C.2",
+      "D.4.8"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_31",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 31,
+    "subject": "臨床生理學與病理學",
+    "question": "有關用力肺活量（FVC）的敘述，下列何者正確？",
+    "choices": [
+      "A.代表呼氣儲備容積（ERV）與吸氣儲備容積（IRV）之和",
+      "B.無法用肺量計（spirometer）測定",
+      "C.正常人的用力肺活量（FVC）與肺活量（VC）大致相同",
+      "D.代表正常吐氣終了時，留在肺部的氣量"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_32",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 32,
+    "subject": "臨床生理學與病理學",
+    "question": "以肺量計（spirometry）測量慢性阻塞性肺病（chronic obstructive pulmonary disease）患者之肺功能時，最有可能發生下列何種狀況？（FEV1：一秒用力呼氣量；FVC：用力肺活量）",
+    "choices": [
+      "A.FEV1/FVC 大於 80％，且 FVC 小於預測值的 80％",
+      "B.FEV1 與 FVC 皆為正常值",
+      "C.FEV1/FVC 為正常值",
+      "D.FEV1/FVC 小於 70％，且 FEV1 小於預測值的 80％"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_33",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 33,
+    "subject": "臨床生理學與病理學",
+    "question": "關於一氧化碳肺瀰散量測定（DLCO）的敘述，下列何者錯誤？",
+    "choices": [
+      "A.檢驗 O2於肺泡膜微血管的通透狀態",
+      "B.測試使用的吸入氣體中，CO 濃度約為 1％",
+      "C.須用血紅素數值來校正",
+      "D.坐姿測量值比平躺測量值低"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_34",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 34,
+    "subject": "臨床生理學與病理學",
+    "question": "頻率為 3 MHz 的音波，在人體內傳導時，其音速為 1,500 m/sec，則波長（λ）=？",
+    "choices": [
+      "A.450 mm",
+      "B.4.5 mm",
+      "C.5 mm",
+      "D.0.5 mm"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_35",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 35,
+    "subject": "臨床生理學與病理學",
+    "question": "超音波的臨床應用，下列何種狀況不太適用超音波檢查？",
+    "choices": [
+      "A.心包膜或胸腔積水",
+      "B.肝臟、膽囊大小、結石",
+      "C.腎臟結構、輸尿管擴張",
+      "D.骨骼、含氣體的胃腸道"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_36",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 36,
+    "subject": "臨床生理學與病理學",
+    "question": "超音波偵測的原理順序，下列何者正確？",
+    "choices": [
+      "A.電子脈衝→超音波→物體反射超音波→接收→放大→顯示圖形",
+      "B.超音波→電子脈衝→物體反射超音波→接收→放大→顯示圖形",
+      "C.超音波→物體反射超音波→電子脈衝→接收→放大→顯示圖形",
+      "D.超音波→物體反射超音波→接收→電子脈衝→放大→顯示圖形"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_37",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 37,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何種超音波模式較不適合一般臨床小兒腦部或頭部的檢查？",
+    "choices": [
+      "A.A-mode",
+      "B.B-mode",
+      "C.color Doppler",
+      "D.M-mode"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_38",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 38,
+    "subject": "臨床生理學與病理學",
+    "question": "有關深部肌腱反射（deep tendon reflex）H 反射的電生理檢查，最佳使用的刺激電量為何？",
+    "choices": [
+      "A.長（long-duration）與超量（supramaximal）刺激電量",
+      "B.長（long-duration）與次高量（submaximal）刺激電量",
+      "C.短（short-duration）與次高量（submaximal）刺激電量",
+      "D.短（short-duration）與超量（supramaximal）刺激電量"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_39",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 39,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何者不是診斷心肌梗塞的方法？",
+    "choices": [
+      "A.典型的心電圖變化",
+      "B.心臟超音波心肌收縮變化",
+      "C.抽血驗心臟酵素",
+      "D.照肺部 X 光"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_40",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 40,
+    "subject": "臨床生理學與病理學",
+    "question": "有關臨床生理檢查，下列敘述何者正確？",
+    "choices": [
+      "A.一般正常成人的肺活量（VC）大約 10 公升，身高愈高者肺活量愈大",
+      "B.正常的 PR 間隔（PR interval）約為 0.12～0.2 秒，代表在 AV node（房室結）停留的時間",
+      "C.心室活化時間（VAT）代表從心內膜傳到心外膜的時間，正常＜0.04 秒",
+      "D.血氧飽和度（SO2）代表血液中血紅素攜帶氧氣的飽和程度，正常靜脈血氧飽和度（SvO2）的值為 95％"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_41",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 41,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何者不是活化的補體（complement）的主要作用？",
+    "choices": [
+      "A.白血球趨化作用（chemotaxis）",
+      "B.吞噬作用（phagocytosis）的加強",
+      "C.肉芽組織（granulation tissue）的形成",
+      "D.細胞裂解（cell lysis）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_42",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 42,
+    "subject": "臨床生理學與病理學",
+    "question": "胃食道逆流的病人，食道的鱗狀上皮（squamous epithelium）被腸道柱狀上皮（intestinal-type columnar epithelium）取代，這種變化稱為下列何者？",
+    "choices": [
+      "A.增生（hyperplasia）",
+      "B.肥大（hypertrophy）",
+      "C.化生（metaplasia）",
+      "D.萎縮（atrophy）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_43",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 43,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何構造之損傷最可能導致其內部酵素釋放至細胞質，且酸水解酶（acid hydrolase）被活化？",
+    "choices": [
+      "A.核膜（nuclear membrane）",
+      "B.質膜（plasma membrane）",
+      "C.溶小體膜（lysosomal membrane）",
+      "D.粒線體膜（mitochondrial membrane）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_44",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 44,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何者是包含多胚層的腫瘤？",
+    "choices": [
+      "A.多形性腺瘤（pleomorphic adenoma）",
+      "B.畸胎瘤（teratoma）",
+      "C.過誤瘤（hamartoma）",
+      "D.神經母細胞瘤（neuroblastoma）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_45",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 45,
+    "subject": "臨床生理學與病理學",
+    "question": "癌症患者的體脂肪減少、體重減輕，且嚴重虛弱、厭食和貧血，與下列何者最有關？",
+    "choices": [
+      "A.TP53 基因突變",
+      "B.惡病質（cachexia）",
+      "C.血中 AFP 上升",
+      "D.EGFR 基因放大"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_46",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 46,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何者是致癌基因（oncogene）？①APC ②BRCA1 ③RAS ④HER2/neu ⑤MLH1",
+    "choices": [
+      "A.①②",
+      "B.②③",
+      "C.③④",
+      "D.④⑤"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_47",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 47,
+    "subject": "臨床生理學與病理學",
+    "question": "人類基因組（human genome）包含約 33 億 DNA 鹼基對（base pairs），下列敘述何者正確？",
+    "choices": [
+      "A.基因組的 10％會編碼（encode）成蛋白質",
+      "B.人類基因組編碼蛋白質的種類是蟲的 10 倍",
+      "C.人類基因組 50％會轉錄（transcribe）成 RNA",
+      "D.基因組非編碼區（noncoding region）對組織形成有重大調控作用"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_48",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 48,
+    "subject": "臨床生理學與病理學",
+    "question": "關於體染色體顯性遺傳的單一基因突變，下列敘述何者正確？",
+    "choices": [
+      "A.病人父母其中必有一位有相同的基因突變及相關的表現型",
+      "B.病人的父母或兄弟姊妹可能都不帶有基因突變",
+      "C.每一位帶有基因突變的病人一定有相對應的表現型",
+      "D.每一位帶有基因突變並有相對應表現型者都有完全相同的臨床表現"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_49",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 49,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何者不是菸鹼酸（niacin）不足的臨床表現？",
+    "choices": [
+      "A.皮膚炎",
+      "B.腹瀉",
+      "C.失智",
+      "D.出血傾向"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_50",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 50,
+    "subject": "臨床生理學與病理學",
+    "question": "有關中暑（heat stroke）之敘述，下列何者錯誤？",
+    "choices": [
+      "A.患者因大量排汗，故皮膚紅、熱且濕潤",
+      "B.體溫常超過 40℃、脈搏快，自覺疲勞虛弱",
+      "C.體液留在周邊血管，有效循環血量降低",
+      "D.可能發生橫紋肌溶解、心肌壞死、腦組織傷害"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_51",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 51,
+    "subject": "臨床生理學與病理學",
+    "question": "水俣病（Minamata disease）與下列何種物質之中毒最為相關？",
+    "choices": [
+      "A.鉛",
+      "B.砷",
+      "C.汞",
+      "D.銀"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_52",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 52,
+    "subject": "臨床生理學與病理學",
+    "question": "結核病的結節（tubercle），在病理切片檢查可以觀察到下列何種組織病理的特徵？①脂肪皂化（fat saponification） ②肉芽腫性發炎（granulomatous inflammation） ③乾酪性壞死（caseous necrosis） ④出血性壞死（hemorrhagic necrosis） ⑤氣性壞疽（gas gangrene）",
+    "choices": [
+      "A.①②",
+      "B.②③",
+      "C.③④",
+      "D.④⑤"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_53",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 53,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何種病毒容易在冬天引起兒童腹瀉（childhood diarrhea）？",
+    "choices": [
+      "A.腺病毒（adenovirus）",
+      "B.鼻病毒（rhinovirus）",
+      "C.登革熱病毒（dengue virus）",
+      "D.輪狀病毒（rotavirus）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_54",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 54,
+    "subject": "臨床生理學與病理學",
+    "question": "感染 SARS-CoV-2 coronavirus（COVID-19）後的老年人最可能發生何種免疫反應而致死？",
+    "choices": [
+      "A.猛爆性肝炎",
+      "B.免疫複合體過敏反應",
+      "C.溶血反應",
+      "D.全身性發炎反應"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_55",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 55,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何種人體的基因型樣不會產生器官移植排斥？",
+    "choices": [
+      "A.異卵雙胞胎",
+      "B.變卵雙胞胎",
+      "C.同卵雙胞胎",
+      "D.多卵雙胞胎"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_56",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 56,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何種疾病與抗著絲粒抗體（anti-centromere antibody）最相關？",
+    "choices": [
+      "A.全身性硬化症（systemic sclerosis）",
+      "B.修格連氏症候群（Sjögren syndrome）",
+      "C.類風濕性關節炎（rheumatoid arthritis）",
+      "D.全身性紅斑性狼瘡（systemic lupus erythematosus）"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_57",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 57,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何項血液疾病可以在腫瘤細胞內看到奧爾氏桿（Auer rod）？",
+    "choices": [
+      "A.急性淋巴球性白血病（acute lymphoblastic leukemia, ALL）",
+      "B.慢性淋巴球性白血病（chronic lymphoblastic leukemia, CLL）",
+      "C.急性骨髓細胞性白血病（acute myeloid leukemia, AML）",
+      "D.毛細胞白血病（hairy cell leukemia）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_58",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 58,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何者並不是引起肺心症（cor pulmonale）常見的原因？",
+    "choices": [
+      "A.肺氣腫（emphysema）",
+      "B.肺栓塞（pulmonary embolism）",
+      "C.慢性支氣管炎（chronic bronchitis）",
+      "D.一氧化碳中毒"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_59",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 59,
+    "subject": "臨床生理學與病理學",
+    "question": "冠狀動脈血管炎是下列何種疾病的特徵？",
+    "choices": [
+      "A.川崎氏症（Kawasaki disease）",
+      "B.結節性多動脈炎（polyarteritis nodosa）",
+      "C.巨細胞血管炎（giant cell arteritis）",
+      "D.過敏性肉芽腫血管炎（eosinophilic granulomatosis with polyangiitis）"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_60",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 60,
+    "subject": "臨床生理學與病理學",
+    "question": "一位 35 歲女性，主訴半年來有雙側頸部淋巴結無痛性腫大，沒有發燒症狀，經淋巴結切片檢查，發現纖維化病灶形成多個結節並出現立德－史登堡氏細胞（Reed-Sternberg cell）合併淋巴細胞、漿細胞及嗜伊紅性白血球浸潤，最有可能的診斷為下列何者？",
+    "choices": [
+      "A.伯基特氏淋巴瘤（Burkitt lymphoma）",
+      "B.何杰金氏淋巴瘤（Hodgkin lymphoma）",
+      "C.濾泡性淋巴瘤（follicular lymphoma）",
+      "D.被套細胞淋巴瘤（mantle cell lymphoma）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_61",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 61,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何種女性生殖道感染的後遺症最輕微？",
+    "choices": [
+      "A.Gardnerella vaginalis",
+      "B.Chlamydia trachomatis",
+      "C.Neisseria gonorrhoeae",
+      "D.Group B Streptococcus"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_62",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 62,
+    "subject": "臨床生理學與病理學",
+    "question": "有關甲狀腺腫瘤，下列何者之細胞來源不是甲狀腺濾泡細胞（thyroid follicular cell）？",
+    "choices": [
+      "A.甲狀腺乳突癌（papillary thyroid carcinoma）",
+      "B.甲狀腺濾泡腺瘤（follicular thyroid adenoma）",
+      "C.甲狀腺髓質癌（medullary thyroid carcinoma）",
+      "D.甲狀腺未分化癌（anaplastic thyroid carcinoma）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_63",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 63,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何者與男性女乳症（gynecomastia）的相關性最小？",
+    "choices": [
+      "A.肝硬化（cirrhosis）",
+      "B.吸食大麻（marijuana）",
+      "C.Sertoli cell 腫瘤（Sertoli cell tumor）",
+      "D.脾血管瘤（splenic hemangioma）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_64",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 64,
+    "subject": "臨床生理學與病理學",
+    "question": "有關肺塵埃沉著症（pneumoconiosis），下列敘述何者錯誤？",
+    "choices": [
+      "A.矽、炭末、石綿均可引起肺塵埃沉著症",
+      "B.常與職業接觸相關",
+      "C.病理主要是巨噬細胞及纖維母細胞形成的肺結節，好發肺上葉",
+      "D.臨床上與胸膜間皮瘤高度相關"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_65",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 65,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何者造成的胸膜腔滲液（effusions）性質與其他三者不同？",
+    "choices": [
+      "A.鬱血性心衰竭",
+      "B.腎病症候群",
+      "C.肺部感染",
+      "D.肝硬化"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_66",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 66,
+    "subject": "臨床生理學與病理學",
+    "question": "有關慢性阻塞性肺病（chronic obstructive pulmonary disease, COPD），下列敘述何者正確？",
+    "choices": [
+      "A.可以是單純慢性支氣管炎或肺氣腫，又或是同時併有此兩種變化",
+      "B.慢性阻塞性肺病是可逆性的疾病",
+      "C.慢性支氣管炎的臨床定義是連續兩年以上、每年至少連續半年以上大部分時間有持續帶痰的咳嗽",
+      "D.慢性支氣管炎的病理變化主要是肺泡及氣室不正常的擴大現象"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_67",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 67,
+    "subject": "臨床生理學與病理學",
+    "question": "惡性貧血（pernicious anemia）主要是因缺乏下列那種營養素所導致？",
+    "choices": [
+      "A.葉酸",
+      "B.鐵質",
+      "C.維生素 B12",
+      "D.鈣"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_68",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 68,
+    "subject": "臨床生理學與病理學",
+    "question": "有關 Graves 氏病，下列何者正確？",
+    "choices": [
+      "A.為甲狀腺腺瘤（adenoma of the thyroid）",
+      "B.為結節性甲狀腺腫（nodular goiter）",
+      "C.為自體免疫甲狀腺疾病（autoimmune thyroid disease）",
+      "D.為亞急性甲狀腺炎（subacute thyroiditis）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_69",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 69,
+    "subject": "臨床生理學與病理學",
+    "question": "心肌梗塞最常見於冠狀動脈出現下列何種情形？",
+    "choices": [
+      "A.血栓（thrombosis）",
+      "B.脂肪栓塞（fat embolism）",
+      "C.動脈瘤（aneurysm）",
+      "D.血管痙攣（vasospasm）"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_70",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 70,
+    "subject": "臨床生理學與病理學",
+    "question": "有關 A 型肝炎病毒（hepatitis A virus）感染，下列敘述何者錯誤？",
+    "choices": [
+      "A.潛伏期約 2～6 週",
+      "B.大多數患者在 3 個月內康復",
+      "C.約 2％～3％的患者出現急性肝衰竭",
+      "D.不會導致慢性肝炎"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_71",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 71,
+    "subject": "臨床生理學與病理學",
+    "question": "有關自體免疫性萎縮性胃炎（autoimmune atrophic gastritis）的敘述，下列何者錯誤？",
+    "choices": [
+      "A.常伴隨維生素 B12缺乏",
+      "B.有 H+, K+-ATP 酶（H+, K+-ATPase）自體抗體的存在",
+      "C.血清胃蛋白酶原一型（pepsinogen I）濃度增加",
+      "D.內分泌細胞增生（endocrine cell hyperplasia）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_72",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 72,
+    "subject": "臨床生理學與病理學",
+    "question": "當腦部組織受到損傷後，下列何者為負責腦部組織修復的主要細胞？",
+    "choices": [
+      "A.腦室細胞（ependymal cell）",
+      "B.寡樹突細胞（oligodendrocyte）",
+      "C.星狀細胞（astrocyte）",
+      "D.神經元細胞（neuron）"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_73",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 73,
+    "subject": "臨床生理學與病理學",
+    "question": "有關骨關節炎（osteoarthritis）的敘述，下列何者較不適當？",
+    "choices": [
+      "A.膝關節是常見的部位",
+      "B.可造成關節周遭骨骼退化性病變",
+      "C.主要成因為關節軟骨反覆承受生物力學壓力",
+      "D.其實為退化性疾病，發炎並無角色"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_74",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 74,
+    "subject": "臨床生理學與病理學",
+    "question": "有關骨質石化病（osteopetrosis），下列敘述何者錯誤？",
+    "choices": [
+      "A.蝕骨細胞（osteoclast）之形成或功能不足",
+      "B.常因基因變異而致，可以是顯性或隱性遺傳性疾病",
+      "C.臨床表現為骨質密度極高、堅硬、沉重而不易骨折",
+      "D.影響造血功能而導致免疫力不足，是重要死因"
+    ],
+    "answer": "C"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_75",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 75,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何種骨及軟組織腫瘤，具有較複雜的染色體核型（karyotype）？",
+    "choices": [
+      "A.未分化多形性肉瘤（undifferentiated pleomorphic sarcoma）",
+      "B.肺泡樣橫紋肌肉瘤（alveolar rhabdomyosarcoma）",
+      "C.尤汶氏肉瘤（Ewing sarcoma）",
+      "D.骨母細胞瘤（osteoblastoma）"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_76",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 76,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何者非腎病症候群（nephrotic syndrome）的特點？",
+    "choices": [
+      "A.蛋白尿（proteinuria）",
+      "B.高血脂症（hyperlipidemia）",
+      "C.全身水腫（generalized edema）",
+      "D.血尿（hematuria）"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_77",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 77,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何種情況會造成瀰漫性肝細胞的小泡型脂肪變化（diffuse microvesicular fatty change）？",
+    "choices": [
+      "A.口服避孕藥",
+      "B.雷伊綜合症（Reye syndrome）",
+      "C.乙醇（ethanol）",
+      "D.類固醇（corticosteroids）"
+    ],
+    "answer": "B"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_78",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 78,
+    "subject": "臨床生理學與病理學",
+    "question": "有關骨髓炎（osteomyelitis）的敘述，下列何者錯誤？",
+    "choices": [
+      "A.化膿性骨髓炎最常被培養出來的致病原是化膿性鏈球菌（Streptococcus pyogenes）",
+      "B.急性骨髓炎可以進展成慢性骨髓炎，並反覆急性發作",
+      "C.慢性骨髓炎之併發症包括骨折、敗血症以及附近組織之鱗狀細胞癌（squamous cell carcinoma）",
+      "D.結核菌造成之骨髓炎約 4 成發生在脊椎"
+    ],
+    "answer": "A"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_79",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 79,
+    "subject": "臨床生理學與病理學",
+    "question": "有關髓母細胞瘤（medulloblastoma）的敘述，下列何者錯誤？",
+    "choices": [
+      "A.好發在小孩的小腦中線",
+      "B.在病理分類上是一種胚胎性腫瘤（embryonal neoplasm），由小藍細胞（small blue cells）組成",
+      "C.屬於高度惡性之腫瘤，但是對放射治療反應很好",
+      "D.不同分子變異的種類預後不同，基因突變發生於 Wnt 路徑的種類是預後最差的一種"
+    ],
+    "answer": "D"
+  },
+  {
+    "type": "question",
+    "qid": "115-2_1_80",
+    "exam_id": "1",
+    "year": "115-2",
+    "question_number": 80,
+    "subject": "臨床生理學與病理學",
+    "question": "下列何種膀胱腫瘤之細胞，較不易於尿液細胞學檢查中清楚辨識？",
+    "choices": [
+      "A.低惡性度乳突泌尿上皮癌（papillary urothelial carcinoma, low grade）",
+      "B.高惡性度乳突泌尿上皮癌（papillary urothelial carcinoma, high grade）",
+      "C.泌尿上皮原位癌（urothelial carcinoma in situ）",
+      "D.侵襲性泌尿上皮癌（invasive urothelial carcinoma）"
+    ],
+    "answer": "A"
+  }
+]

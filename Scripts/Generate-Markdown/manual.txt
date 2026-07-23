@@ -1,0 +1,29 @@
+# Generate-Markdown 分類手冊
+
+本資料夾包含與 Markdown 檔案生成相關的自動化腳本。
+
+---
+
+## 腳本清單
+
+### generate_md_from_json.py
+
+- **核心功能**: 讀取指定目錄下的 JSON 題目檔案，根據既有 Markdown 模板格式，為每一道題目自動生成包含完整 YAML frontmatter 與內容骨架的 `.md` 檔案。
+- **執行方式**: 
+  ```bash
+  uv run Scripts/Generate-Markdown/generate_md_from_json.py \
+    --json-dir <JSON題目目錄> \
+    --output-dir <Markdown輸出根目錄>
+  ```
+- **所需參數 (Arguments)**:
+  - `--json-dir` (必要): 包含 JSON 題目檔案的目錄路徑。
+  - `--output-dir` (必要): 輸出 Markdown 檔案的根目錄路徑。Markdown 將按 `{subject}/{year}/{exam_id}_{year}_{question_number}.md` 的結構自動建立。
+  - `--dry-run` (選用): 僅列印預計行為而不實際寫入檔案。
+- **輸入格式**: JSON 陣列，每個元素為一道題目，必須包含 `type`, `qid`, `exam_id`, `year`, `question_number`, `subject`, `question`, `choices`, `answer` 欄位。
+- **輸出格式**: Markdown 檔案，包含:
+  - YAML frontmatter: `type`, `qid`, `exam_id`, `year`, `question_number`, `subject`, `question`, `choices`, `answer`, `difficulty`(空), `topic`(空), `key_concept`(空), `summarize_including`, `images`。
+  - 題目段落: 完整題目文字與選項。
+  - 筆記與詳解段落: 僅標題，內容留空（快速破題、詳解預備、詳解、縱向聯想、橫向比較）。
+- **防呆機制**: 若目標檔案已存在則自動跳過，不會覆蓋。
+- **歷史使用紀錄**:
+  - 2026-07-23: 初始化建立，用於 115-2 年度 6 科 JSON 題目批次轉換為 Markdown (共 480 個檔案)。
