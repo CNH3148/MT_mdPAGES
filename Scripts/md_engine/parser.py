@@ -1,6 +1,9 @@
+import logging
 from typing import Any
 from pathlib import Path
 import ruamel.yaml
+
+logger = logging.getLogger(__name__)
 
 def parse_question_file(filepath: Path) -> dict[str, Any]:
     """
@@ -20,8 +23,9 @@ def parse_question_file(filepath: Path) -> dict[str, Any]:
     if len(parts) >= 3 and parts[0].strip() == '':
         try:
             yaml_data = yaml.load(parts[1]) or {}
-        except Exception:
-            yaml_data = {}
+        except Exception as e:
+            logger.warning("YAML parse failed for %s: %s", filepath, e)
+            return {}
         body = parts[2]
     else:
         body = content
@@ -71,6 +75,14 @@ def parse_question_file(filepath: Path) -> dict[str, Any]:
         
     yaml_data['explanation'] = explanation
     
+    # Validate essential fields before returning
+    if not yaml_data.get('year') or yaml_data.get('no') is None:
+        logger.warning(
+            "Missing essential fields (year=%r, no=%r) in %s, skipping.",
+            yaml_data.get('year'), yaml_data.get('no'), filepath
+        )
+        return {}
+
     # QID
     if 'year' in yaml_data and 'exam_id' in yaml_data and 'no' in yaml_data:
         yaml_data['qid'] = f"{yaml_data['year']}_{yaml_data['exam_id']}_{yaml_data['no']}"

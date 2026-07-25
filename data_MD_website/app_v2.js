@@ -375,6 +375,7 @@ async function loadSubjectData(sub) {
 
     // 關鍵過濾：只保留 110 ~ 115 年的題目
     filteredData = rawData.filter(q => {
+        if (!q.year || typeof q.year !== 'string') return false;
         const yearInt = parseInt(q.year.split('-')[0]);
         return yearInt >= 110 && yearInt <= 115;
     });

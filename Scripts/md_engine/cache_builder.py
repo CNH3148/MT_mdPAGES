@@ -20,7 +20,7 @@ def build_cache(data_md_dir: Path, output_dir: Path):
     total_parsed = 0
     total_skipped = 0
     
-    subject_dirs = [d for d in data_md_dir.iterdir() if d.is_dir() and not d.name.startswith('_') and not d.name.startswith('.')]
+    subject_dirs = [d for d in data_md_dir.iterdir() if d.is_dir() and not d.name.startswith('_') and not d.name.startswith('.') and not d.name.startswith('data_MD_')]
     
     for subject_dir in subject_dirs:
         subject = subject_dir.name
